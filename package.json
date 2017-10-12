@@ -1,0 +1,28 @@
+{
+  "name": "sketchmachine",
+  "version": "1.0.0",
+  "description": "",
+  "now": {
+    "alias": ["sketchmachine.net", "www.sketchmachine.net"]
+  },
+  "scripts": {
+    "start": "serve src",
+    "dev": "browser-sync start --server 'src' --files 'src' --no-notify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/REAS/sketchmachine.git"
+  },
+  "author": "Casey REAS",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/REAS/sketchmachine/issues"
+  },
+  "homepage": "https://github.com/REAS/sketchmachine#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.13"
+  },
+  "dependencies": {
+    "serve": "latest"
+  }
+}

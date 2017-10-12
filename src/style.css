@@ -1,0 +1,60 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: red;
+  display: flex;
+  height: 100vh;
+}
+
+#animation {
+}
+
+#colors {
+  width: 100%;
+  height: 100%;
+  background-color: aquamarine;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#colors.active {
+  display: block;
+}
+
+
+#ui {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: yellow;
+  position: relative;
+}
+
+
+#speed-slider {
+}
+
+
+/* @media all and (min-width: 500px) { */
+@media all and (orientation: landscape) {
+
+  body {
+    background-color: red;
+
+  }
+
+  #animation {
+
+  }
+
+  #ui {
+    flex-direction: row;
+  }
+
+  #speed-slider {
+
+  }
+
+}
