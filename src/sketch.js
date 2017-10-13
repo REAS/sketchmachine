@@ -21,6 +21,10 @@ let startDrawing = false;
 
 let thickness = 30;
 
+let mobile = false;  // Global variable, if on phone or not
+
+let mx, my, pmx, pmy = 0;
+
 //
 let ui = document.querySelector('#ui');
 let speedSlider = document.querySelector('#speed-slider');
@@ -29,9 +33,17 @@ const colors = document.querySelector('#colors');
 
 let dpi = window.devicePixelRatio;
 
+// TIMELINE
+
+let overFrame = new Array(numFrames).fill(false);
+let overMaker = new Array(numFrames).fill(false);
+let onFrame = new Array(numFrames).fill(false);
+let firstClick = false;
+let addMode = true;  // Add or remove active frames
+
 
 function setup() {
-  canvas = createCanvas(512, 512 + 100);
+  canvas = createCanvas(frameDim, frameDim + 100);
 
   canvas.id('animation');
 
@@ -67,17 +79,31 @@ function draw() {
 
   timeStep = parseInt(speedSlider.value);
 
+  // Draw the time line to set the boolean values for
+  // frames on and off before frames are drawn into
+  timeLineH();
+
   if (startDrawing) {
-    frames[currentFrame].fill(255);
-    frames[currentFrame].noStroke();
-    frames[currentFrame].ellipse(mx, my, thickness, thickness);
+    for (let i = firstFrame; i < lastFrame; i++) {
+      if (onFrame[i] || i === currentFrame) {
+        frames[i].noFill();
+        frames[i].stroke(255);
+        //frames[currentFrame].ellipse(mx, my, thickness, thickness);
+        frames[i].line(pmx, pmy, mx, my);
+      }
+    }
   }
 
   image(backgroundFrame, 0, 0, 512, 512);
   image(frames[currentFrame], 0, 0, 512, 512);
   image(tempFrame, 0, 0, 512, 512);
 
-  timelineH();
+
+
+  if (startDrawing) {
+    pmx = mx;
+    pmy = my;
+  }
 
   if (!pause) {
     if (millis() > lastTime + timeStep) {
@@ -115,20 +141,28 @@ function keyPressed() {
       }
     }
   }
+  if (key === 'c' ||  key === 'C') {
+    onFrame.fill(false);
+  }
+  if (key === 'a' || key === 'A') {
+    onFrame.fill(true);
+  }
 
 }
 
 function mousePressed() {
+  // If click in animation area
   if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
     startDrawing = true;
+    pmx = mouseX;
+    pmy = mouseY;
   }
 }
 
 function mouseReleased() {
-  //if (startDrawing) {
-  //  frames[currentFrame] =
-  //}
   startDrawing = false;
+  selectFirstFrame = false;
+  selectLastFrame = false;
 }
 
 function windowResized() {
