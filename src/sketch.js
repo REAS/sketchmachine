@@ -38,8 +38,6 @@ function setup() {
   ui.prepend(canvas.elt);
   canvas.background(204);
 
-  startGUI();
-
   for (let i = 0; i < numFrames; i++) {
     frames[i] = createGraphics(frameDim * dpi, frameDim * dpi);
     //frames[i].background(0, 0, 255);
@@ -79,7 +77,6 @@ function draw() {
   image(frames[currentFrame], 0, 0, 512, 512);
   image(tempFrame, 0, 0, 512, 512);
 
-  //timeline();
   timelineH();
 
   if (!pause) {
