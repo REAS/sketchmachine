@@ -9,12 +9,9 @@ let tempFrame;
 let numFrames = 48;
 let firstFrame = 0;
 let lastFrame = 12;
-let cf = 0;
+let currentFrame = 0;
 
 let frameDim = 512;
-
-let px = 20;
-let py = 20;
 
 let lastTime = 0;
 let timeStep = 500; //40;  // In milliseconds
@@ -30,11 +27,12 @@ let speedSlider = document.querySelector('#speed-slider');
 
 const colors = document.querySelector('#colors');
 
+let dpi = window.devicePixelRatio;
+
 
 function setup() {
-  canvas = createCanvas(512, 512 + 50);
-  
-  //canvas.position(px, py);
+  canvas = createCanvas(512, 512 + 100);
+
   canvas.id('animation');
 
   ui.prepend(canvas.elt);
@@ -43,14 +41,14 @@ function setup() {
   startGUI();
 
   for (let i = 0; i < numFrames; i++) {
-    frames[i] = createGraphics(frameDim, frameDim);
+    frames[i] = createGraphics(frameDim * dpi, frameDim * dpi);
     //frames[i].background(0, 0, 255);
   }
 
-  backgroundFrame = createGraphics(frameDim, frameDim);
+  backgroundFrame = createGraphics(frameDim * dpi, frameDim * dpi);
   backgroundFrame.background(0, 0, 102);
 
-  tempFrame = createGraphics(frameDim, frameDim);
+  tempFrame = createGraphics(frameDim * dpi, frameDim * dpi);
 
   lastTime = millis();
 }
@@ -58,6 +56,8 @@ function setup() {
 function draw() {
 
   if (startDrawing) {
+    //mx = mouseX / dpi;
+    //my = mouseY / dpi;
     mx = mouseX;
     my = mouseY;
   }
@@ -70,23 +70,23 @@ function draw() {
   timeStep = parseInt(speedSlider.value);
 
   if (startDrawing) {
-    frames[cf].fill(255);
-    frames[cf].noStroke();
-    frames[cf].ellipse(mx, my, thickness, thickness);
+    frames[currentFrame].fill(255);
+    frames[currentFrame].noStroke();
+    frames[currentFrame].ellipse(mx, my, thickness, thickness);
   }
 
-  image(backgroundFrame, 0, 0);
-  image(frames[cf], 0, 0);
-  image(tempFrame, 0, 0);
+  image(backgroundFrame, 0, 0, 512, 512);
+  image(frames[currentFrame], 0, 0, 512, 512);
+  image(tempFrame, 0, 0, 512, 512);
 
   //timeline();
   timelineH();
 
   if (!pause) {
     if (millis() > lastTime + timeStep) {
-      cf++;
-      if (cf >= lastFrame) {
-        cf = firstFrame;
+      currentFrame++;
+      if (currentFrame >= lastFrame) {
+        currentFrame = firstFrame;
       }
       lastTime = millis();
     }
@@ -94,11 +94,31 @@ function draw() {
 }
 
 function keyPressed() {
+  /*
   if (key === ' ') {
     colors.classList.add('active')
   } else {
     colors.classList.remove('active')
   }
+  */
+  if (key === ' ') {
+    pause = !pause;
+  }
+  if (pause) {
+    if (keyCode === RIGHT_ARROW) {
+      currentFrame++;
+      if (currentFrame >= lastFrame) {
+        currentFrame = firstFrame;
+      }
+    }
+    if (keyCode === LEFT_ARROW) {
+      currentFrame--;
+      if (currentFrame < firstFrame) {
+        currentFrame = lastFrame-1;
+      }
+    }
+  }
+
 }
 
 function mousePressed() {
@@ -108,6 +128,9 @@ function mousePressed() {
 }
 
 function mouseReleased() {
+  //if (startDrawing) {
+  //  frames[currentFrame] =
+  //}
   startDrawing = false;
 }
 
