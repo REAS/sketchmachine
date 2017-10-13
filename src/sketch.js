@@ -117,13 +117,13 @@ function draw() {
 }
 
 function keyPressed() {
-  /*
-  if (key === ' ') {
+
+  if (key === 'p' || key === 'P') {
     colors.classList.add('active')
   } else {
     colors.classList.remove('active')
   }
-  */
+
   if (key === ' ') {
     pause = !pause;
   }
