@@ -167,5 +167,5 @@ function mouseReleased() {
 
 function windowResized() {
   //resizeCanvas(windowWidth, windowHeight);
-  resizeGUI();
+  //resizeGUI();
 }

@@ -96,7 +96,7 @@ function timeLineH() {
   noStroke();
   if (mouseX > ffx && mouseX < ffx+tw && mouseY > tty && mouseY < tty + th) {
     fill(255, 0, 0);
-    if (mouseIsPressed) {
+    if (mouseIsPressed && !selectLastFrame) {
       selectFirstFrame = true;
     }
   } else {
@@ -112,7 +112,7 @@ function timeLineH() {
   rect(firstFrame * tw, tty, tw, th);
   if (mouseX > lfx && mouseX < lfx+tw && mouseY > tty && mouseY < tty + th) {
     fill(255, 0, 0);
-    if (mouseIsPressed) {
+    if (mouseIsPressed && !selectFirstFrame) {
       selectLastFrame = true;
     }
   } else {
@@ -135,8 +135,4 @@ function timeLineH() {
     line(xx, ty+th, xx, ty+th2);
   }
 
-}
-
-function timeLineRes() {
-  return ceil(mouseX / numFrames) * tw;
 }
