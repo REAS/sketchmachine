@@ -1,55 +1,67 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
+</head>
+<body>
 
-  	<div id="ui">
-      <!-- canvas will be here -->
+<div id="ui">
+    <!-- canvas will be here -->
 
-      <div id="colors">
+    <div id="colors">
         <h1>Choose your color.</h1>
-      </div>
-
-      <script>
-
-        /* const colors = document.querySelector('#colors') */
-
-        /*
-        window.onkeydown = function (e) {
-          if (e.key === ' ') {
-            colors.classList.add('active')
-          } else {
-            colors.classList.remove('active')
-          }
-        }*/
-
-      </script>
-
-      <div id="controls">
-  	    <input id="speed-slider" type="range" min="10" max="100" value="50">
-        <div id="brushes">
-          <div id="brush-1">
-            <!-- Image dropdown. -->
-            <!-- input type="range" -->   
-            <!-- input type="color" -->
-          </div>
-          <div id="brush-2">
-            <!-- Image dropdown. -->
-            <!-- input type="range" -->
-            <!-- input type="color" -->
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <script src="p5.min.js"></script>
-    <!--<script src="addons/p5.dom.min.js"></script>-->
-    <!--<script src="../addons/p5.sound.min.js"></script>-->
-    <script src="sketch.js"></script>
-    <script src="timeline.js"></script>
 
-  </body>
+    <div id="timeline">
+        <div>
+            <input id="speed-slider" type="range" min="10" max="100" value="50">
+            <input id="back" type="button" value = "back">
+            <input id="playpause" type="button" value="play">
+            <input id="next" type="button" value = "next">
+            <input id="bgcolor" type="button" value = "color">
+            <input id="loop" type="button" value = "loop">
+            <input id="play-once" type="button" value = "once">
+            <input id="loop-back-and-forth" type="button" value = "back and forth">
+        </div>
+    </div>
+
+    <script>
+
+      /* const colors = document.querySelector('#colors') */
+
+      /*
+      window.onkeydown = function (e) {
+        if (e.key === ' ') {
+          colors.classList.add('active')
+        } else {
+          colors.classList.remove('active')
+        }
+      }*/
+
+    </script>
+
+    <div id="controls">
+        <!--<input id="other-slider" type="range" min="10" max="100" value="50">-->
+        <div id="brushes">
+            <div id="brush-1">
+                <!-- Image dropdown. -->
+                <input id="b1-slider" type="range" min="10" max="100" value="50">
+                <!-- input type="color" -->
+            </div>
+            <div id="brush-2">
+                <!-- Image dropdown. -->
+                <!-- input type="range" -->
+                <!-- input type="color" -->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="p5.min.js"></script>
+<script src="sketch.js"></script>
+<script src="timeline.js"></script>
+
+</body>
 </html>

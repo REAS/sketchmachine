@@ -27,6 +27,7 @@ let mx, my, pmx, pmy = 0;
 
 //
 let ui = document.querySelector('#ui');
+let timeline = document.querySelector('#timeline');
 let speedSlider = document.querySelector('#speed-slider');
 
 const colors = document.querySelector('#colors');
@@ -43,11 +44,12 @@ let addMode = true;  // Add or remove active frames
 
 
 function setup() {
-  canvas = createCanvas(frameDim, frameDim + 100);
+  canvas = createCanvas(frameDim, frameDim + 80);
 
   canvas.id('animation');
 
-  ui.prepend(canvas.elt);
+  //ui.prepend(canvas.elt);
+  timeline.prepend(canvas.elt);
   canvas.background(204);
 
   for (let i = 0; i < numFrames; i++) {

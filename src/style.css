@@ -23,7 +23,6 @@ body {
   display: block;
 }
 
-
 #ui {
   margin: auto;
   display: flex;
@@ -32,10 +31,14 @@ body {
   position: relative;
 }
 
+#timeline {
+  background-color: salmon;
+  display: flex;
+  flex-direction: column;
+}
 
 #speed-slider {
 }
-
 
 /* @media all and (min-width: 500px) { */
 @media all and (orientation: landscape) {
