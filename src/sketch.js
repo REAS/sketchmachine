@@ -19,8 +19,6 @@ let timeStep = 500; //40;  // In milliseconds
 let pause = false;
 let startDrawing = false;
 
-let thickness = 30;
-
 let mobile = false;  // Global variable, if on phone or not
 
 let mx, my, pmx, pmy = 0;
@@ -41,6 +39,13 @@ let overMaker = new Array(numFrames).fill(false);
 let onFrame = new Array(numFrames).fill(false);
 let firstClick = false;
 let addMode = true;  // Add or remove active frames
+
+// "BRUSHES"
+let b1Select = document.querySelector("#b1-select");
+let b1Tools = document.querySelector("#b1-tools");
+let b1Slider = document.querySelector('#b1-slider');
+let b1Color = document.querySelector('#b1-color');
+let b1Thickness = 1;
 
 
 function setup() {
@@ -79,7 +84,13 @@ function draw() {
   noStroke();
   rect(0);
 
+  // TIMELINE
   timeStep = parseInt(speedSlider.value);
+
+  // "BRUSHES"
+  let b1OnOff = b1Select.checked;
+
+  //console.log(b1OnOff);
 
   // Draw the time line to set the boolean values for
   // frames on and off before frames are drawn into
@@ -88,10 +99,9 @@ function draw() {
   if (startDrawing) {
     for (let i = firstFrame; i < lastFrame; i++) {
       if (onFrame[i] || i === currentFrame) {
-        frames[i].noFill();
-        frames[i].stroke(255);
-        //frames[currentFrame].ellipse(mx, my, thickness, thickness);
-        frames[i].line(pmx, pmy, mx, my);
+        if (b1OnOff) {
+          mark1(i);
+        }
       }
     }
   }
@@ -99,8 +109,6 @@ function draw() {
   image(backgroundFrame, 0, 0, 512, 512);
   image(frames[currentFrame], 0, 0, 512, 512);
   image(tempFrame, 0, 0, 512, 512);
-
-
 
   if (startDrawing) {
     pmx = mx;
@@ -154,7 +162,7 @@ function keyPressed() {
 
 function mousePressed() {
   // If click in animation area
-  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < width) {
     startDrawing = true;
     pmx = mouseX;
     pmy = mouseY;

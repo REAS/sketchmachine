@@ -15,14 +15,16 @@
 
     <div id="timeline">
         <div>
-            <input id="speed-slider" type="range" min="10" max="100" value="50">
+            <input id="speed-slider" type="range" min="10" max="100" value="50"> Speed
             <input id="back" type="button" value = "back">
             <input id="playpause" type="button" value="play">
             <input id="next" type="button" value = "next">
-            <input id="bgcolor" type="button" value = "color">
-            <input id="loop" type="button" value = "loop">
-            <input id="play-once" type="button" value = "once">
-            <input id="loop-back-and-forth" type="button" value = "back and forth">
+            <input id="bgcolor" type="button" value = "background color">
+            <form>
+                <input id="loop" type="radio" name="playback" value="loop" checked> Loop
+                <input id="play-once" type="radio" name="playback" value="once"> Once
+                <input id="loop-back-and-forth" type="radio" name="playback" value="back and forth"> Back and forth
+            </form>
         </div>
     </div>
 
@@ -45,14 +47,64 @@
         <!--<input id="other-slider" type="range" min="10" max="100" value="50">-->
         <div id="brushes">
             <div id="brush-1">
+                <input id="b1-select" type="checkbox" checked>
                 <!-- Image dropdown. -->
-                <input id="b1-slider" type="range" min="10" max="100" value="50">
-                <!-- input type="color" -->
+                <select id = "b1-tools">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <input id="b1-slider" type="range" min="1" max="100" value="10">
+                <input id="b1-color" type="button" value="color">
             </div>
             <div id="brush-2">
+                <input id="b2-select" type="checkbox">
                 <!-- Image dropdown. -->
-                <!-- input type="range" -->
-                <!-- input type="color" -->
+                <select id = "b2-tools">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <input id="b2-slider" type="range" min="1" max="100" value="10">
+                <input id="b2-color" type="button" value="color">
+            </div>
+            <div id="brush-3">
+                <input id="b3-select" type="checkbox">
+                <!-- Image dropdown. -->
+                <select id = "b3-tools">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <input id="b3-slider" type="range" min="1" max="100" value="10">
+            <input id="b3-color" type="button" value="color">
+            </div>
+            <div id="brush-4">
+                <input id="b4-select" type="checkbox">
+                <!-- Image dropdown. -->
+                <select id = "b4-tools">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <input id="b4-slider" type="range" min="1" max="100" value="10">
+                <input id="b4-color" type="button" value="color">
+            </div>
+            <div id="brush-5">
+                <input id="b5-select" type="checkbox">
+                <!-- Image dropdown. -->
+                <select id = "b5-tools">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <input id="b5-slider" type="range" min="1" max="100" value="10">
+                <input id="b5-color" type="button" value="color">
             </div>
         </div>
     </div>
@@ -62,6 +114,7 @@
 <script src="p5.min.js"></script>
 <script src="sketch.js"></script>
 <script src="timeline.js"></script>
+<script src="marks.js"></script>
 
 </body>
 </html>
