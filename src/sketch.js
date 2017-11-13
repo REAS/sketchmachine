@@ -35,17 +35,22 @@ let dpi = window.devicePixelRatio;
 // TIMELINE
 
 let overFrame = new Array(numFrames).fill(false);
-let overMaker = new Array(numFrames).fill(false);
+let overMarker = new Array(numFrames).fill(false);
 let onFrame = new Array(numFrames).fill(false);
 let firstClick = false;
 let addMode = true;  // Add or remove active frames
 
-// "BRUSHES"
-let b1Select = document.querySelector("#b1-select");
-let b1Tools = document.querySelector("#b1-tools");
-let b1Slider = document.querySelector('#b1-slider');
-let b1Color = document.querySelector('#b1-color');
-let b1Thickness = 1;
+// "MAKERS"
+let marker1Select = document.querySelector("#b1-select");
+let marker1Tools = document.querySelector("#b1-tools");
+let marker1Slider = document.querySelector("#b1-slider");
+let marker1Color = document.querySelector("#b1-color");
+
+let marker2Select = document.querySelector("#b2-select");
+let marker2Tools = document.querySelector("#b2-tools");
+let marker2Slider = document.querySelector("#b2-slider");
+let marker2Color = document.querySelector("#b2-color");
+
 
 
 function setup() {
@@ -88,7 +93,8 @@ function draw() {
   timeStep = parseInt(speedSlider.value);
 
   // "BRUSHES"
-  let b1OnOff = b1Select.checked;
+  let marker1 = marker1Select.checked;
+  let marker2 = marker2Select.checked;
 
   //console.log(b1OnOff);
 
@@ -96,11 +102,20 @@ function draw() {
   // frames on and off before frames are drawn into
   timeLineH();
 
+  let whichTool;
+
+  let markFunctions = [ mark1, mark2 ];
+
   if (startDrawing) {
     for (let i = firstFrame; i < lastFrame; i++) {
       if (onFrame[i] || i === currentFrame) {
-        if (b1OnOff) {
-          mark1(i);
+        if (marker2) {
+          whichTool = parseInt(marker2Tools.value);
+          markFunctions[whichTool-1](i, "#FF0000", parseInt(marker1Slider.value));
+        }
+        if (marker1) {
+          whichTool = parseInt(marker1Tools.value);
+          markFunctions[whichTool-1](i, "#FF0000", parseInt(marker1Slider.value));
         }
       }
     }
@@ -147,11 +162,11 @@ function keyPressed() {
     if (keyCode === LEFT_ARROW) {
       currentFrame--;
       if (currentFrame < firstFrame) {
-        currentFrame = lastFrame-1;
+        currentFrame = lastFrame - 1;
       }
     }
   }
-  if (key === 'c' ||  key === 'C') {
+  if (key === 'c' || key === 'C') {
     onFrame.fill(false);
   }
   if (key === 'a' || key === 'A') {

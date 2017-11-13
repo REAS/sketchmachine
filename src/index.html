@@ -16,10 +16,12 @@
     <div id="timeline">
         <div>
             <input id="speed-slider" type="range" min="10" max="100" value="50"> Speed
+            <input id="play" type="button" value="play">
+            <input id="pause" type="button" value="pause">
             <input id="back" type="button" value = "back">
-            <input id="playpause" type="button" value="play">
             <input id="next" type="button" value = "next">
             <input id="bgcolor" type="button" value = "background color">
+            <input id="erase" type="button" value = "erase">
             <form>
                 <input id="loop" type="radio" name="playback" value="loop" checked> Loop
                 <input id="play-once" type="radio" name="playback" value="once"> Once
@@ -54,6 +56,7 @@
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
+                    <option value="5">5</option>
                 </select>
                 <input id="b1-slider" type="range" min="1" max="100" value="10">
                 <input id="b1-color" type="button" value="color">
@@ -63,9 +66,10 @@
                 <!-- Image dropdown. -->
                 <select id = "b2-tools">
                     <option value="1">1</option>
-                    <option value="2">2</option>
+                    <option value="2" selected>2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
+                    <option value="5">5</option>
                 </select>
                 <input id="b2-slider" type="range" min="1" max="100" value="10">
                 <input id="b2-color" type="button" value="color">
@@ -76,7 +80,7 @@
                 <select id = "b3-tools">
                 <option value="1">1</option>
                 <option value="2">2</option>
-                <option value="3">3</option>
+                <option value="3" selected>3</option>
                 <option value="4">4</option>
             </select>
             <input id="b3-slider" type="range" min="1" max="100" value="10">
@@ -89,7 +93,8 @@
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
-                    <option value="4">4</option>
+                    <option value="4" selected>4</option>
+                    <option value="5">5</option>
                 </select>
                 <input id="b4-slider" type="range" min="1" max="100" value="10">
                 <input id="b4-color" type="button" value="color">
@@ -102,6 +107,7 @@
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
+                    <option value="5" selected>5</option>
                 </select>
                 <input id="b5-slider" type="range" min="1" max="100" value="10">
                 <input id="b5-color" type="button" value="color">
