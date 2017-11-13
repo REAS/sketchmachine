@@ -4,9 +4,10 @@ let canvas;
 
 let frames = [];
 let backgroundFrame;
-let tempFrame;
+let markerFrames = [];
 
 let numFrames = 48;
+let numMarkerFrames = 5;
 let firstFrame = 0;
 let lastFrame = 12;
 let currentFrame = 0;
@@ -64,13 +65,14 @@ function setup() {
 
   for (let i = 0; i < numFrames; i++) {
     frames[i] = createGraphics(frameDim * dpi, frameDim * dpi);
-    //frames[i].background(0, 0, 255);
+  }
+
+  for (let i = 0; i < numMarkerFrames; i++) {
+    markerFrames[i] = createGraphics(frameDim * dpi, frameDim * dpi);
   }
 
   backgroundFrame = createGraphics(frameDim * dpi, frameDim * dpi);
   backgroundFrame.background(0, 0, 102);
-
-  tempFrame = createGraphics(frameDim * dpi, frameDim * dpi);
 
   lastTime = millis();
 }
@@ -109,13 +111,13 @@ function draw() {
   if (startDrawing) {
     for (let i = firstFrame; i < lastFrame; i++) {
       if (onFrame[i] || i === currentFrame) {
-        if (marker2) {
-          whichTool = parseInt(marker2Tools.value);
-          markFunctions[whichTool-1](i, "#FF0000", parseInt(marker1Slider.value));
-        }
         if (marker1) {
           whichTool = parseInt(marker1Tools.value);
-          markFunctions[whichTool-1](i, "#FF0000", parseInt(marker1Slider.value));
+          markFunctions[whichTool-1](0, "#FFFFFF", parseInt(marker1Slider.value));
+        }
+        if (marker2) {
+          whichTool = parseInt(marker2Tools.value);
+          markFunctions[whichTool-1](1, "#FF0000", parseInt(marker2Slider.value));
         }
       }
     }
@@ -123,7 +125,9 @@ function draw() {
 
   image(backgroundFrame, 0, 0, 512, 512);
   image(frames[currentFrame], 0, 0, 512, 512);
-  image(tempFrame, 0, 0, 512, 512);
+  for (let i = numMarkerFrames-1; i >= 0; i--) {
+    image(markerFrames[i], 0, 0, 512, 512);
+  }
 
   if (startDrawing) {
     pmx = mx;
@@ -132,12 +136,26 @@ function draw() {
 
   if (!pause) {
     if (millis() > lastTime + timeStep) {
+
+      writeMarkersIntoFrames();
+
+      // Go to the next frame
       currentFrame++;
+
       if (currentFrame >= lastFrame) {
         currentFrame = firstFrame;
       }
       lastTime = millis();
     }
+  }
+}
+
+function writeMarkersIntoFrames() {
+  // Write all "marker frames" into the current frame
+  // and erase each right after it's written
+  for (let i = numMarkerFrames-1; i >= 0; i--) {
+    frames[currentFrame].image(markerFrames[i], 0, 0, 512, 512);
+    markerFrames[i].clear();
   }
 }
 
@@ -188,6 +206,7 @@ function mouseReleased() {
   startDrawing = false;
   selectFirstFrame = false;
   selectLastFrame = false;
+  writeMarkersIntoFrames();
 }
 
 function windowResized() {
