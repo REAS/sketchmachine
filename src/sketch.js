@@ -23,11 +23,12 @@ let startDrawing = false;
 let mobile = false;  // Global variable, if on phone or not
 
 let mx, my, pmx, pmy = 0;
+let rx, ry = 0;
 
 //
 let ui = document.querySelector('#ui');
 let timeline = document.querySelector('#timeline');
-let speedSlider = document.querySelector('#speed-slider');
+let speedSlider = document.querySelector('#speed');
 
 const colors = document.querySelector('#colors');
 
@@ -51,6 +52,23 @@ let marker2Select = document.querySelector("#b2-select");
 let marker2Tools = document.querySelector("#b2-tools");
 let marker2Slider = document.querySelector("#b2-slider");
 let marker2Color = document.querySelector("#b2-color");
+
+let marker3Select = document.querySelector("#b3-select");
+let marker3Tools = document.querySelector("#b3-tools");
+let marker3Slider = document.querySelector("#b3-slider");
+let marker3Color = document.querySelector("#b3-color");
+
+let marker4Select = document.querySelector("#b4-select");
+let marker4Tools = document.querySelector("#b4-tools");
+let marker4Slider = document.querySelector("#b4-slider");
+let marker4Color = document.querySelector("#b4-color");
+
+let marker5Select = document.querySelector("#b5-select");
+let marker5Tools = document.querySelector("#b5-tools");
+let marker5Slider = document.querySelector("#b5-slider");
+let marker5Color = document.querySelector("#b5-color");
+
+let randomXY = document.querySelector("#randomXY");
 
 
 
@@ -97,6 +115,9 @@ function draw() {
   // "BRUSHES"
   let marker1 = marker1Select.checked;
   let marker2 = marker2Select.checked;
+  let marker3 = marker3Select.checked;
+  let marker4 = marker4Select.checked;
+  let marker5 = marker5Select.checked;
 
   //console.log(b1OnOff);
 
@@ -106,7 +127,17 @@ function draw() {
 
   let whichTool;
 
-  let markFunctions = [ mark1, mark2 ];
+  let markFunctions = [ mark1, mark2, mark3, mark4, mark5 ];
+
+  let rxy = parseInt(randomXY.value);
+
+  rx = 0;
+  ry = 0;
+
+  if (rxy !== 0) {
+    rx = random(-rxy, rxy);
+    ry = random(-rxy, rxy);
+  }
 
   if (startDrawing) {
     for (let i = firstFrame; i < lastFrame; i++) {
@@ -119,6 +150,18 @@ function draw() {
           whichTool = parseInt(marker2Tools.value);
           markFunctions[whichTool-1](1, "#FF0000", parseInt(marker2Slider.value));
         }
+        if (marker3) {
+          whichTool = parseInt(marker3Tools.value);
+          markFunctions[whichTool-1](2, "#00CC00", parseInt(marker3Slider.value));
+        }
+        if (marker4) {
+          whichTool = parseInt(marker4Tools.value);
+          markFunctions[whichTool-1](3, "#000000", parseInt(marker4Slider.value));
+        }
+        if (marker5) {
+          whichTool = parseInt(marker5Tools.value);
+          markFunctions[whichTool-1](4, "#FFCC00", parseInt(marker5Slider.value));
+        }
       }
     }
   }
@@ -130,8 +173,8 @@ function draw() {
   }
 
   if (startDrawing) {
-    pmx = mx;
-    pmy = my;
+    pmx = mx + rx;
+    pmy = my + ry;
   }
 
   if (!pause) {
