@@ -39,7 +39,7 @@
             <input onclick="eraseFrame()" id="erase-frame" type="button" value="erase frame">
             <input onclick="eraseAllFrames()" id="erase-all" type="button" value="erase all">
 
-            <input id="bgcolor" type="button" value="background">
+            <input onclick="openBackgroundColorSelector()" id="background-color-button" type="button" value="" class="colorButton">
         </div>
 
         <br />
@@ -59,8 +59,8 @@
         <br />
 
         <div id="export-options">
-            <input id="export" type="button" value="Share as GIF on GIPHY">
-            <input id="bitmark" type="button" value="Register Bitmark">
+            <input id="export" type="button" value="Share as GIF on GIPHY (not working)">
+            <input id="bitmark" type="button" value="Register Bitmark (not working)">
         </div>
 
     </div>
@@ -149,8 +149,8 @@
                 <li>pause/play - p</li>
                 <li>next frame - right arrow</li>
                 <li>previous frame - left arrow</li>
-                <li>clear frame - f</li>
-                <li>clear all - c</li>
+                <li>erase frame - f</li>
+                <li>erase all - c</li>
                 <li>background color - b</li>
                 <!--<li>draw into all frames - a</li>-->
                 <!--<li>draw into current frame - u</li>-->
@@ -169,17 +169,22 @@
 
 </div>
 
-<div id="colors">
+<div id="color-selector">
     <h1>Choose your color.</h1>
     <input onclick="closeColorSelector()" id="color-selector-close" type="button" value="close">
 </div>
 
-<script src="ui.js"></script>
+<div id="background-color-selector">
+    <h1>Choose your color.</h1>
+    <input onclick="closeBackgroundColorSelector()" id="background-color-selector-close" type="button" value="close">
+</div>
+
 <script src="p5.min.js"></script>
 <script src="sketch.js"></script>
 <script src="timeline.js"></script>
 <script src="marks.js"></script>
 <script src="selector.js"></script>
+<script src="ui.js"></script>
 
 </body>
 </html>

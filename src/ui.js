@@ -1,7 +1,9 @@
 function openColorSelector() {
-  colors.classList.add('active');
+  colorSelector.classList.add('active');
   colorActive = true;
   currentColorSelection = arguments[0];
+  //console.log("open color selector");
+  //console.log(colorSelector);
 }
 
 function closeColorSelector() {
@@ -21,8 +23,23 @@ function closeColorSelector() {
     marker5Color = currentColor;
     marker5ColorButton.style.backgroundColor = marker5Color;
   }
-  colors.classList.remove('active');
-  colorActive = false;
+  colorSelector.classList.remove('active');
+  //colorActive = false;
+  triggerColorActive = true;
+}
+
+function openBackgroundColorSelector() {
+  backgroundColorSelector.classList.add('active');
+  colorActive = true;
+}
+
+function closeBackgroundColorSelector() {
+  backgroundColor = currentColor;
+  backgroundColorButton.style.backgroundColor = currentColor;
+  backgroundColorSelector.classList.remove('active');
+  //colorActive = false;
+  triggerColorActive = true;
+  console.log(backgroundColor);
 }
 
 function clickPlay() {

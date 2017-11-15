@@ -18,20 +18,25 @@ function timeLineH() {
 
   // CURRENT FRAME MARKER TOP
   let tfmy = ty - th/4;
-  fill(255, 0, 255);
-  noStroke();
-  rect(tx, tfmy , tw+1, th);
 
   for (let x = firstFrame; x < lastFrame; x++) {
     let xx = map(x, 0, numFrames, 0, width);
     if (mouseX > xx && mouseX < xx+tw && mouseY > tfmy && mouseY < tfmy+th) {
-      fill(255, 0, 0);
-      rect(xx, tfmy , tw+1, th);
+      fill(51, 51, 51);
+      //rect(xx, tfmy , tw+1, th);
+      triangle(xx, tfmy, xx+tw+1, tfmy, xx+tw/2, ty+th);
       if (mouseIsPressed) {
         currentFrame = x;
       }
     }
   }
+
+  fill(0, 0, 255);
+  noStroke();
+  //rect(tx, tfmy , tw+1, th);
+  triangle(tx, tfmy, tx+tw+1, tfmy, tx+tw/2, ty+th);
+
+
 
   // HIGHLIGHT FRAMES TO DRAW INTO
   stroke(0);
@@ -109,7 +114,9 @@ function timeLineH() {
       currentFrame = firstFrame;
     }
   }
-  rect(firstFrame * tw, tty, tw, th);
+  // IN MARKER
+  //rect(firstFrame * tw, tty, tw, th);
+  triangle(firstFrame* tw, tty, firstFrame*tw, tty+th, (firstFrame+1)*tw, tty+th/2);
   if (mouseX > lfx && mouseX < lfx+tw && mouseY > tty && mouseY < tty + th) {
     fill(255, 0, 0);
     if (mouseIsPressed && !selectFirstFrame) {
@@ -125,7 +132,9 @@ function timeLineH() {
       currentFrame = lastFrame-1 ;
     }
   }
-  rect((lastFrame-1) * tw, tty, tw, th);
+  // OUT MARKER
+  //rect((lastFrame-1) * tw, tty, tw, th);
+  triangle(lastFrame* tw, tty, lastFrame*tw, tty+th, (lastFrame-1)*tw, tty+th/2);
 
   // TICK MARKS, THE GRID OF FRAMES
   stroke(0);

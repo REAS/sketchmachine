@@ -9,17 +9,31 @@ body {
 #animation {
 }
 
-#colors {
+#color-selector {
   width: 100%;
   height: 100%;
-  background-color: aquamarine;
+  background-color: white;
   display: none;
   position: absolute;
   top: 0;
   left: 0;
 }
 
-#colors.active {
+#background-color-selector {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#color-selector.active {
+  display: block;
+}
+
+#background-color-selector.active {
   display: block;
 }
 
@@ -43,10 +57,9 @@ body {
   height: 30px;
   color: white;
   padding: 2px 2px 2px 2px;
-  text-align: center;
-  text-decoration: none;
   display: inline-block;
-  font-size: 1px;
+  border-radius: 50%;
+  border: 1px solid #FFFFFF;
 }
 
 #etc {

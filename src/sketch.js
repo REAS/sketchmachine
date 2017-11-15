@@ -1,6 +1,9 @@
 
 
 /**
+ * KNOWN BUGS
+ * - arrow keys continuing in current direction when switch keys
+ *
  * TODO
  * Onion skin?
  */
@@ -36,11 +39,15 @@ let currentColor = "#FFFFFF";
 let currentColorSelection = 1;
 
 //
-let ui = document.querySelector('#ui');
-let timeline = document.querySelector('#timeline');
-let speedSlider = document.querySelector('#speed');
+const ui = document.querySelector('#ui');
+const timeline = document.querySelector('#timeline');
+const speedSlider = document.querySelector('#speed');
 
-const colors = document.querySelector('#colors');
+const colorSelector = document.querySelector('#color-selector');
+const backgroundColorSelector = document.querySelector('#background-color-selector');
+const backgroundColorButton = document.querySelector('#background-color-button');
+
+let triggerColorActive = false;
 
 let dpi = window.devicePixelRatio;
 
@@ -80,35 +87,37 @@ let markers[0] = new maker();
 let markers[0].select = document.querySelector("#b1-select");
 */
 
-let marker1Select = document.querySelector("#b1-select");
-let marker1Tools = document.querySelector("#b1-tools");
-let marker1Slider = document.querySelector("#b1-slider");
-let marker1ColorButton = document.querySelector("#b1-color");
+const marker1Select = document.querySelector("#b1-select");
+const marker1Tools = document.querySelector("#b1-tools");
+const marker1Slider = document.querySelector("#b1-slider");
+const marker1ColorButton = document.querySelector("#b1-color");
 let marker1Color = 0;
 
-let marker2Select = document.querySelector("#b2-select");
-let marker2Tools = document.querySelector("#b2-tools");
-let marker2Slider = document.querySelector("#b2-slider");
-let marker2ColorButton = document.querySelector("#b2-color");
+const marker2Select = document.querySelector("#b2-select");
+const marker2Tools = document.querySelector("#b2-tools");
+const marker2Slider = document.querySelector("#b2-slider");
+const marker2ColorButton = document.querySelector("#b2-color");
 let marker2Color = 0;
 
-let marker3Select = document.querySelector("#b3-select");
-let marker3Tools = document.querySelector("#b3-tools");
-let marker3Slider = document.querySelector("#b3-slider");
-let marker3ColorButton = document.querySelector("#b3-color");
+const marker3Select = document.querySelector("#b3-select");
+const marker3Tools = document.querySelector("#b3-tools");
+const marker3Slider = document.querySelector("#b3-slider");
+const marker3ColorButton = document.querySelector("#b3-color");
 let marker3Color = 0;
 
-let marker4Select = document.querySelector("#b4-select");
-let marker4Tools = document.querySelector("#b4-tools");
-let marker4Slider = document.querySelector("#b4-slider");
-let marker4ColorButton = document.querySelector("#b4-color");
+const marker4Select = document.querySelector("#b4-select");
+const marker4Tools = document.querySelector("#b4-tools");
+const marker4Slider = document.querySelector("#b4-slider");
+const marker4ColorButton = document.querySelector("#b4-color");
 let marker4Color = 0;
 
-let marker5Select = document.querySelector("#b5-select");
-let marker5Tools = document.querySelector("#b5-tools");
-let marker5Slider = document.querySelector("#b5-slider");
-let marker5ColorButton = document.querySelector("#b5-color");
+const marker5Select = document.querySelector("#b5-select");
+const marker5Tools = document.querySelector("#b5-tools");
+const marker5Slider = document.querySelector("#b5-slider");
+const marker5ColorButton = document.querySelector("#b5-color");
 let marker5Color = 0;
+
+let backgroundColor = 0;
 
 let randomXY = document.querySelector("#randomXY");
 
@@ -145,6 +154,9 @@ function setup() {
   marker4ColorButton.style.backgroundColor = marker4Color;
   marker5ColorButton.style.backgroundColor = marker5Color;
 
+  backgroundColor = "#000000";
+  backgroundColorButton.style.backgroundColor = backgroundColor;
+
   for (let i = 0; i < numFrames; i++) {
     frames[i] = createGraphics(frameDim * dpi, frameDim * dpi);
     //frames[i] = createGraphics(frameDim * 1, frameDim * 1);
@@ -157,7 +169,7 @@ function setup() {
 
   backgroundFrame = createGraphics(frameDim * dpi, frameDim * dpi);
   //backgroundFrame = createGraphics(frameDim * 1, frameDim * 1);
-  backgroundFrame.background(0, 0, 255);
+  backgroundFrame.background(backgroundColor);
 
   compositeFrame = createGraphics(frameDim * dpi, frameDim * dpi);
 
@@ -229,6 +241,8 @@ function draw() {
       markFunctions[whichTool - 1](4, marker5Color, parseInt(marker5Slider.value));
     }
   }
+
+  backgroundFrame.background(backgroundColor);
 
   image(backgroundFrame, 0, 0, frameDim, frameDim);
   image(frames[currentFrame], 0, 0, frameDim, frameDim);
@@ -308,9 +322,9 @@ function keyPressed() {
   }
 
   // Background color
-  if (key === 'b' || key === 'B') {
-    openColorSelector();
-  }
+  //if (key === 'b' || key === 'B') {
+  //  openColorSelector();
+  //}
   //else {
   //  colors.classList.remove('active');
   //}
@@ -322,10 +336,18 @@ function keyPressed() {
 
   if (pause) {
     if (keyCode === RIGHT_ARROW) {
-      clickNext();
+      //clickNext();
+      currentFrame++;
+      if (currentFrame >= lastFrame) {
+        currentFrame = firstFrame;
+      }
     }
     if (keyCode === LEFT_ARROW) {
-      clickBack();
+      //clickBack();
+      currentFrame--;
+      if (currentFrame < firstFrame) {
+        currentFrame = lastFrame - 1;
+      }
     }
   }
 
@@ -340,10 +362,14 @@ function keyPressed() {
 
 function mousePressed() {
   // If click in animation area
-  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < width) {
+  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < width && !colorActive) {
     startDrawing = true;
     pmx = mouseX;
     pmy = mouseY;
+  }
+  if (triggerColorActive) {
+    colorActive = false;
+    triggerColorActive = false;
   }
 }
 
