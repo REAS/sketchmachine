@@ -18,15 +18,18 @@ function mark2(i, color, thickness) {
 
 // QUADS
 function mark3(i, color, thickness) {
-  markerFrames[i].strokeCap(SQUARE);
-  markerFrames[i].noFill();
-  markerFrames[i].stroke(color);
-  markerFrames[i].strokeWeight(thickness);
-  markerFrames[i].line(pmx, pmy, mx + rx, my + ry);
+  if (pmx !== mx || pmy !== my ) {
+    markerFrames[i].strokeCap(SQUARE);
+    markerFrames[i].noFill();
+    markerFrames[i].stroke(color);
+    markerFrames[i].strokeWeight(thickness + 5);
+    markerFrames[i].line(pmx, pmy, mx + rx, my + ry);
+  }
 }
 
 // VARIABLE-SIZE LINES
 function mark4(i, color, thickness) {
+  markerFrames[i].strokeCap(ROUND);
   markerFrames[i].stroke(color);
   let varThick = map(thickness, 1, 100, 0.25, 2.0);
   let diameter = dist(pmx, pmy, mx, my) * varThick;

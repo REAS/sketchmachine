@@ -27,25 +27,49 @@ body {
   margin: auto;
   display: flex;
   flex-direction: column;
-  background-color: yellow;
+  background-color: #999999;
   position: relative;
 }
 
 #timeline {
-  background-color: salmon;
+  background-color: #BBBBBB;
   display: flex;
   flex-direction: column;
 }
 
+.colorButton {
+  border: none;
+  width: 30px;
+  height: 30px;
+  color: white;
+  padding: 2px 2px 2px 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1px;
+}
+
+#etc {
+  flex-direction: column;
+  background-color: #AAAAAA;
+}
+
 #speed-slider {
+}
+
+#next {
+  visibility: hidden;
+}
+
+#back {
+  visibility: hidden;
 }
 
 /* @media all and (min-width: 500px) { */
 @media all and (orientation: landscape) {
 
   body {
-    background-color: red;
-
+    background-color: #333333;
   }
 
   #animation {
@@ -58,6 +82,10 @@ body {
 
   #speed-slider {
 
+  }
+
+  #etc {
+    flex-direction: column;
   }
 
 }
