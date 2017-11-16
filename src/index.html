@@ -39,6 +39,9 @@
 
     <div id="controls">
         <!--<input id="other-slider" type="range" min="10" max="100" value="50">-->
+
+        TOOLS<br />
+
         <div id="brushes">
             <div id="brush-1">
                 <input id="b1-select" type="checkbox" checked>
@@ -108,12 +111,19 @@
 
         </div>
 
-        <hr>
-
-        Random <input id="randomXY" type="range" min="0" max="100" value="0">
 
         <hr>
+        <div>
+            TOOL MODIFIERS<br />
+            <br />
+            Random <input id="randomXY" type="range" min="0" max="100" value="0"><br />
+            Smooth (not working) <input id="TK1" type="range" min="0" max="100" value="0"><br />
+            TK (not working) <input id="TK2" type="range" min="0" max="100" value="0"><br />
+        </div>
 
+        <hr>
+
+        OPTIONS<br />
 
         <div id="background-buttons">
             Background color: <input onclick="openBackgroundColorSelector()" id="background-color-button" type="button" value="" class="colorButton">
@@ -133,8 +143,10 @@
 
         <hr>
 
+        DESTROY
+
         <div id="erase-buttons">
-            <input onclick="eraseFrame()" id="erase-frame" type="button" value="erase frame">
+            <input onclick="eraseFrame()" id="erase-frame" type="button" value="erase current frame">
             <input onclick="eraseAllFrames()" id="erase-all" type="button" value="erase all">
         </div>
 
