@@ -56,6 +56,7 @@ const backgroundColorButton = document.querySelector('#background-color-button')
 
 let speedSize = false;
 let triggerColorActive = false;
+let onionSkin = false;
 
 let dpi = window.devicePixelRatio;
 
@@ -141,11 +142,11 @@ function setup() {
   timeline.prepend(canvas.elt);
   canvas.background(204);
 
-  marker1Color = "#FFFFFF";
-  marker2Color = "#FF0000";
-  marker3Color = "#00CC00";
-  marker4Color = "#000000";
-  marker5Color = "#FFCC00";
+  marker1Color = "#FFFFFF"; //web216[int(random(web216.length))];
+  marker2Color = web216[int(random(web216.length))];
+  marker3Color = web216[int(random(web216.length))];
+  marker4Color = web216[int(random(web216.length))];
+  marker5Color = web216[int(random(web216.length))];
 
   marker1ColorButton.style.backgroundColor = marker1Color;
   marker2ColorButton.style.backgroundColor = marker2Color;
@@ -153,7 +154,7 @@ function setup() {
   marker4ColorButton.style.backgroundColor = marker4Color;
   marker5ColorButton.style.backgroundColor = marker5Color;
 
-  backgroundColor = "#000000";
+  backgroundColor = "#000000"; //web216[int(random(web216.length))];
   backgroundColorButton.style.backgroundColor = backgroundColor;
 
   for (let i = 0; i < numFrames; i++) {
@@ -236,11 +237,23 @@ function draw() {
 
   backgroundFrame.background(backgroundColor);
 
+  // Now, finally, draw the animation to the screen
+
   image(backgroundFrame, 0, 0, frameDim, frameDim);
   image(frames[currentFrame], 0, 0, frameDim, frameDim);
   for (let i = numMarkerFrames-1; i >= 0; i--) {
     image(markerFrames[i], 0, 0, frameDim, frameDim);
   }
+  if (pause && onionSkin) {
+    tint(255, 102);
+    if (currentFrame > firstFrame) {
+      image(frames[currentFrame - 1], 0, 0, frameDim, frameDim);
+    } else if (currentFrame == firstFrame) {
+      image(frames[lastFrame-1], 0, 0, frameDim, frameDim);
+    }
+    //console.log(currentFrame, firstFrame, lastFrame);
+  }
+  noTint();
 
   // Draw the time line to set the boolean values for
   // frames on and off before frames are drawn into
