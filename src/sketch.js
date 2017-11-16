@@ -121,16 +121,7 @@ let backgroundColor = 0;
 
 let randomXY = document.querySelector("#randomXY");
 
-/*
-let marker1 = false;
-let marker2 = false;
-let marker3 = false;
-let marker4 = false;
-let marker5 = false;
-*/
-
 let markers = [false, false, false, false, false];
-
 
 
 function setup() {
@@ -168,7 +159,7 @@ function setup() {
   }
 
   backgroundFrame = createGraphics(frameDim * dpi, frameDim * dpi);
-  //backgroundFrame = createGraphics(frameDim * 1, frameDim * 1);
+  backgroundFrame = createGraphics(frameDim * 1, frameDim * 1);
   backgroundFrame.background(backgroundColor);
 
   compositeFrame = createGraphics(frameDim * dpi, frameDim * dpi);
@@ -187,9 +178,6 @@ function draw() {
   }
 
   background(204);
-  fill(255);
-  noStroke();
-  rect(0);
 
   // TIMELINE
   timeStep = parseInt(speedSlider.value);
@@ -200,10 +188,6 @@ function draw() {
   markers[2] = marker3Select.checked;
   markers[3] = marker4Select.checked;
   markers[4] = marker5Select.checked;
-
-  // Draw the time line to set the boolean values for
-  // frames on and off before frames are drawn into
-  timeLineH();
 
   let whichTool;
 
@@ -249,6 +233,10 @@ function draw() {
   for (let i = numMarkerFrames-1; i >= 0; i--) {
     image(markerFrames[i], 0, 0, frameDim, frameDim);
   }
+
+  // Draw the time line to set the boolean values for
+  // frames on and off before frames are drawn into
+  timeLineH();
 
   if (startDrawing) {
     pmx = mx + rx;
@@ -329,7 +317,6 @@ function keyPressed() {
   //  colors.classList.remove('active');
   //}
 
-
   if (key === 'p' || key === 'P') {
     clickPlay();
   }
@@ -377,6 +364,8 @@ function mouseReleased() {
   startDrawing = false;
   selectFirstFrame = false;
   selectLastFrame = false;
+  //frameSelectLock = false;
+  //arrowLock = false;
   writeMarkersIntoFrames();
 }
 

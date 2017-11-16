@@ -6,8 +6,6 @@
 <body>
 
 
-
-
 <!--
 <script>
 
@@ -35,25 +33,6 @@
             <input onclick="clickBack()" id="back" type="button" value="back">
             <input onclick="clickPlay()" id="play" type="button" value="pause">
             <input onclick="clickNext()" id="next" type="button" value="next">
-
-            <input onclick="eraseFrame()" id="erase-frame" type="button" value="erase frame">
-            <input onclick="eraseAllFrames()" id="erase-all" type="button" value="erase all">
-
-            <input onclick="openBackgroundColorSelector()" id="background-color-button" type="button" value="" class="colorButton">
-        </div>
-
-        <br />
-
-        <div id="speed-slider">
-            Speed: <input id="speed" type="range" min="10" max="100" value="50">
-        </div>
-
-        <div id="playback-options">
-            <form>Playback:
-                <input onclick="clickLoop()" id="loop" type="radio" name="playback" value="loop" checked> Loop
-                <input onclick="clickOnce()" id="play-once" type="radio" name="playback" value="once"> Once
-                <input onclick="clickBackAndForth()" id="loop-back-and-forth" type="radio" name="playback" value="back and forth"> Back and forth
-            </form>
         </div>
 
         <br />
@@ -133,11 +112,41 @@
                 <input id="b5-slider" type="range" min="1" max="100" value="40">
                 <input onclick="openColorSelector(5)" id="b5-color" type="button" value="" class="colorButton">
             </div>
+
         </div>
 
         <hr>
 
         Random <input id="randomXY" type="range" min="0" max="100" value="0">
+
+        <hr>
+
+
+        <div id="background-buttons">
+            Background color: <input onclick="openBackgroundColorSelector()" id="background-color-button" type="button" value="" class="colorButton">
+        </div>
+
+        <div id="speed-slider">
+            Speed: <input id="speed" type="range" min="10" max="100" value="50">
+        </div>
+
+        <div id="playback-options">
+            <form>Playback:
+                <input onclick="clickLoop()" id="loop" type="radio" name="playback" value="loop" checked> Loop
+                <input onclick="clickOnce()" id="play-once" type="radio" name="playback" value="once"> Once
+                <input onclick="clickBackAndForth()" id="loop-back-and-forth" type="radio" name="playback" value="back and forth"> Back and forth
+            </form>
+        </div>
+
+        <hr>
+
+        <div id="erase-buttons">
+            <input onclick="eraseFrame()" id="erase-frame" type="button" value="erase frame">
+            <input onclick="eraseAllFrames()" id="erase-all" type="button" value="erase all">
+        </div>
+
+        <br />
+
     </div>
 
     <div id="etc">

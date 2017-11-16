@@ -6,7 +6,7 @@ let colorSelectorCanvas = function (p) {
 
   p.preload = function () {
     img = p.loadImage("colors.gif");
-  }
+  };
 
   p.setup = function () {
     p.createCanvas(512, 512);
@@ -40,7 +40,7 @@ let backgroundColorSelectorCanvas = function (p) {
 
   p.preload = function () {
     img = p.loadImage("colors.gif");
-  }
+  };
 
   p.setup = function () {
     p.createCanvas(512, 512);
