@@ -3,11 +3,16 @@
 /**
  * KNOWN BUGS
  * - arrow keys continuing in current direction when switch keys (keys are one behind the key pressed)
- * - lock out time line while drawing
- *
+ * x lock out time line while drawing
  *
  * TODO
- * Onion skin?
+ * - Initialize with random colors
+ * - Onion skin?
+ * - Real color selections screens
+ * - Add drawing tool selection screen?
+ * - Other background options: transparent, grid, gradient?
+ * - Color cycle (random color) options
+ * - Possible to create a transparent color for erasing?
  */
 
 let canvas;

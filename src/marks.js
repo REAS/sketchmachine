@@ -9,18 +9,25 @@ function mark1(i, color, thickness) {
   */
 
   markerFrames[i].strokeCap(ROUND);
-  //markerFrames[i].noStroke();
   markerFrames[i].stroke(color);
 
-  //let diameter = thickness;
-  //if (speedSize) {
-  //  let varThick = map(thickness, 1, 100, 0.25, 2.0);
-    //thickness = dist(pmx, pmy, mx, my) * varThick;
-    //markerFrames[i].ellipse(mx + rx, my + ry, diameter, diameter);
-  //}
-  markerFrames[i].strokeWeight(thickness);
+  /*
+  markerFrames[i].noStroke();
+  markerFrames[i].fill(color);
+  let varThick = map(thickness, 1, 100, 0.25, 2.0);
+  let diameter = dist(pmx, pmy, mx, my) * varThick;
+  markerFrames[i].ellipse(mx + rx, my + ry, diameter, diameter);
+  */
+
+  if (speedSize) {
+    let varThick = map(thickness, 1, 100, 0.25, 2.0);
+    let diameter = dist(pmx, pmy, mx, my) * varThick;
+    markerFrames[i].strokeWeight(diameter);
+  } else {
+    markerFrames[i].strokeWeight(thickness);
+  }
+
   markerFrames[i].point(mx + rx, my + ry);
-  //markerFrames[i].ellipse(mx + rx, my + ry, diameter, diameter);
 
 }
 
@@ -52,27 +59,37 @@ function mark3(i, color, thickness) {
     markerFrames[i].strokeCap(SQUARE);
     markerFrames[i].noFill();
     markerFrames[i].stroke(color);
-    markerFrames[i].strokeWeight(thickness + 5);
+    if (speedSize) {
+      let varThick = map(thickness, 1, 100, 0.25, 3.0);
+      let diameter = dist(pmx, pmy, mx, my) * varThick;
+      markerFrames[i].strokeWeight(diameter);
+    } else {
+      markerFrames[i].strokeWeight(thickness + 5);
+    }
     markerFrames[i].line(pmx, pmy, mx + rx, my + ry);
   }
 }
 
-// VARIABLE-SIZE LINES
+// VARIABLE-SIZE LINES / RETIRED
 function mark4(i, color, thickness) {
+  /*
   markerFrames[i].strokeCap(ROUND);
   markerFrames[i].stroke(color);
   let varThick = map(thickness, 1, 100, 0.25, 2.0);
   let diameter = dist(pmx, pmy, mx, my) * varThick;
   markerFrames[i].strokeWeight(diameter);
   markerFrames[i].line(pmx, pmy, mx + rx, my + ry);
+  */
 }
 
-// VARIABLE-SIZE CIRCLES
+// VARIABLE-SIZE CIRCLES / RETIRED
 function mark5(i, color, thickness) {
+  /*
   markerFrames[i].noStroke();
   markerFrames[i].fill(color);
   let varThick = map(thickness, 1, 100, 0.25, 2.0);
   let diameter = dist(pmx, pmy, mx, my) * varThick;
   markerFrames[i].ellipse(mx + rx, my + ry, diameter, diameter);
+  */
 }
 
