@@ -1,7 +1,7 @@
 body {
   padding: 0;
   margin: 0;
-  background-color: red;
+  background-color: #CCCCCC;
   display: flex;
   height: 100vh;
 }
@@ -41,14 +41,36 @@ body {
   margin: auto;
   display: flex;
   flex-direction: column;
-  background-color: #999999;
+  background-color: #CCCCCC;
   position: relative;
 }
 
-#timeline {
-  background-color: #BBBBBB;
+#macro-ui {
+  margin: auto;
   display: flex;
   flex-direction: column;
+  background-color: #CCCCCC;
+  position: relative;
+}
+
+#etc {
+  /*margin: auto;*/
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #CCCCCC;
+}
+
+#timeline {
+  background-color: #CCCCCC;
+  display: flex;
+  flex-direction: column;
+}
+
+#playback-buttons {
+  margin: auto;
 }
 
 .colorButton {
@@ -62,8 +84,8 @@ body {
 }
 
 .play {
-  width: 60px;
-  height: 60px;
+  width:50px;
+  height: 50px;
   color: #FFFFFF;
   background-color: #333333;
   padding: 2px 2px 2px 2px;
@@ -83,10 +105,7 @@ body {
   border: none;
 }
 
-#etc {
-  flex-direction: column;
-  background-color: #AAAAAA;
-}
+
 
 #speed-slider {
 }
@@ -103,7 +122,7 @@ body {
 @media all and (orientation: landscape) {
 
   body {
-    background-color: #333333;
+    background-color: #CCCCCC;
   }
 
   #animation {

@@ -24,7 +24,10 @@
 
 -->
 
+<div id="macro-ui">
+
 <div id="ui">
+
     <!-- canvas will be here -->
 
     <div id="timeline">
@@ -40,9 +43,10 @@
     <div id="controls">
         <!--<input id="other-slider" type="range" min="10" max="100" value="50">-->
 
-        TOOLS<br />
+        <div id="tools">
 
-        <div id="brushes">
+            TOOLS<br/>
+
             <div id="brush-1">
                 <input id="b1-select" type="checkbox" checked>
                 <!-- Image dropdown -->
@@ -111,80 +115,103 @@
 
         </div>
 
-
-        <hr>
-        <div>
-            TOOL MODIFIERS<br />
-            <br />
-            Random <input id="randomXY" type="range" min="0" max="100" value="0"><br />
-            Smooth (not working) <input id="TK1" type="range" min="0" max="100" value="0"><br />
-            TK (not working) <input id="TK2" type="range" min="0" max="100" value="0"><br />
-        </div>
-
         <hr>
 
-        OPTIONS<br />
+        <div id="tool-modifiers">
 
-        <div id="background-buttons">
-            Background color: <input onclick="openBackgroundColorSelector()" id="background-color-button" type="button" value="" class="colorButton">
-        </div>
+            TOOL MODIFIERS<br/>
+            <br/>
 
-        <div id="speed-slider">
-            Speed: <input id="speed" type="range" min="10" max="100" value="50">
-        </div>
-
-        <div id="playback-options">
-            <form>Playback:
-                <input onclick="clickLoop()" id="loop" type="radio" name="playback" value="loop" checked> Loop
-                <input onclick="clickOnce()" id="play-once" type="radio" name="playback" value="once"> Once
-                <input onclick="clickBackAndForth()" id="loop-back-and-forth" type="radio" name="playback" value="back and forth"> Back and forth
-            </form>
+            Random <input id="randomXY" type="range" min="0" max="100" value="0"><br/>
+            Smooth (not working) <input id="TK1" type="range" min="0" max="100" value="0"><br/>
+            TK (not working) <input id="TK2" type="range" min="0" max="100" value="0"><br/>
         </div>
 
         <hr>
 
-        DESTROY
+        <div id="options">
 
-        <div id="erase-buttons">
-            <input onclick="eraseFrame()" id="erase-frame" type="button" value="erase current frame">
-            <input onclick="eraseAllFrames()" id="erase-all" type="button" value="erase all">
+            OPTIONS<br/>
+
+            <div id="background-buttons">
+                Background: <input onclick="openBackgroundColorSelector()" id="background-color-button"
+                                         type="button"
+                                         value="" class="colorButton">
+            </div>
+
+            <div id="speed-slider">
+                Speed: <input id="speed" type="range" min="10" max="100" value="50">
+            </div>
+
+            <div id="onion-options">
+                <form>Onion skin (not working):
+                    <input onclick="" id="" type="radio" name="" value="off" checked> Off
+                    <input onclick="" id="-once" type="radio" name="" value="on"> On
+                </form>
+            </div>
+
+            <div id="playback-options">
+                <form>Playback:
+                    <input onclick="clickLoop()" id="loop" type="radio" name="playback" value="loop" checked> Loop
+                    <input onclick="clickOnce()" id="play-once" type="radio" name="playback" value="once"> Once
+                    <input onclick="clickBackAndForth()" id="loop-back-and-forth" type="radio" name="playback"
+                           value="back and forth"> Back and forth
+                </form>
+            </div>
+
         </div>
 
         <hr>
 
-        <div id="export-options">
-            <input id="export" type="button" value="Share as GIF on GIPHY (not working)">
-            <!--<input id="bitmark" type="button" value="Register Bitmark (not working)">-->
+        <div id="destroy">
+            DESTROY
+
+            <div id="erase-buttons">
+                <input onclick="eraseFrame()" id="erase-frame" type="button" value="erase frame">
+                <input onclick="eraseAllFrames()" id="erase-all" type="button" value="erase all">
+            </div>
+        </div>
+
+        <hr>
+
+        <div id="export">
+            <div id="export-options">
+                <input id="export" type="button" value="Share as GIF on GIPHY (not working)">
+                <!--<input id="bitmark" type="button" value="Register Bitmark (not working)">-->
+            </div>
         </div>
 
     </div>
 
-    <div id="etc">
 
-        <!-- TODO: HIDE ON MOBILE -->
-        <div id="keyboard-shortcuts">
-            Keyboard shortcuts:
-            <ul>
-                <li>pause/play - p</li>
-                <li>next frame - right arrow</li>
-                <li>previous frame - left arrow</li>
-                <li>erase frame - f</li>
-                <li>erase all - c</li>
-                <li>background color - b</li>
-                <!--<li>draw into all frames - a</li>-->
-                <!--<li>draw into current frame - u</li>-->
-            </ul>
-        </div>
+</div>
 
-        <div id="credits">
-            Sketch Machine was created by <a href="http://caesuras.net">Casey REAS</a> with help
-            from <a href="https://giphy.com/">GIPHY</a>.
-            <br />
-            <br />
-            <a href="">Find all the Sketch Machine GIFs on Giphy</a>.
-        </div>
+<div id="etc">
 
+    <!-- TODO: HIDE ON MOBILE -->
+    <div id="keyboard-shortcuts">
+        Keyboard shortcuts:
+        <ul>
+            <li>pause/play - p</li>
+            <li>next frame - right arrow</li>
+            <li>previous frame - left arrow</li>
+            <li>erase frame - f</li>
+            <li>erase all - c</li>
+            <!--<li>background color - b</li>-->
+            <!--<li>draw into all frames - a</li>-->
+            <!--<li>draw into current frame - u</li>-->
+        </ul>
     </div>
+
+    <div id="credits">
+        Sketch Machine was created by <a href="http://caesuras.net">Casey REAS</a> with help
+        from <a href="https://giphy.com/">GIPHY</a>.
+        <br/>
+        <br/>
+        <a href="">Find all the Sketch Machine GIFs on Giphy</a>.
+    </div>
+
+</div>
 
 </div>
 

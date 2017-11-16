@@ -2,7 +2,9 @@
 
 /**
  * KNOWN BUGS
- * - arrow keys continuing in current direction when switch keys
+ * - arrow keys continuing in current direction when switch keys (keys are one behind the key pressed)
+ * - lock out time line while drawing
+ *
  *
  * TODO
  * Onion skin?
@@ -125,7 +127,7 @@ let markers = [false, false, false, false, false];
 
 
 function setup() {
-  canvas = createCanvas(frameDim, frameDim + 80);
+  canvas = createCanvas(frameDim, frameDim + 75);
 
   canvas.id('animation');
 
@@ -300,6 +302,9 @@ function eraseAllFrames() {
 }
 
 function keyPressed() {
+
+  //console.log(key);
+  //console.log("hey");
 
   if (key === 'f' || key === 'F') {
     eraseFrame();
