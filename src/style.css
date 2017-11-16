@@ -105,6 +105,26 @@ body {
   border: none;
 }
 
+#tools {
+  margin: 10px 10px 10px 20px;
+}
+
+#tool-modifiers {
+  margin: 30px 10px 10px 20px;
+}
+
+#options {
+  margin: 30px 10px 10px 20px;
+}
+
+#destroy {
+  margin: 30px 10px 10px 20px;
+}
+
+#export {
+  margin: 30px 10px 10px 20px;
+}
+
 
 
 #speed-slider {

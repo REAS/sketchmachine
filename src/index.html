@@ -51,11 +51,9 @@
                 <input id="b1-select" type="checkbox" checked>
                 <!-- Image dropdown -->
                 <select id="b1-tools">
-                    <option value="1" selected>Line</option>
-                    <option value="2">Point</option>
-                    <option value="3">Quad</option>
-                    <option value="4">Links</option>
-                    <option value="5">Circles</option>
+                    <option value="1" selected>Point</option>
+                    <option value="2">Line</option>
+                    <option value="3">Plane</option>
                 </select>
                 <input id="b1-slider" type="range" min="1" max="100" value="1">
                 <input onclick="openColorSelector(1)" id="b1-color" type="button" value="" class="colorButton">
@@ -64,11 +62,9 @@
                 <input id="b2-select" type="checkbox">
                 <!-- Image dropdown -->
                 <select id="b2-tools">
-                    <option value="1" selected>Line</option>
-                    <option value="2">Point</option>
-                    <option value="3">Quad</option>
-                    <option value="4">Links</option>
-                    <option value="5">Circles</option>
+                    <option value="1" selected>Point</option>
+                    <option value="2">Line</option>
+                    <option value="3">Plane</option>
                 </select>
                 <input id="b2-slider" type="range" min="1" max="100" value="10">
                 <input onclick="openColorSelector(2)" id="b2-color" type="button" value="" class="colorButton">
@@ -115,19 +111,23 @@
 
         </div>
 
-        <hr>
+        <!--<hr>-->
 
         <div id="tool-modifiers">
 
             TOOL MODIFIERS<br/>
             <br/>
 
+            <form>SpeedSize:
+                <input onclick="speedSizeOff()" id="speed-size-on" type="radio" name="speed-size" value="off" checked> Off
+                <input onclick="speedSizeOn()" id="speed-size-off" type="radio" name="speed-size" value="on"> On
+            </form>
             Random <input id="randomXY" type="range" min="0" max="100" value="0"><br/>
             Smooth (not working) <input id="TK1" type="range" min="0" max="100" value="0"><br/>
             TK (not working) <input id="TK2" type="range" min="0" max="100" value="0"><br/>
         </div>
 
-        <hr>
+        <!--<hr>-->
 
         <div id="options">
 
@@ -146,7 +146,7 @@
             <div id="onion-options">
                 <form>Onion skin (not working):
                     <input onclick="" id="" type="radio" name="" value="off" checked> Off
-                    <input onclick="" id="-once" type="radio" name="" value="on"> On
+                    <input onclick="" id="" type="radio" name="" value="on"> On
                 </form>
             </div>
 
@@ -161,7 +161,7 @@
 
         </div>
 
-        <hr>
+        <!--<hr>-->
 
         <div id="destroy">
             DESTROY
@@ -172,7 +172,7 @@
             </div>
         </div>
 
-        <hr>
+        <!--<hr>-->
 
         <div id="export">
             <div id="export-options">

@@ -19,9 +19,9 @@ let compositeFrame;
 
 let numFrames = 48;
 let numMarkerFrames = 5;
-let firstFrame = 0;
-let lastFrame = 12;
-let currentFrame = 0;
+let firstFrame = 18;
+let lastFrame = 30;
+let currentFrame = firstFrame;
 
 let frameDim = 512;
 
@@ -49,6 +49,7 @@ const colorSelector = document.querySelector('#color-selector');
 const backgroundColorSelector = document.querySelector('#background-color-selector');
 const backgroundColorButton = document.querySelector('#background-color-button');
 
+let speedSize = false;
 let triggerColorActive = false;
 
 let dpi = window.devicePixelRatio;

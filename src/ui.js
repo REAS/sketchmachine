@@ -1,3 +1,11 @@
+function speedSizeOn() {
+  speedSize = true;
+}
+
+function speedSizeOff() {
+  speedSize = false;
+}
+
 function openColorSelector() {
   colorSelector.classList.add('active');
   colorActive = true;
