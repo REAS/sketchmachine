@@ -1,18 +1,24 @@
 
 
 /**
- * KNOWN BUGS
- * - arrow keys continuing in current direction when switch keys (keys are one behind the key pressed)
- * x lock out time line while drawing
- *
  * TODO
- * - Initialize with random colors
- * - Onion skin?
+ * - Modify mouse values for 2X screens (BROKEN NOW)
+ * - Touch for mobile
  * - Real color selections screens
- * - Add drawing tool selection screen?
- * - Other background options: transparent, grid, gradient?
  * - Color cycle (random color) options
- * - Possible to create a transparent color for erasing?
+ * - Onion skin performance issue
+ *
+ * MAYBE
+ * - Other background options: transparent, grid, gradient?
+ * - Possible to create a transparent color for erasing? -- first test didn't work...
+ * - Add drawing tool selection screen?
+ * - Randomize colors button in Modifiers
+ * - remove p5.js from the project?
+ *
+ * DONE
+ * x Smoothing
+ * x Initialize with random colors
+ * x Onion skin (huge performance issue)
  */
 
 let canvas;
@@ -39,7 +45,8 @@ let startDrawing = false;
 let mobile = false;  // Global variable, if on phone or not
 
 let mx, my, pmx, pmy = 0;
-let rx, ry = 0;
+let rx, ry, prx, pry = 0;
+let targetX, targetY = 0;
 
 let colorActive = false;
 let currentColor = "#FFFFFF";
@@ -57,6 +64,9 @@ const backgroundColorButton = document.querySelector('#background-color-button')
 let speedSize = false;
 let triggerColorActive = false;
 let onionSkin = false;
+let smoothing = false;
+let easingSlider = document.querySelector("#easing-slider");
+let easing = 0.0;
 
 let dpi = window.devicePixelRatio;
 
@@ -132,9 +142,12 @@ let randomXY = document.querySelector("#randomXY");
 
 let markers = [false, false, false, false, false];
 
+//let firstClickDrawing = false;
+
 
 function setup() {
   canvas = createCanvas(frameDim, frameDim + 75);
+  noSmooth();
 
   canvas.id('animation');
 
@@ -159,22 +172,24 @@ function setup() {
 
   for (let i = 0; i < numFrames; i++) {
     frames[i] = createGraphics(frameDim * dpi, frameDim * dpi);
-    //frames[i] = createGraphics(frameDim * 1, frameDim * 1);
+    //frames[i] = createGraphics(frameDim, frameDim);
   }
 
   for (let i = 0; i < numMarkerFrames; i++) {
     markerFrames[i] = createGraphics(frameDim * dpi, frameDim * dpi);
-    //markerFrames[i] = createGraphics(frameDim * 1, frameDim * 1);
+    //markerFrames[i] = createGraphics(frameDim, frameDim);
   }
 
+  compositeFrame = createGraphics(frameDim * dpi, frameDim * dpi);
+  //compositeFrame = createGraphics(frameDim, frameDim);
+
   backgroundFrame = createGraphics(frameDim * dpi, frameDim * dpi);
-  backgroundFrame = createGraphics(frameDim * 1, frameDim * 1);
+  //backgroundFrame = createGraphics(frameDim, frameDim);
   backgroundFrame.background(backgroundColor);
 
-  compositeFrame = createGraphics(frameDim * dpi, frameDim * dpi);
-
-
   lastTime = millis();
+
+  console.log(frameDim);
 }
 
 function draw() {
@@ -182,8 +197,13 @@ function draw() {
   if (startDrawing) {
     //mx = mouseX / dpi;
     //my = mouseY / dpi;
-    mx = mouseX;
-    my = mouseY;
+    if (smoothing) {
+      targetX = mouseX;
+      targetY = mouseY;
+    } else {
+      mx = mouseX;
+      my = mouseY;
+    }
   }
 
   background(204);
@@ -206,6 +226,18 @@ function draw() {
 
   rx = 0;
   ry = 0;
+
+  let tempEasing = parseInt(easingSlider.value);
+  //easing = 1.0 - parseFloat(easingSlider.value);
+  if (tempEasing > 0) {
+    easing = map(tempEasing, 0, 100, 0.1, 0.01);
+    smoothing = true;
+  } else {
+    smoothing = false;
+  }
+  if (frameCount % 60 === 0) {
+    console.log(easing);
+  }
 
   if (rxy !== 0) {
     rx = random(-rxy, rxy);
@@ -240,7 +272,7 @@ function draw() {
   // Now, finally, draw the animation to the screen
 
   image(backgroundFrame, 0, 0, frameDim, frameDim);
-  image(frames[currentFrame], 0, 0, frameDim, frameDim);
+  image(frames[currentFrame], 0, 0, width, width);
   for (let i = numMarkerFrames-1; i >= 0; i--) {
     image(markerFrames[i], 0, 0, frameDim, frameDim);
   }
@@ -260,8 +292,12 @@ function draw() {
   timeLineH();
 
   if (startDrawing) {
-    pmx = mx + rx;
-    pmy = my + ry;
+    pmx = mx;
+    pmy = my;
+    prx = rx;
+    pry = ry;
+    //pmx = mx;
+    //pmy = my;
   }
 
   if (!pause) {
@@ -372,11 +408,18 @@ function keyPressed() {
 }
 
 function mousePressed() {
+  //firstClickDrawing = true;
   // If click in animation area
   if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < width && !colorActive) {
     startDrawing = true;
+    //pmx = mouseX / dpi;
+    //pmy = mouseY / dpi;
     pmx = mouseX;
     pmy = mouseY;
+    if (smoothing) {
+      mx = pmx;
+      my = pmy;
+    }
   }
   if (triggerColorActive) {
     colorActive = false;

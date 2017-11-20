@@ -1,23 +1,13 @@
 // POINTS
 function mark1(i, color, thickness) {
-  /*
-  markerFrames[i].strokeCap(ROUND);
-  markerFrames[i].noFill();
-  markerFrames[i].stroke(color);
-  markerFrames[i].strokeWeight(thickness);
-  markerFrames[i].point(mx + rx, my + ry);
-  */
+
+  if (smoothing) {
+    mx += (targetX - mx) * easing;
+    my += (targetY - my) * easing;
+  }
 
   markerFrames[i].strokeCap(ROUND);
   markerFrames[i].stroke(color);
-
-  /*
-  markerFrames[i].noStroke();
-  markerFrames[i].fill(color);
-  let varThick = map(thickness, 1, 100, 0.25, 2.0);
-  let diameter = dist(pmx, pmy, mx, my) * varThick;
-  markerFrames[i].ellipse(mx + rx, my + ry, diameter, diameter);
-  */
 
   if (speedSize) {
     let varThick = map(thickness, 1, 100, 0.25, 2.0);
@@ -33,14 +23,10 @@ function mark1(i, color, thickness) {
 
 // LINES
 function mark2(i, color, thickness) {
-  /*
-  markerFrames[i].strokeCap(ROUND);
-  markerFrames[i].noFill();
-  markerFrames[i].stroke(color);
-  markerFrames[i].strokeWeight(thickness);
-  markerFrames[i].line(pmx, pmy, mx + rx, my + ry);
-  */
-
+  if (smoothing) {
+    mx += (targetX - mx) * easing;
+    my += (targetY - my) * easing;
+  }
   markerFrames[i].strokeCap(ROUND);
   markerFrames[i].stroke(color);
   if (speedSize) {
@@ -50,11 +36,16 @@ function mark2(i, color, thickness) {
   } else {
     markerFrames[i].strokeWeight(thickness);
   }
-  markerFrames[i].line(pmx, pmy, mx + rx, my + ry);
+  markerFrames[i].line(pmx + prx, pmy + pry, mx + rx, my + ry);
 }
 
 // QUADS
 function mark3(i, color, thickness) {
+  if (smoothing) {
+    mx += (targetX - mx) * easing;
+    my += (targetY - my) * easing;
+  }
+
   if (pmx !== mx || pmy !== my) {
     markerFrames[i].strokeCap(SQUARE);
     markerFrames[i].noFill();
@@ -66,7 +57,7 @@ function mark3(i, color, thickness) {
     } else {
       markerFrames[i].strokeWeight(thickness + 5);
     }
-    markerFrames[i].line(pmx, pmy, mx + rx, my + ry);
+    markerFrames[i].line(pmx + prx, pmy + pry, mx + rx, my + ry);
   }
 }
 

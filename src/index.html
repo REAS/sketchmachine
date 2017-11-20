@@ -51,8 +51,8 @@
                 <input id="b1-select" type="checkbox" checked>
                 <!-- Image dropdown -->
                 <select id="b1-tools">
-                    <option value="1" selected>Point</option>
-                    <option value="2">Line</option>
+                    <option value="1">Point</option>
+                    <option value="2" selected>Line</option>
                     <option value="3">Plane</option>
                 </select>
                 <input id="b1-slider" type="range" min="1" max="100" value="1">
@@ -62,8 +62,8 @@
                 <input id="b2-select" type="checkbox">
                 <!-- Image dropdown -->
                 <select id="b2-tools">
-                    <option value="1" selected>Point</option>
-                    <option value="2">Line</option>
+                    <option value="1">Point</option>
+                    <option value="2" selected>Line</option>
                     <option value="3">Plane</option>
                 </select>
                 <input id="b2-slider" type="range" min="1" max="100" value="10">
@@ -73,8 +73,8 @@
                 <input id="b3-select" type="checkbox">
                 <!-- Image dropdown -->
                 <select id="b3-tools">
-                    <option value="1" selected>Point</option>
-                    <option value="2">Line</option>
+                    <option value="1">Point</option>
+                    <option value="2" selected>Line</option>
                     <option value="3">Plane</option>
                 </select>
                 <input id="b3-slider" type="range" min="1" max="100" value="20">
@@ -84,8 +84,8 @@
                 <input id="b4-select" type="checkbox">
                 <!-- Image dropdown -->
                 <select id="b4-tools">
-                    <option value="1" selected>Point</option>
-                    <option value="2">Line</option>
+                    <option value="1">Point</option>
+                    <option value="2" selected>Line</option>
                     <option value="3">Plane</option>
                 </select>
                 <input id="b4-slider" type="range" min="1" max="100" value="30">
@@ -95,8 +95,8 @@
                 <input id="b5-select" type="checkbox">
                 <!-- Image dropdown -->
                 <select id="b5-tools">
-                    <option value="1" selected>Point</option>
-                    <option value="2">Line</option>
+                    <option value="1">Point</option>
+                    <option value="2" selected>Line</option>
                     <option value="3">Plane</option>
                 </select>
                 <input id="b5-slider" type="range" min="1" max="100" value="40">
@@ -112,13 +112,12 @@
             TOOL MODIFIERS<br/>
             <br/>
 
-            <form>SpeedSize:
+            <form>Variable size:
                 <input onclick="speedSizeOff()" id="speed-size-on" type="radio" name="speed-size" value="off" checked> Off
                 <input onclick="speedSizeOn()" id="speed-size-off" type="radio" name="speed-size" value="on"> On
             </form>
             Random <input id="randomXY" type="range" min="0" max="100" value="0"><br/>
-            Smooth (not working) <input id="TK1" type="range" min="0" max="100" value="0"><br/>
-            TK (not working) <input id="TK2" type="range" min="0" max="100" value="0"><br/>
+            Smooth <input id="easing-slider" type="range" min="0" max="100" value="0"><br/>
         </div>
 
         <!--<hr>-->
@@ -139,8 +138,8 @@
 
             <div id="onion-options">
                 <form>Onion skin:
-                    <input onclick="onionOff()" id="" type="radio" name="onion" value="off" checked> Off
-                    <input onclick="onionOn()" id="" type="radio" name="onion" value="on"> On
+                    <input onclick="onionOff()" id="onion-off" type="radio" name="onion" value="off" checked> Off
+                    <input onclick="onionOn()" id="onion-on" type="radio" name="onion" value="on"> On
                 </form>
             </div>
 
@@ -170,7 +169,7 @@
 
         <div id="export">
             <div id="export-options">
-                <input id="export" type="button" value="Share as GIF (not working)">
+                <input id="export-button" type="button" value="Share as GIF (not working)">
                 <!--<input id="bitmark" type="button" value="Register Bitmark (not working)">-->
             </div>
         </div>
@@ -198,15 +197,15 @@
     </div>
 
     <div id="credits">
-        Sketch Machine was created by <a href="http://caesuras.net">Casey REAS</a> with help
+        Sketch Machine was created by <a href="http://caesuras.net" target="_blank">Casey REAS</a> with help
         from <a href="https://giphy.com/">GIPHY</a>.
         <br/>
         <br/>
         <a href="">Find all the Sketch Machine GIFs on Giphy</a>.<br />
         <br />
-        The <a href="https://github.com/REAS/sketchmachine">source code</a> for Sketch Machine is on GitHub.<br />
+        The <a href="https://github.com/REAS/sketchmachine" target="_blank">source code</a> for Sketch Machine is on GitHub.<br />
         For related work, see this informal list of
-        "<a href="https://github.com/REAS/sketchmachine/wiki/Weird-Drawing-Software">Weird Drawing Software</a>."
+        "<a href="https://github.com/REAS/sketchmachine/wiki/Weird-Drawing-Software" target="_blank">Weird Drawing Software</a>."
     </div>
 
 </div>
@@ -229,6 +228,10 @@
 <script src="marks.js"></script>
 <script src="selector.js"></script>
 <script src="ui.js"></script>
+
+<script>
+  generateButtons()
+</script>
 
 </body>
 </html>

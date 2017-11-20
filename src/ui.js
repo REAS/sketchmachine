@@ -112,6 +112,28 @@ function rgbToHex(r, g, b) {
   return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
+/* <input onclick="eraseFrame()" id="erase-frame" type="button" value="erase frame"> */
+
+function generateButtons() {
+
+  /*
+  var btn = document.createElement("BUTTON");        // Create a <button> element
+  var t = document.createTextNode("CLICK ME");       // Create a text node
+  btn.appendChild(t);                                // Append the text to <button>
+  console.log(btn);
+  //document.body.appendChild(btn);                    // Append <button> to <body>
+  colorSelector.appendChild(btn);
+  */
+
+  /*
+  var node = document.getElementById('node-id');
+  var newNode = document.createElement('p');
+  newNode.appendChild(document.createTextNode('some dynamic html'));
+  node.appendChild(newNode);
+   */
+
+}
+
 const web216 = [
   '#000000',
   '#000033',
