@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "now": {
-    "alias": ["sketchmachine.net", "www.sketchmachine.net"]
+    "alias": [
+      "sketchmachine.net",
+      "www.sketchmachine.net"
+    ]
   },
   "scripts": {
     "start": "serve src",

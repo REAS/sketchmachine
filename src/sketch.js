@@ -1,5 +1,4 @@
 
-
 /**
  * TODO
  * - Modify mouse values for 2X screens (BROKEN NOW)
@@ -144,8 +143,8 @@ let markers = [false, false, false, false, false];
 
 //let firstClickDrawing = false;
 
-
 function setup() {
+  pixelDensity(dpi);
   canvas = createCanvas(frameDim, frameDim + 75);
   noSmooth();
 
@@ -171,26 +170,26 @@ function setup() {
   backgroundColorButton.style.backgroundColor = backgroundColor;
 
   for (let i = 0; i < numFrames; i++) {
-    frames[i] = createGraphics(frameDim * dpi, frameDim * dpi);
+    frames[i] = createGraphics(frameDim, frameDim);
     //frames[i] = createGraphics(frameDim, frameDim);
   }
 
   for (let i = 0; i < numMarkerFrames; i++) {
-    markerFrames[i] = createGraphics(frameDim * dpi, frameDim * dpi);
+    markerFrames[i] = createGraphics(frameDim, frameDim);
     //markerFrames[i] = createGraphics(frameDim, frameDim);
   }
 
-  compositeFrame = createGraphics(frameDim * dpi, frameDim * dpi);
+  compositeFrame = createGraphics(frameDim, frameDim);
   //compositeFrame = createGraphics(frameDim, frameDim);
 
-  backgroundFrame = createGraphics(frameDim * dpi, frameDim * dpi);
+  backgroundFrame = createGraphics(frameDim, frameDim);
   //backgroundFrame = createGraphics(frameDim, frameDim);
   backgroundFrame.background(backgroundColor);
 
   lastTime = millis();
-
-  console.log(frameDim);
 }
+
+// function draw() {}
 
 function draw() {
 
@@ -236,7 +235,7 @@ function draw() {
     smoothing = false;
   }
   if (frameCount % 60 === 0) {
-    console.log(easing);
+    console.log('Easing:', easing);
   }
 
   if (rxy !== 0) {
@@ -267,9 +266,11 @@ function draw() {
     }
   }
 
+
   backgroundFrame.background(backgroundColor);
 
   // Now, finally, draw the animation to the screen
+
 
   image(backgroundFrame, 0, 0, frameDim, frameDim);
   image(frames[currentFrame], 0, 0, width, width);
@@ -285,6 +286,7 @@ function draw() {
     }
     //console.log(currentFrame, firstFrame, lastFrame);
   }
+
   noTint();
 
   // Draw the time line to set the boolean values for
@@ -299,6 +301,7 @@ function draw() {
     //pmx = mx;
     //pmy = my;
   }
+
 
   if (!pause) {
     if (millis() > lastTime + timeStep) {
@@ -327,23 +330,26 @@ function draw() {
       lastTime = millis();
     }
   }
+
+
 }
 
 function writeMarkersIntoFrames() {
   // Composite each layer into one, then erase in turn
   for (let i = numMarkerFrames - 1; i >= 0; i--) {
     if (markers[i]) {
-      compositeFrame.image(markerFrames[i], 0, 0, frameDim, frameDim);
-      markerFrames[i].clear();
+      compositeFrame.drawingContext.drawImage(markerFrames[i].canvas, 0, 0)
+      markerFrames[i].drawingContext.clearRect(0, 0, frameDim, frameDim)
     }
   }
+
   // Write all "marker frames" composites into the selected frames
   for (let i = firstFrame; i < lastFrame; i++) {
     if (onFrame[i] || i === currentFrame) {
-      frames[i].image(compositeFrame, 0, 0, frameDim, frameDim);
+      frames[i].drawingContext.drawImage(compositeFrame.canvas, 0, 0)
     }
   }
-  compositeFrame.clear();
+  compositeFrame.drawingContext.clearRect(0, 0, frameDim, frameDim)
 }
 
 function eraseFrame() {
