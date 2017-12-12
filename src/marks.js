@@ -36,6 +36,7 @@ function mark2(i, color, thickness) {
   } else {
     markerFrames[i].strokeWeight(thickness);
   }
+  console.log(pmx + prx, pmy + pry, mx + rx, my + ry);
   markerFrames[i].line(pmx + prx, pmy + pry, mx + rx, my + ry);
 }
 

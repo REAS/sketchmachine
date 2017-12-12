@@ -29,8 +29,8 @@ let compositeFrame;
 
 let numFrames = 48;
 let numMarkerFrames = 5;
-let firstFrame = 18;
-let lastFrame = 30;
+let firstFrame = 0//18;
+let lastFrame = 48//30;
 let currentFrame = firstFrame;
 
 let frameDim = 512;
@@ -144,7 +144,7 @@ let markers = [false, false, false, false, false];
 //let firstClickDrawing = false;
 
 function setup() {
-  pixelDensity(dpi);
+  pixelDensity(1);
   canvas = createCanvas(frameDim, frameDim + 75);
   noSmooth();
 
@@ -413,10 +413,15 @@ function keyPressed() {
 
 }
 
-function mousePressed() {
+// Define an abstract pointer device
+function pointerPressed() {
+
+  console.log('Pointer pressed:', mouseX, mouseY)
+
   //firstClickDrawing = true;
   // If click in animation area
   if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < width && !colorActive) {
+
     startDrawing = true;
     //pmx = mouseX / dpi;
     //pmy = mouseY / dpi;
@@ -433,7 +438,7 @@ function mousePressed() {
   }
 }
 
-function mouseReleased() {
+function pointerReleased() {
   startDrawing = false;
   selectFirstFrame = false;
   selectLastFrame = false;
@@ -442,7 +447,22 @@ function mouseReleased() {
   writeMarkersIntoFrames();
 }
 
-function windowResized() {
+// Link mouse
+function mousePressed() { pointerPressed() }
+function mouseReleased() { pointerReleased() }
+
+// Link touch
+function touchStarted(e) { pointerPressed() }
+
+function touchMoved(e) {
+  if (startDrawing && e.touches.length === 1) { // Prevent pan gesture on mobile
+    e.preventDefault()
+  }
+}
+
+function touchReleased() { pointerReleased() }
+
+//function windowResized() {
   //resizeCanvas(windowWidth, windowHeight);
   //resizeGUI();
-}
+//}
