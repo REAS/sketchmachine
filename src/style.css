@@ -3,7 +3,6 @@ html {
 }
 
 body {
-  padding: 0;
   margin: 10px;
   background-color: #CCCCCC;
 }
@@ -51,8 +50,13 @@ input, button {
   margin: auto;
   display: flex;
   flex-direction: column;
-  background-color: #CCCCCC;
+  background-color: yellow;
   position: relative;
+}
+
+#controls {
+  width: 400px;
+  background-color: pink;
 }
 
 #macro-ui {
@@ -148,9 +152,7 @@ input, button {
   visibility: hidden;
 }
 
-/* @media all and (min-width: 500px) { */
-@media all and (orientation: landscape) {
-
+@media all and (min-width: 932px) {
   body {
     background-color: #CCCCCC;
   }
