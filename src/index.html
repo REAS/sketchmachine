@@ -146,9 +146,11 @@
 
             <div id="playback-options">
                 <form>Playback:
-                    <input onclick="clickLoop()" id="loop" type="radio" name="playback" value="loop" checked> Loop
-                    <input onclick="clickOnce()" id="play-once" type="radio" name="playback" value="once"> Once
-                    <input onclick="clickBackAndForth()" id="loop-back-and-forth" type="radio" name="playback"
+                    <input onclick="clickForward()" id="forward" type="radio" name="playback"
+                           value="forward" checked> Forward
+                    <input onclick="clickReverse()" id="reverse" type="radio" name="playback"
+                           value="reverse"> Reverse
+                    <input onclick="clickBackAndForth()" id="back-and-forth" type="radio" name="playback"
                            value="back and forth"> Back and forth
                 </form>
             </div>

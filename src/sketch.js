@@ -29,13 +29,13 @@ let compositeFrame;
 
 let numFrames = 48;
 let numMarkerFrames = 5;
-let firstFrame = 0//18;
-let lastFrame = 48//30;
+let firstFrame = 18;
+let lastFrame = 30;
 let currentFrame = firstFrame;
 
 let frameDim = 512;
 let surfaceDim = frameDim / 2;
-let frameSurfaceRatio = surfaceDim / frameDim
+let frameSurfaceRatio = surfaceDim / frameDim;
 
 let lastTime = 0;
 let timeStep = 500; //40;  // In milliseconds
@@ -81,11 +81,11 @@ let addMode = true;  // Add or remove active frames
 
 let playbackDirection = 1;
 
-const ONCE = 0;
-const LOOP = 1;
+const REVERSE = 0;
+const FORWARD = 1;
 const BACKANDFORTH = 2;
 
-let playbackMode = LOOP;
+let playbackMode = FORWARD;
 
 // "MARKERS"
 
@@ -268,9 +268,8 @@ function draw() {
 
   // Now, finally, draw the animation to the screen
 
-
   image(backgroundFrame, 0, 0, frameDim, frameDim);
-  image(frames[currentFrame], 0, 0, width, width);
+  image(frames[currentFrame], 0, 0, frameDim, frameDim);
   for (let i = numMarkerFrames-1; i >= 0; i--) {
     image(markerFrames[i], 0, 0, frameDim, frameDim);
   }
@@ -305,17 +304,15 @@ function draw() {
 
       writeMarkersIntoFrames();
 
-      if (playbackMode === LOOP) {
+      if (playbackMode === FORWARD) {
         currentFrame++;  // Go to the next frame
         if (currentFrame >= lastFrame) {
           currentFrame = firstFrame;
         }
-      } else if (playbackMode === ONCE) {
-        currentFrame++;  // Go to the next frame
-        if (currentFrame >= lastFrame) {
-          currentFrame--;
-          //pause = true;
-          clickPlay();
+      } else if (playbackMode === REVERSE) {
+        currentFrame--;  // Go to the next frame
+        if (currentFrame < firstFrame) {
+          currentFrame = lastFrame-1;
         }
       } else if (playbackMode === BACKANDFORTH) {
         currentFrame += 1 * playbackDirection;  // Go to the next frame

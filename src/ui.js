@@ -68,9 +68,9 @@ function clickPlay() {
     document.getElementById("play").value = "pause";
     document.getElementById("next").style.visibility = "hidden";
     document.getElementById("back").style.visibility = "hidden";
-    if (playbackMode === ONCE && currentFrame === lastFrame-1) {
-      currentFrame = firstFrame;
-    }
+    //if (playbackMode === ONCE && currentFrame === lastFrame-1) {
+    //  currentFrame = firstFrame;
+    //}
     if (playbackMode === BACKANDFORTH && currentFrame === lastFrame-1) {
       playbackDirection = -1;
     }
@@ -91,12 +91,12 @@ function clickNext() {
   }
 }
 
-function clickOnce() {
-  playbackMode = ONCE;
+function clickReverse() {
+  playbackMode = REVERSE;
 }
 
-function clickLoop() {
-  playbackMode = LOOP;
+function clickForward() {
+  playbackMode = FORWARD;
 }
 
 function clickBackAndForth() {
