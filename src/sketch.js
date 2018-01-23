@@ -34,6 +34,8 @@ let lastFrame = 48//30;
 let currentFrame = firstFrame;
 
 let frameDim = 512;
+let surfaceDim = frameDim / 2;
+let frameSurfaceRatio = surfaceDim / frameDim
 
 let lastTime = 0;
 let timeStep = 500; //40;  // In milliseconds
@@ -170,20 +172,16 @@ function setup() {
   backgroundColorButton.style.backgroundColor = backgroundColor;
 
   for (let i = 0; i < numFrames; i++) {
-    frames[i] = createGraphics(frameDim, frameDim);
-    //frames[i] = createGraphics(frameDim, frameDim);
+    frames[i] = createGraphics(surfaceDim, surfaceDim);
   }
 
   for (let i = 0; i < numMarkerFrames; i++) {
-    markerFrames[i] = createGraphics(frameDim, frameDim);
-    //markerFrames[i] = createGraphics(frameDim, frameDim);
+    markerFrames[i] = createGraphics(surfaceDim, surfaceDim);
   }
 
-  compositeFrame = createGraphics(frameDim, frameDim);
-  //compositeFrame = createGraphics(frameDim, frameDim);
+  compositeFrame = createGraphics(surfaceDim, surfaceDim);
 
-  backgroundFrame = createGraphics(frameDim, frameDim);
-  //backgroundFrame = createGraphics(frameDim, frameDim);
+  backgroundFrame = createGraphics(surfaceDim, surfaceDim);
   backgroundFrame.background(backgroundColor);
 
   lastTime = millis();
@@ -197,11 +195,11 @@ function draw() {
     //mx = mouseX / dpi;
     //my = mouseY / dpi;
     if (smoothing) {
-      targetX = mouseX;
-      targetY = mouseY;
+      targetX = mouseX * frameSurfaceRatio;
+      targetY = mouseY * frameSurfaceRatio;
     } else {
-      mx = mouseX;
-      my = mouseY;
+      mx = mouseX * frameSurfaceRatio;
+      my = mouseY * frameSurfaceRatio;
     }
   }
 
@@ -425,8 +423,8 @@ function pointerPressed() {
     startDrawing = true;
     //pmx = mouseX / dpi;
     //pmy = mouseY / dpi;
-    pmx = mouseX;
-    pmy = mouseY;
+    pmx = mouseX * frameSurfaceRatio;
+    pmy = mouseY * frameSurfaceRatio;
     if (smoothing) {
       mx = pmx;
       my = pmy;
