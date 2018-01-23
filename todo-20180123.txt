@@ -1,0 +1,44 @@
+PAIR
+
+- GUI
+  . Keep similar feel
+  . Increase button size
+- Timeline
+  . Use the single frame selector and add "select/deselect"
+  . Drag frame selection left and right
+  . Doesn't work well on phone
+  . Export toggle changes timeline icons
+- Final resolution decision
+  . Variable performace, see if "user agent" can be used
+  x 256x256 or 512x512
+
+
+JAS
+
+- Starting zoom
+- Add "user select none"
+- Add line smoothing (JAS)
+- Hook into Giphy
+- Configure multitouch
+  . Two fingers for scale
+  . One finger to draw
+- Scroll up/down not working on Android
+- Add border around drawing area
+- Intercept the "back" swipe "Do you want to cancel your drawing?"
+- Prevent focus on UI elements
+
+
+CEB
+
+- Default drawing tool larger
+- GUI Naming
+  . "random" to "jitter"
+  . "smooth" to "chase"
+  x Change "Playback" to "Direction: Forward, Reverse, Back and Forth", remove once
+- Color picker
+  . Full screen or not?
+  . Transparent option with gray grid for background color select
+  . "Close" button changes to an x
+- Move "Clear"/"Erase" to button area
+
+
