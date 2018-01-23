@@ -187,8 +187,6 @@ function setup() {
   lastTime = millis();
 }
 
-// function draw() {}
-
 function draw() {
 
   if (startDrawing) {
@@ -203,7 +201,8 @@ function draw() {
     }
   }
 
-  background(204);
+  canvas.drawingContext.fillStyle = 'rgb(204, 204, 204)'
+  canvas.drawingContext.fillRect(0, 0, width, height)
 
   // TIMELINE
   timeStep = parseInt(speedSlider.value);

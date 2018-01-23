@@ -4,17 +4,15 @@ html {
 
 body {
   padding: 0;
-  margin: 0;
+  margin: 10px;
   background-color: #CCCCCC;
-  overflow: hidden;
-  width: 512px;
-}
-
-#animation {
 }
 
 canvas {
  image-rendering: pixelated;
+ /* Override p5.js sizing to fit viewport. */
+ width: 100% !important;
+ height: auto !important;
 }
 
 input, button {
@@ -66,7 +64,6 @@ input, button {
 }
 
 #etc {
-  /*margin: auto;*/
   padding: 2px;
   box-sizing: border-box;
   margin-top: 50px;
@@ -78,6 +75,7 @@ input, button {
 }
 
 #timeline {
+  max-width: 512px;
   background-color: #CCCCCC;
   display: flex;
   flex-direction: column;
@@ -139,8 +137,6 @@ input, button {
   margin: 30px 10px 10px 20px;
 }
 
-
-
 #speed-slider {
 }
 
@@ -160,7 +156,6 @@ input, button {
   }
 
   #animation {
-
   }
 
   #ui {
@@ -168,7 +163,6 @@ input, button {
   }
 
   #speed-slider {
-
   }
 
   #etc {
