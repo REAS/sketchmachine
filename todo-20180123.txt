@@ -18,7 +18,7 @@ PAIR
 
 JAS
 
-- Starting zoom
+- Disable tap delay
 - Add button feature to "Export GIF", open new tab to define
   GIF export features on a separate page
   . Share on GIPHY
@@ -31,7 +31,6 @@ JAS
   . Two fingers for scale
   . One finger to draw
 - Scroll up/down not working on Android
-- Add border around drawing area
 - Intercept the "back" swipe "Do you want to cancel your drawing?"
 - Prevent focus on UI elements
 - Tap radio button tables to toggle button too
