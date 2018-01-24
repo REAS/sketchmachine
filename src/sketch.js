@@ -1,23 +1,7 @@
 
 /**
  * TODO
- * - Modify mouse values for 2X screens (BROKEN NOW)
- * - Touch for mobile
- * - Real color selections screens
- * - Color cycle (random color) options
- * - Onion skin performance issue
- *
- * MAYBE
- * - Other background options: transparent, grid, gradient?
- * - Possible to create a transparent color for erasing? -- first test didn't work...
- * - Add drawing tool selection screen?
- * - Randomize colors button in Modifiers
- * - remove p5.js from the project?
- *
- * DONE
- * x Smoothing
- * x Initialize with random colors
- * x Onion skin (huge performance issue)
+ * - see TODO-x.txt document in root
  */
 
 let canvas;
@@ -27,14 +11,14 @@ let backgroundFrame;
 let markerFrames = [];
 let compositeFrame;
 
-let numFrames = 48;
+let numFrames = 36; // 48
 let numMarkerFrames = 5;
-let firstFrame = 18;
-let lastFrame = 30;
+let firstFrame = 12; //18;
+let lastFrame = 24; //30;
 let currentFrame = firstFrame;
 
 let frameDim = 512;
-let surfaceDim = frameDim / 2;
+let surfaceDim = frameDim / 1;
 let frameSurfaceRatio = surfaceDim / frameDim;
 
 let lastTime = 0;
@@ -86,6 +70,11 @@ const FORWARD = 1;
 const BACKANDFORTH = 2;
 
 let playbackMode = FORWARD;
+
+//let fpsOptions = [1, 2, 4, 8, 12, 24, 30, 40, 50, 60];
+//                1     2    4    8    12  24  30  40  50  60
+//let fpsOptions = [1000, 500, 250, 125, 12, 42, 33, 25, 20, 17];
+let fpsOptions = [17, 20, 25, 33, 42, 12, 125, 250, 500, 1000];
 
 // "MARKERS"
 
@@ -205,7 +194,7 @@ function draw() {
   canvas.drawingContext.fillRect(0, 0, width, height)
 
   // TIMELINE
-  timeStep = parseInt(speedSlider.value);
+  timeStep = fpsOptions[parseInt(speedSlider.value)-1];
 
   // "BRUSHES"
   markers[0] = marker1Select.checked;

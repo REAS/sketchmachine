@@ -56,7 +56,7 @@
                     <option value="2" selected>Line</option>
                     <option value="3">Plane</option>
                 </select>
-                <input id="b1-slider" type="range" min="1" max="100" value="1">
+                <input id="b1-slider" type="range" min="1" max="100" value="20">
                 <input onclick="openColorSelector(1)" id="b1-color" type="button" value="" class="colorButton">
             </div>
             <div id="brush-2">
@@ -67,7 +67,7 @@
                     <option value="2" selected>Line</option>
                     <option value="3">Plane</option>
                 </select>
-                <input id="b2-slider" type="range" min="1" max="100" value="10">
+                <input id="b2-slider" type="range" min="1" max="100" value="30">
                 <input onclick="openColorSelector(2)" id="b2-color" type="button" value="" class="colorButton">
             </div>
             <div id="brush-3">
@@ -78,7 +78,7 @@
                     <option value="2" selected>Line</option>
                     <option value="3">Plane</option>
                 </select>
-                <input id="b3-slider" type="range" min="1" max="100" value="20">
+                <input id="b3-slider" type="range" min="1" max="100" value="40">
                 <input onclick="openColorSelector(3)" id="b3-color" type="button" value="" class="colorButton">
             </div>
             <div id="brush-4">
@@ -89,7 +89,7 @@
                     <option value="2" selected>Line</option>
                     <option value="3">Plane</option>
                 </select>
-                <input id="b4-slider" type="range" min="1" max="100" value="30">
+                <input id="b4-slider" type="range" min="1" max="100" value="50">
                 <input onclick="openColorSelector(4)" id="b4-color" type="button" value="" class="colorButton">
             </div>
             <div id="brush-5">
@@ -100,7 +100,7 @@
                     <option value="2" selected>Line</option>
                     <option value="3">Plane</option>
                 </select>
-                <input id="b5-slider" type="range" min="1" max="100" value="40">
+                <input id="b5-slider" type="range" min="1" max="100" value="60">
                 <input onclick="openColorSelector(5)" id="b5-color" type="button" value="" class="colorButton">
             </div>
 
@@ -113,12 +113,12 @@
             TOOL MODIFIERS<br/>
             <br/>
 
-            <form>Variable size:
+            <form>Engorge:
                 <input onclick="speedSizeOff()" id="speed-size-on" type="radio" name="speed-size" value="off" checked> Off
                 <input onclick="speedSizeOn()" id="speed-size-off" type="radio" name="speed-size" value="on"> On
             </form>
-            Random <input id="randomXY" type="range" min="0" max="100" value="0"><br/>
-            Smooth <input id="easing-slider" type="range" min="0" max="100" value="0"><br/>
+            Jitter: <input id="randomXY" type="range" min="0" max="100" value="0"><br/>
+            Dawdle: <input id="easing-slider" type="range" min="0" max="100" value="0"><br/>
         </div>
 
         <!--<hr>-->
@@ -134,7 +134,7 @@
             </div>
 
             <div id="speed-slider">
-                Speed: <input id="speed" style="direction: rtl" type="range" min="10" max="100" value="10">
+                Speed: <input id="speed" style="direction: rtl" type="range" min="1" max="10" value="1">
             </div>
 
             <div id="onion-options">
