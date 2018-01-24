@@ -3,19 +3,27 @@ PAIR
 - GUI
   . Keep similar feel
   . Increase button size
+- TOOLs
+  . Vertically center each tool line
 - Timeline
   . Use the single frame selector and add "select/deselect"
   . Drag frame selection left and right
   . Doesn't work well on phone
   . Export toggle changes timeline icons
+  . Triangles too difficult to grab
 - Final resolution decision
   . Variable performace, see if "user agent" can be used
-  x 256x256 or 512x512
-
+  x 256-256 or 512-512
+- Convert Play, Next, Back to images buttons
 
 JAS
 
 - Starting zoom
+- Add button feature to "Export GIF", open new tab to define
+  GIF export features on a separate page
+  . Share on GIPHY
+  . See this page: https://media.giphy.com/media/xULW8LE3usQAw9kSGc/source.gif
+- Add instructions into main Controls column, lighter gray text
 - Add "user select none"
 - Add line smoothing (JAS)
 - Hook into Giphy
@@ -26,19 +34,27 @@ JAS
 - Add border around drawing area
 - Intercept the "back" swipe "Do you want to cancel your drawing?"
 - Prevent focus on UI elements
+- Tap radio button tables to toggle button too
+- Keyboard events directly in Javascript, route to the button
+- Hide keyboard hints on mobile?
 
 
 CEB
 
 - Default drawing tool larger
-- GUI Naming
-  . "random" to "jitter"
-  . "smooth" to "chase"
-  x Change "Playback" to "Direction: Forward, Reverse, Back and Forth", remove once
 - Color picker
   . Full screen or not?
   . Transparent option with gray grid for background color select
   . "Close" button changes to an x
 - Move "Clear"/"Erase" to button area
+- Align frame rates to 60fps maximum and 1 or 2 fps minimum
+- Lock frame selection when using range UI element
 
+//
 
+DONE
+
+X GUI Naming
+  x "random" to "jitter"
+  x "smooth" to "chase"
+  x Change "Playback" to "Direction: Forward, Reverse, Back and Forth", remove once

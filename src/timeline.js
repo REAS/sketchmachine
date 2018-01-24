@@ -26,7 +26,7 @@ function timeLineH() {
   if (!startDrawing) {
     for (let x = firstFrame; x < lastFrame; x++) {
       let xx = map(x, 0, numFrames, 0, width);
-      if ((mouseX > xx && mouseX < xx + tw && mouseY > tfmy - th && mouseY < tfmy + th / 2)) {
+      if ((mouseX > xx && mouseX < xx + tw && mouseY > ty + th && mouseY < tfmy + th / 2)) {
         noStroke();
         fill(255, 0, 0);
         //rect(xx, tfmy , tw+1, th);
@@ -44,7 +44,7 @@ function timeLineH() {
   //rect(tx, tfmy , tw+1, th);
   triangle(tx, tfmy, tx + tw + 1, tfmy, tx + tw / 2, tfmy - tw);
 
-
+  /*
   // HIGHLIGHT FRAMES TO DRAW INTO
   stroke(0);
   let i = 0;
@@ -94,6 +94,7 @@ function timeLineH() {
 
     i++;
   }
+  */
 
   // CURRENT FRAME MARKER (MIDDLE)
   fill(0, 0, 255);
