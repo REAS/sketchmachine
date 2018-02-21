@@ -1,6 +1,5 @@
 // POINTS
 function mark1(i, color, thickness) {
-
   if (smoothing) {
     mx += (targetX - mx) * easing;
     my += (targetY - my) * easing;
@@ -18,7 +17,6 @@ function mark1(i, color, thickness) {
   }
 
   markerFrames[i].point(mx + rx, my + ry);
-
 }
 
 // LINES
@@ -36,7 +34,7 @@ function mark2(i, color, thickness) {
   } else {
     markerFrames[i].strokeWeight(thickness);
   }
-  console.log(pmx + prx, pmy + pry, mx + rx, my + ry);
+  // console.log(pmx + prx, pmy + pry, mx + rx, my + ry);
   markerFrames[i].line(pmx + prx, pmy + pry, mx + rx, my + ry);
 }
 

@@ -5,6 +5,7 @@ html {
 body {
   margin: 0;
   background-color: #CCCCCC;
+  user-select: none;
 }
 
 canvas {
@@ -103,6 +104,7 @@ hr {
 }
 
 #playback-buttons {
+  padding-top: 4px;
   margin: 0 auto;
 }
 
@@ -136,6 +138,35 @@ hr {
   display: inline-block;
   border-radius: 50%;
   border: none;
+}
+
+#keyboard-shortcuts {
+  padding: 0;
+  list-style-type: none;
+}
+
+#keyboard-shortcuts li {
+  line-height: 1.75em;
+  display: inline-block;
+  padding-bottom: 0.5em;
+}
+
+.keyboard-shortcut {
+  min-width: 1em;
+  height: 1.5em;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  background-color: #eee;
+  border: 0.25em outset #c3c3c3;
+  padding: 0 0.2em;
+  vertical-align: middle;
+  text-align: center;
+  color: grey;
+}
+
+.mirror {
+  display: inline-block;
+  transform: scaleX(-1);
 }
 
 /*

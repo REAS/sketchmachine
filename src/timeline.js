@@ -1,26 +1,21 @@
 let selectLastFrame = false;
 let selectFirstFrame = false;
-//let arrowLock = false;
-//let frameSelectLock = false;
 
 function timeLineH() {
-
   let tw = frameDim / numFrames;
   let ty = frameDim + 10;
   let th = 20;  // Time line height
   let th2 = th * 2;
 
-
   // Change the height of the time line elements when running on a phone
-  if (mobile) {
+  // if (mobile) {
     th = 40;
     th2 = th * 2;
-  }
+  // }
 
   let tx = map(currentFrame, 0, numFrames, 0, width);
 
   // CURRENT FRAME MARKER ARROW
-  //let tfmy = ty - th/4;
   let tfmy = ty + th * 3 - th / 4;
 
   if (!startDrawing) {
@@ -31,7 +26,7 @@ function timeLineH() {
         fill(255, 0, 0);
         //rect(xx, tfmy , tw+1, th);
         triangle(xx, tfmy, xx + tw + 1, tfmy, xx + tw / 2, tfmy - th / 2);
-        if (mouseIsPressed) {
+        if (mouseIsPressed && mouseY >= ty + th && mouseY <= height) {
           currentFrame = x;
           arrowLock = true;
         }
@@ -41,7 +36,6 @@ function timeLineH() {
 
   fill(0, 0, 255);
   noStroke();
-  //rect(tx, tfmy , tw+1, th);
   triangle(tx, tfmy, tx + tw + 1, tfmy, tx + tw / 2, tfmy - tw);
 
   /*
@@ -100,17 +94,14 @@ function timeLineH() {
   fill(0, 0, 255);
   rect(tx, ty + th, tw, th);
 
-
   // RANGE OF FRAMES, FIRST TO LAST
   let tty = ty - th / 4;
   let ffx = firstFrame * tw;
   let lfx = (lastFrame - 1) * tw;
 
-
   // CONNECT IN AND OUT MARKERS
   stroke(102);
   line(firstFrame * tw, tty + th / 2, (  lastFrame - 1) * tw, tty + th / 2);
-
 
   // IN MARKER
   fill(102);
@@ -133,7 +124,6 @@ function timeLineH() {
   }
   triangle(firstFrame * tw, tty, firstFrame * tw, tty + th, (firstFrame + 1) * tw, tty + th / 2);
 
-
   // OUT MARKER
   fill(102);
   if (mouseX > lfx && mouseX < lfx + tw && mouseY > tty && mouseY < tty + th && !selectFirstFrame) {
@@ -154,7 +144,6 @@ function timeLineH() {
   }
   triangle(lastFrame * tw, tty, lastFrame * tw, tty + th, (lastFrame - 1) * tw, tty + th / 2);
 
-
   // TICK MARKS, THE GRID OF FRAMES
   stroke(0);
   for (let x = 0; x <= numFrames; x++) {
@@ -162,5 +151,4 @@ function timeLineH() {
     line(xx, ty + th, xx, ty + th2);
   }
   line(frameDim-1, ty + th, frameDim-1, ty + th2);
-
 }

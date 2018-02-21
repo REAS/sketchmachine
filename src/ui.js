@@ -18,8 +18,6 @@ function openColorSelector() {
   colorSelector.classList.add('active');
   colorActive = true;
   currentColorSelection = arguments[0];
-  //console.log("open color selector");
-  //console.log(colorSelector);
 }
 
 function closeColorSelector() {
@@ -40,7 +38,6 @@ function closeColorSelector() {
     marker5ColorButton.style.backgroundColor = marker5Color;
   }
   colorSelector.classList.remove('active');
-  //colorActive = false;
   triggerColorActive = true;
 }
 
@@ -53,7 +50,6 @@ function closeBackgroundColorSelector() {
   backgroundColor = currentColor;
   backgroundColorButton.style.backgroundColor = currentColor;
   backgroundColorSelector.classList.remove('active');
-  //colorActive = false;
   triggerColorActive = true;
   console.log(backgroundColor);
 }
@@ -68,9 +64,6 @@ function clickPlay() {
     document.getElementById("play").value = "pause";
     document.getElementById("next").style.visibility = "hidden";
     document.getElementById("back").style.visibility = "hidden";
-    //if (playbackMode === ONCE && currentFrame === lastFrame-1) {
-    //  currentFrame = firstFrame;
-    //}
     if (playbackMode === BACKANDFORTH && currentFrame === lastFrame-1) {
       playbackDirection = -1;
     }
@@ -110,28 +103,6 @@ function componentToHex(c) {
 
 function rgbToHex(r, g, b) {
   return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-}
-
-/* <input onclick="eraseFrame()" id="erase-frame" type="button" value="erase frame"> */
-
-function generateButtons() {
-
-  /*
-  var btn = document.createElement("BUTTON");        // Create a <button> element
-  var t = document.createTextNode("CLICK ME");       // Create a text node
-  btn.appendChild(t);                                // Append the text to <button>
-  console.log(btn);
-  //document.body.appendChild(btn);                    // Append <button> to <body>
-  colorSelector.appendChild(btn);
-  */
-
-  /*
-  var node = document.getElementById('node-id');
-  var newNode = document.createElement('p');
-  newNode.appendChild(document.createTextNode('some dynamic html'));
-  node.appendChild(newNode);
-   */
-
 }
 
 const web216 = [

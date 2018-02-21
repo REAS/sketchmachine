@@ -1,11 +1,4 @@
-
-/**
- * TODO
- * - see TODO-x.txt document in root
- */
-
 let canvas;
-
 let frames = [];
 let backgroundFrame;
 let markerFrames = [];
@@ -22,12 +15,13 @@ let surfaceDim = frameDim / 1;
 let frameSurfaceRatio = surfaceDim / frameDim;
 
 let lastTime = 0;
-let timeStep = 500; //40;  // In milliseconds
+let timeStep = 500; // In milliseconds
 
 let pause = false;
 let startDrawing = false;
+let didDrawAnything = false;
 
-let mobile = false;  // Global variable, if on phone or not
+let mobile = false; // Global variable, if on phone or not
 
 let mx, my, pmx, pmy = 0;
 let rx, ry, prx, pry = 0;
@@ -37,9 +31,9 @@ let colorActive = false;
 let currentColor = "#FFFFFF";
 let currentColorSelection = 1;
 
-//
 const ui = document.querySelector('#ui');
 const timeline = document.querySelector('#timeline');
+const animationView = document.querySelector('#animation-view');
 const speedSlider = document.querySelector('#speed');
 
 const colorSelector = document.querySelector('#color-selector');
@@ -56,12 +50,11 @@ let easing = 0.0;
 let dpi = window.devicePixelRatio;
 
 // TIMELINE
-
 let overFrame = new Array(numFrames).fill(false);
 let overMarker = new Array(numFrames).fill(false);
 let onFrame = new Array(numFrames).fill(false);
 let firstClick = false;
-let addMode = true;  // Add or remove active frames
+let addMode = true; // Add or remove active frames
 
 let playbackDirection = 1;
 
@@ -70,32 +63,9 @@ const FORWARD = 1;
 const BACKANDFORTH = 2;
 
 let playbackMode = FORWARD;
+const fpsOptions = [17, 20, 25, 33, 42, 12, 125, 250, 500, 1000];
 
-//let fpsOptions = [1, 2, 4, 8, 12, 24, 30, 40, 50, 60];
-//                1     2    4    8    12  24  30  40  50  60
-//let fpsOptions = [1000, 500, 250, 125, 12, 42, 33, 25, 20, 17];
-let fpsOptions = [17, 20, 25, 33, 42, 12, 125, 250, 500, 1000];
-
-// "MARKERS"
-
-/*
-class Marker {
-  constructor() {
-    this.on = false;
-
-  }
-  on: false;
-  select: 1;
-  tools = 1;
-  slider = 1;
-  color = "#FFOOOO";
-}
-
-let markers = [];
-let markers[0] = new maker();
-let markers[0].select = document.querySelector("#b1-select");
-*/
-
+// MARKERS
 const marker1Select = document.querySelector("#b1-select");
 const marker1Tools = document.querySelector("#b1-tools");
 const marker1Slider = document.querySelector("#b1-slider");
@@ -127,12 +97,8 @@ const marker5ColorButton = document.querySelector("#b5-color");
 let marker5Color = 0;
 
 let backgroundColor = 0;
-
 let randomXY = document.querySelector("#randomXY");
-
 let markers = [false, false, false, false, false];
-
-//let firstClickDrawing = false;
 
 function setup() {
   pixelDensity(1);
@@ -141,8 +107,7 @@ function setup() {
 
   canvas.id('animation');
 
-  //ui.prepend(canvas.elt);
-  timeline.prepend(canvas.elt);
+  animationView.prepend(canvas.elt);
   canvas.background(204);
 
   marker1Color = "#FFFFFF"; //web216[int(random(web216.length))];
@@ -177,7 +142,6 @@ function setup() {
 }
 
 function draw() {
-
   if (startDrawing) {
     //mx = mouseX / dpi;
     //my = mouseY / dpi;
@@ -196,7 +160,7 @@ function draw() {
   // TIMELINE
   timeStep = fpsOptions[parseInt(speedSlider.value)-1];
 
-  // "BRUSHES"
+  // MARKERS
   markers[0] = marker1Select.checked;
   markers[1] = marker2Select.checked;
   markers[2] = marker3Select.checked;
@@ -220,9 +184,10 @@ function draw() {
   } else {
     smoothing = false;
   }
-  if (frameCount % 60 === 0) {
-    console.log('Easing:', easing);
-  }
+
+  // if (frameCount % 60 === 0) {
+    // console.log('Easing:', easing);
+  // }
 
   if (rxy !== 0) {
     rx = random(-rxy, rxy);
@@ -233,30 +198,33 @@ function draw() {
     if (markers[0]) {
       whichTool = parseInt(marker1Tools.value);
       markFunctions[whichTool - 1](0, marker1Color, parseInt(marker1Slider.value));
+      didDrawAnything = true
     }
     if (markers[1]) {
       whichTool = parseInt(marker2Tools.value);
       markFunctions[whichTool - 1](1, marker2Color, parseInt(marker2Slider.value));
+      didDrawAnything = true
     }
     if (markers[2]) {
       whichTool = parseInt(marker3Tools.value);
       markFunctions[whichTool - 1](2, marker3Color, parseInt(marker3Slider.value));
+      didDrawAnything = true
     }
     if (markers[3]) {
       whichTool = parseInt(marker4Tools.value);
       markFunctions[whichTool - 1](3, marker4Color, parseInt(marker4Slider.value));
+      didDrawAnything = true
     }
     if (markers[4]) {
       whichTool = parseInt(marker5Tools.value);
       markFunctions[whichTool - 1](4, marker5Color, parseInt(marker5Slider.value));
+      didDrawAnything = true
     }
   }
-
 
   backgroundFrame.background(backgroundColor);
 
   // Now, finally, draw the animation to the screen
-
   image(backgroundFrame, 0, 0, frameDim, frameDim);
   image(frames[currentFrame], 0, 0, frameDim, frameDim);
   for (let i = numMarkerFrames-1; i >= 0; i--) {
@@ -266,7 +234,7 @@ function draw() {
     tint(255, 102);
     if (currentFrame > firstFrame) {
       image(frames[currentFrame - 1], 0, 0, frameDim, frameDim);
-    } else if (currentFrame == firstFrame) {
+    } else if (currentFrame === firstFrame) {
       image(frames[lastFrame-1], 0, 0, frameDim, frameDim);
     }
     //console.log(currentFrame, firstFrame, lastFrame);
@@ -283,14 +251,10 @@ function draw() {
     pmy = my;
     prx = rx;
     pry = ry;
-    //pmx = mx;
-    //pmy = my;
   }
-
 
   if (!pause) {
     if (millis() > lastTime + timeStep) {
-
       writeMarkersIntoFrames();
 
       if (playbackMode === FORWARD) {
@@ -301,20 +265,17 @@ function draw() {
       } else if (playbackMode === REVERSE) {
         currentFrame--;  // Go to the next frame
         if (currentFrame < firstFrame) {
-          currentFrame = lastFrame-1;
+          currentFrame = lastFrame - 1;
         }
       } else if (playbackMode === BACKANDFORTH) {
-        currentFrame += 1 * playbackDirection;  // Go to the next frame
-        if (currentFrame >= lastFrame-1 || currentFrame <= firstFrame) {
-          playbackDirection = playbackDirection * -1;
+        currentFrame += playbackDirection;  // Go to the next frame
+        if (currentFrame >= lastFrame - 1 || currentFrame <= firstFrame) {
+          playbackDirection *= -1;
         }
       }
-
       lastTime = millis();
     }
   }
-
-
 }
 
 function writeMarkersIntoFrames() {
@@ -332,7 +293,7 @@ function writeMarkersIntoFrames() {
       frames[i].drawingContext.drawImage(compositeFrame.canvas, 0, 0)
     }
   }
-  compositeFrame.drawingContext.clearRect(0, 0, frameDim, frameDim)
+  compositeFrame.drawingContext.clearRect(0, 0, frameDim, frameDim);
 }
 
 function eraseFrame() {
@@ -345,69 +306,45 @@ function eraseAllFrames() {
   }
 }
 
-function keyPressed() {
-
-  //console.log(key);
-  //console.log("hey");
-
-  if (key === 'f' || key === 'F') {
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'f' || e.key === 'F') {
     eraseFrame();
   }
 
-  if (key === 'c' || key === 'C') {
+  if (e.key === 'c' || e.key === 'C') {
     eraseAllFrames();
   }
 
-  // Background color
-  //if (key === 'b' || key === 'B') {
-  //  openColorSelector();
-  //}
-  //else {
-  //  colors.classList.remove('active');
-  //}
-
-  if (key === 'p' || key === 'P') {
+  if (e.key === 'p' || e.key === 'P') {
     clickPlay();
   }
 
-  if (pause) {
-    if (keyCode === RIGHT_ARROW) {
-      //clickNext();
-      currentFrame++;
-      if (currentFrame >= lastFrame) {
-        currentFrame = firstFrame;
-      }
+  if (e.keyCode === LEFT_ARROW) {
+    if (!pause) { clickPlay() } else {
+      clickBack()
     }
-    if (keyCode === LEFT_ARROW) {
-      //clickBack();
-      currentFrame--;
-      if (currentFrame < firstFrame) {
-        currentFrame = lastFrame - 1;
-      }
+  }
+  if (e.keyCode === RIGHT_ARROW) {
+    if (!pause) { clickPlay() } else {
+      clickNext()
     }
   }
 
-  if (key === 'u' || key === 'U') {
+  if (e.key === 'u' || e.key === 'U') {
     onFrame.fill(false);
   }
-  if (key === 'a' || key === 'A') {
+  if (e.key === 'a' || e.key === 'A') {
     onFrame.fill(true);
   }
 
-}
+  e.preventDefault();
+})
 
 // Define an abstract pointer device
 function pointerPressed() {
-
-  console.log('Pointer pressed:', mouseX, mouseY)
-
-  //firstClickDrawing = true;
   // If click in animation area
   if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < width && !colorActive) {
-
     startDrawing = true;
-    //pmx = mouseX / dpi;
-    //pmy = mouseY / dpi;
     pmx = mouseX * frameSurfaceRatio;
     pmy = mouseY * frameSurfaceRatio;
     if (smoothing) {
@@ -425,8 +362,6 @@ function pointerReleased() {
   startDrawing = false;
   selectFirstFrame = false;
   selectLastFrame = false;
-  //frameSelectLock = false;
-  //arrowLock = false;
   writeMarkersIntoFrames();
 }
 
@@ -438,14 +373,36 @@ function mouseReleased() { pointerReleased() }
 function touchStarted(e) { pointerPressed() }
 
 function touchMoved(e) {
-  if (startDrawing && e.touches.length === 1) { // Prevent pan gesture on mobile
+  if (startDrawing && e.touches && e.touches.length === 1) { // Prevent pan gesture on mobile
     e.preventDefault()
   }
 }
 
 function touchReleased() { pointerReleased() }
 
-//function windowResized() {
-  //resizeCanvas(windowWidth, windowHeight);
-  //resizeGUI();
-//}
+/*
+// GIF Export
+function exportGIF () {
+  const gif = new GIF({
+    workers: 2,
+    quality: 10
+  });
+
+  // TODO: Add from start frame to end frame, and include ping-ponging.
+  gif.addFrame(ctx, {delay: 100, copy: true});
+
+  gif.on('finished', function(blob) {
+    window.open(URL.createObjectURL(blob));
+  });
+
+  // TODO: Show spinner.
+  gif.render()
+}
+*/
+
+// Leave page warning
+window.onbeforeunload = (e) => {
+  if (didDrawAnything) {
+    return true
+  }
+}

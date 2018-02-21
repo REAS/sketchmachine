@@ -1,243 +1,216 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
 </head>
 <body>
 
-
-<!--
-<script>
-
-  const colorselect = document.querySelector('#colors')
-
-
-  window.onkeydown = function (e) {
-    if (e.key === 'w') {
-      colorselect.classList.add('active')
-    } else {
-      colorselect.classList.remove('active')
-    }
-  }
-
-</script>
-
--->
-
 <div id="macro-ui">
 
-<div id="ui">
-
-    <!-- canvas will be here -->
-
+  <div id="ui">
     <div id="timeline">
-
-        <div id="playback-buttons">
-            <input onclick="clickBack()" id="back" type="button" value="<<" class="back-next">
-            <input onclick="clickPlay()" id="play" type="button" value="pause" class="play">
-            <input onclick="clickNext()" id="next" type="button" value=">>" class="back-next">
-        </div>
-
+      <div id="animation-view">
+        <!-- Canvas will be here -->
+      </div>
+      <div id="playback-buttons">
+        <input onclick="clickBack()" id="back" type="button" value="<<"
+               class="back-next">
+        <input onclick="clickPlay()" id="play" type="button" value="pause"
+               class="play">
+        <input onclick="clickNext()" id="next" type="button" value=">>"
+               class="back-next">
+      </div>
     </div>
 
     <div id="column">
-        <!--<input id="other-slider" type="range" min="10" max="100" value="50">-->
-
-        <div id="controls">
-
+      <div id="controls">
         <div id="tools">
-
-            TOOLS<br/>
-
-            <div id="brush-1">
-                <input id="b1-select" type="checkbox" checked>
-                <!-- Image dropdown -->
-                <select id="b1-tools">
-                    <option value="1">Point</option>
-                    <option value="2" selected>Line</option>
-                    <option value="3">Plane</option>
-                </select>
-                <input id="b1-slider" type="range" min="1" max="100" value="20">
-                <input onclick="openColorSelector(1)" id="b1-color" type="button" value="" class="colorButton">
-            </div>
-            <div id="brush-2">
-                <input id="b2-select" type="checkbox">
-                <!-- Image dropdown -->
-                <select id="b2-tools">
-                    <option value="1">Point</option>
-                    <option value="2" selected>Line</option>
-                    <option value="3">Plane</option>
-                </select>
-                <input id="b2-slider" type="range" min="1" max="100" value="30">
-                <input onclick="openColorSelector(2)" id="b2-color" type="button" value="" class="colorButton">
-            </div>
-            <div id="brush-3">
-                <input id="b3-select" type="checkbox">
-                <!-- Image dropdown -->
-                <select id="b3-tools">
-                    <option value="1">Point</option>
-                    <option value="2" selected>Line</option>
-                    <option value="3">Plane</option>
-                </select>
-                <input id="b3-slider" type="range" min="1" max="100" value="40">
-                <input onclick="openColorSelector(3)" id="b3-color" type="button" value="" class="colorButton">
-            </div>
-            <div id="brush-4">
-                <input id="b4-select" type="checkbox">
-                <!-- Image dropdown -->
-                <select id="b4-tools">
-                    <option value="1">Point</option>
-                    <option value="2" selected>Line</option>
-                    <option value="3">Plane</option>
-                </select>
-                <input id="b4-slider" type="range" min="1" max="100" value="50">
-                <input onclick="openColorSelector(4)" id="b4-color" type="button" value="" class="colorButton">
-            </div>
-            <div id="brush-5">
-                <input id="b5-select" type="checkbox">
-                <!-- Image dropdown -->
-                <select id="b5-tools">
-                    <option value="1">Point</option>
-                    <option value="2" selected>Line</option>
-                    <option value="3">Plane</option>
-                </select>
-                <input id="b5-slider" type="range" min="1" max="100" value="60">
-                <input onclick="openColorSelector(5)" id="b5-color" type="button" value="" class="colorButton">
-            </div>
-
+          TOOLS<br/>
+          <div id="brush-1">
+            <input id="b1-select" type="checkbox" checked>
+            <!-- Image dropdown -->
+            <select id="b1-tools">
+              <option value="1">Point</option>
+              <option value="2" selected>Line</option>
+              <option value="3">Plane</option>
+            </select>
+            <input id="b1-slider" type="range" min="1" max="100" value="20">
+            <input onclick="openColorSelector(1)" id="b1-color" type="button"
+                   value="" class="colorButton">
+          </div>
+          <div id="brush-2">
+            <input id="b2-select" type="checkbox">
+            <!-- Image dropdown -->
+            <select id="b2-tools">
+              <option value="1">Point</option>
+              <option value="2" selected>Line</option>
+              <option value="3">Plane</option>
+            </select>
+            <input id="b2-slider" type="range" min="1" max="100" value="30">
+            <input onclick="openColorSelector(2)" id="b2-color" type="button"
+                   value="" class="colorButton">
+          </div>
+          <div id="brush-3">
+            <input id="b3-select" type="checkbox">
+            <!-- Image dropdown -->
+            <select id="b3-tools">
+              <option value="1">Point</option>
+              <option value="2" selected>Line</option>
+              <option value="3">Plane</option>
+            </select>
+            <input id="b3-slider" type="range" min="1" max="100" value="40">
+            <input onclick="openColorSelector(3)" id="b3-color" type="button"
+                   value="" class="colorButton">
+          </div>
+          <div id="brush-4">
+            <input id="b4-select" type="checkbox">
+            <!-- Image dropdown -->
+            <select id="b4-tools">
+              <option value="1">Point</option>
+              <option value="2" selected>Line</option>
+              <option value="3">Plane</option>
+            </select>
+            <input id="b4-slider" type="range" min="1" max="100" value="50">
+            <input onclick="openColorSelector(4)" id="b4-color" type="button"
+                   value="" class="colorButton">
+          </div>
+          <div id="brush-5">
+            <input id="b5-select" type="checkbox">
+            <!-- Image dropdown -->
+            <select id="b5-tools">
+              <option value="1">Point</option>
+              <option value="2" selected>Line</option>
+              <option value="3">Plane</option>
+            </select>
+            <input id="b5-slider" type="range" min="1" max="100" value="60">
+            <input onclick="openColorSelector(5)" id="b5-color" type="button"
+                   value="" class="colorButton">
+          </div>
         </div>
-
-        <!--<hr>-->
 
         <div id="tool-modifiers">
-
-            TOOL MODIFIERS<br/>
-            <br/>
-
-            <form>Engorge:
-                <input onclick="speedSizeOff()" id="speed-size-on" type="radio" name="speed-size" value="off" checked> Off
-                <input onclick="speedSizeOn()" id="speed-size-off" type="radio" name="speed-size" value="on"> On
-            </form>
-            Jitter: <input id="randomXY" type="range" min="0" max="100" value="0"><br/>
-            Dawdle: <input id="easing-slider" type="range" min="0" max="100" value="0"><br/>
+          TOOL MODIFIERS<br/><br/>
+          <form>Engorge:
+            <input onclick="speedSizeOff()" id="speed-size-on" type="radio"
+                   name="speed-size" value="off" checked><label for="speed-size-on">Off</label>
+            <input onclick="speedSizeOn()" id="speed-size-off" type="radio"
+                   name="speed-size" value="on"><label for="speed-size-off">On</label>
+          </form>
+          Jitter: <input id="randomXY" type="range" min="0" max="100" value="0"><br/>
+          Dawdle: <input id="easing-slider" type="range" min="0" max="100"
+                         value="0"><br/>
         </div>
-
-        <!--<hr>-->
 
         <div id="options">
-
-            OPTIONS<br/>
-
-            <div id="background-buttons">
-                Background: <input onclick="openBackgroundColorSelector()" id="background-color-button"
-                                         type="button"
-                                         value="" class="colorButton">
-            </div>
-
-            <div id="speed-slider">
-                Speed: <input id="speed" style="direction: rtl" type="range" min="1" max="10" value="1">
-            </div>
-
-            <div id="onion-options">
-                <form>Onion skin:
-                    <input onclick="onionOff()" id="onion-off" type="radio" name="onion" value="off" checked> Off
-                    <input onclick="onionOn()" id="onion-on" type="radio" name="onion" value="on"> On
-                </form>
-            </div>
-
-            <div id="playback-options">
-                <form>Playback:
-                    <input onclick="clickForward()" id="forward" type="radio" name="playback"
-                           value="forward" checked> Forward
-                    <input onclick="clickReverse()" id="reverse" type="radio" name="playback"
-                           value="reverse"> Reverse
-                    <input onclick="clickBackAndForth()" id="back-and-forth" type="radio" name="playback"
-                           value="back and forth"> Back and forth
-                </form>
-            </div>
-
+          OPTIONS<br/>
+          <div id="background-buttons">
+            Background: <input onclick="openBackgroundColorSelector()"
+                               id="background-color-button"
+                               type="button"
+                               value="" class="colorButton">
+          </div>
+          <div id="speed-slider">
+            Speed: <input id="speed" style="direction: rtl" type="range" min="1"
+                          max="10" value="1">
+          </div>
+          <div id="onion-options">
+            <form>Onion skin:
+              <input onclick="onionOff()" id="onion-off" type="radio"
+                     name="onion" value="off" checked><label for="onion-off">Off</label>
+              <input onclick="onionOn()" id="onion-on" type="radio" name="onion"
+                     value="on"><label for="onion-on">On</label>
+            </form>
+          </div>
+          <div id="playback-options">
+            <form>Playback:
+              <input onclick="clickForward()" id="forward" type="radio"
+                     name="playback"
+                     value="forward" checked><label for="forward">Forward</label>
+              <input onclick="clickReverse()" id="reverse" type="radio"
+                     name="playback"
+                     value="reverse"><label for="reverse">Reverse</label>
+              <input onclick="clickBackAndForth()" id="back-and-forth"
+                     type="radio" name="playback"
+                     value="back and forth"><label for="back-and-forth">Back and forth</label>
+            </form>
+          </div>
         </div>
-
-        <!--<hr>-->
 
         <div id="destroy">
-            DESTROY
-
-            <div id="erase-buttons">
-                <input onclick="eraseFrame()" id="erase-frame" type="button" value="erase frame">
-                <input onclick="eraseAllFrames()" id="erase-all" type="button" value="erase all">
-            </div>
+          DESTROY
+          <div id="erase-buttons">
+            <input onclick="eraseFrame()" id="erase-frame" type="button"
+                   value="erase frame">
+            <input onclick="eraseAllFrames()" id="erase-all" type="button"
+                   value="erase all">
+          </div>
         </div>
-
-        <!--<hr>-->
 
         <div id="export">
-            <div id="export-options">
-                <input id="export-button" type="button" value="Share as GIF (not working)">
-                <!--<input id="bitmark" type="button" value="Register Bitmark (not working)">-->
-            </div>
+          <div id="export-options">
+            <input id="export-button" type="button"
+                   value="Share as GIF (not working)">
+            <!--<input id="bitmark" type="button" value="Register Bitmark (not working)">-->
+          </div>
         </div>
-
-        </div>
-
-
+      </div>
     </div>
+  </div>
 
-</div>
+  <hr>
 
-<hr>
-
-<div id="etc">
-    <!-- TODO: HIDE ON MOBILE -->
-    <div id="keyboard-shortcuts">
-        Keyboard shortcuts: (Buggy!)
-        <ul>
-            <li>pause/play - p</li>
-            <li>next frame - right arrow</li>
-            <li>previous frame - left arrow</li>
-            <li>erase frame - f</li>
-            <li>erase all - c</li>
-            <!--<li>background color - b</li>-->
-            <!--<li>draw into all frames - a</li>-->
-            <!--<li>draw into current frame - u</li>-->
-        </ul>
-    </div>
+  <div id="etc">
+    Keyboard Shorcuts
+    <ul id="keyboard-shortcuts">
+      <li><span class="keyboard-shortcut">P</span> Pause / Play</li>
+      <br>
+      <li>
+        <span class="keyboard-shortcut">⬅</span>
+        <span class="keyboard-shortcut"><span class="mirror">⬅</span></span> Prev & Next Frame
+      </li>
+      <br>
+      <li><span class="keyboard-shortcut">F</span> Erase Frame</li>
+      <li><span class="keyboard-shortcut">C</span> Erase <b>All</b> Frames</li>
+    </ul>
 
     <div id="credits">
-        Sketch Machine was created by <a href="http://caesuras.net" target="_blank">Casey REAS</a> with help
-        from <a href="https://giphy.com/">GIPHY</a>.
-        <br/>
-        <br/>
-        <a href="">Find all the Sketch Machine GIFs on Giphy</a>.<br />
-        <br />
-        The <a href="https://github.com/REAS/sketchmachine" target="_blank">source code</a> for Sketch Machine is on GitHub.<br />
-        For related work, see this informal list of
-        "<a href="https://github.com/REAS/sketchmachine/wiki/Weird-Drawing-Software" target="_blank">Weird Drawing Software</a>."
+      Sketch Machine was created by <a href="http://caesuras.net"
+                                       target="_blank">Casey REAS</a> with help
+      from <a href="https://giphy.com/">GIPHY</a>.
+      <br/>
+      <br/>
+      <a href="">Find all the Sketch Machine GIFs on Giphy</a>.<br/>
+      <br/>
+      The <a href="https://github.com/REAS/sketchmachine" target="_blank">source
+      code</a> for Sketch Machine is on GitHub.<br/>
+      For related work, see this informal list of
+      "<a
+      href="https://github.com/REAS/sketchmachine/wiki/Weird-Drawing-Software"
+      target="_blank">Weird Drawing Software</a>."
     </div>
-</div>
-
-
-    <div id="color-selector">
+  </div>
+  <div id="color-selector">
     <h1>Choose your color.</h1>
-    <input onclick="closeColorSelector()" id="color-selector-close" type="button" value="close">
+    <input onclick="closeColorSelector()" id="color-selector-close"
+           type="button" value="close">
+  </div>
 </div>
 
 <div id="background-color-selector">
-    <h1>Choose your color.</h1>
-    <input onclick="closeBackgroundColorSelector()" id="background-color-selector-close" type="button" value="close">
+  <h1>Choose your color.</h1>
+  <input onclick="closeBackgroundColorSelector()"
+         id="background-color-selector-close" type="button" value="close">
 </div>
 
-<script src="p5.min.js"></script>
+<script src="vendor/p5.min.js"></script>
+<script src="vendor/gif.js"></script>
 <script src="sketch.js"></script>
 <script src="timeline.js"></script>
 <script src="marks.js"></script>
 <script src="selector.js"></script>
 <script src="ui.js"></script>
-
-<script>
-  //generateButtons()
-</script>
 
 </body>
 </html>
