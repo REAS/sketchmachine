@@ -3,7 +3,7 @@ let selectFirstFrame = false;
 
 function timeLineH() {
   let tw = frameDim / numFrames;
-  let ty = frameDim + 10;
+  let ty = frameDim + 75 + 10;
   let th = 20;  // Time line height
   let th2 = th * 2;
 

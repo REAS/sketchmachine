@@ -111,6 +111,7 @@ hr {
 }
 
 #timeline {
+  position: relative;
   max-width: 512px;
   max-height: 637px;
   display: flex;
@@ -118,7 +119,10 @@ hr {
 }
 
 #buttons {
-  height: 50px;
+  position: absolute;
+  top: 516px;
+  height: 71px;
+  width: 100%;
   padding-top: 4px;
   margin: 0 auto;
   display: flex;
@@ -223,6 +227,10 @@ hr {
   display: inline-block;
   margin-right: 8px !important;
   border: none;
+}
+
+select option {
+  font-family: monospace;
 }
 
 /*

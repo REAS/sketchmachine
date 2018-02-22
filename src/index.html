@@ -15,11 +15,6 @@
         <div id="animation-border"></div>
       </div>
       <div id="buttons">
-        <div id="select-buttons">
-          <input onclick="selectRange()" tabindex="-1" id="selectrange" type="button" value="Select Range" class="select-range">
-          <input onclick="Deselect()" tabindex="-1" id="deselect" type="button" value="Deselect" class="select-range">
-        </div>
-
         <div id="playback-buttons">
           <input onclick="clickBack()" tabindex="-1" id="back" type="button" value="⬅"
                  class="back-next">
@@ -28,7 +23,10 @@
           <input onclick="clickNext()" tabindex="-1" id="next" type="button" value="⬅"
                  class="back-next mirror">
         </div>
-
+        <div id="select-buttons">
+          <input onclick="selectRange()" tabindex="-1" id="selectrange" type="button" value="Select Range" class="select-range">
+          <input onclick="Deselect()" tabindex="-1" id="deselect" type="button" value="Deselect" class="select-range">
+        </div>
         <div id="erase-console">
           <input onclick="eraseFrames()" tabindex="-1" id="eraseconsole" type="button" value="Erase" class="select-range">
         </div>
@@ -43,7 +41,7 @@
             <!-- Image dropdown -->
             <select id="b1-tools">
               <option value="1">Point</option>
-              <option value="2" selected>Line</option>
+              <option value="2" selected>〰</option>
               <option value="3">Plane</option>
             </select>
             <input id="b1-slider" type="range" min="1" max="100" value="20">

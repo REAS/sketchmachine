@@ -11,6 +11,7 @@ let lastFrame = 24; //30;
 let currentFrame = firstFrame;
 
 let frameDim = 512;
+// let surfaceDim = 256; // TODO: Add this back in.
 
 let lastTime = 0;
 let timeStep = 500; // In milliseconds
@@ -98,9 +99,11 @@ let backgroundColor = 0;
 let randomXY = document.querySelector("#randomXY");
 let markers = [false, false, false, false, false];
 
+let timeLineCanvas;
+
 function setup() {
   pixelDensity(window.devicePixelRatio);
-  canvas = createCanvas(frameDim, frameDim + 75);
+  canvas = createCanvas(frameDim, frameDim + 75 + 75);
   noSmooth();
 
   canvas.id('animation');
@@ -123,7 +126,7 @@ function setup() {
   backgroundColor = "#000000"; //web216[int(random(web216.length))];
   backgroundColorButton.style.backgroundColor = backgroundColor;
 
-  pixelDensity(1)
+  pixelDensity(1);
 
   for (let i = 0; i < numFrames; i++) {
     frames[i] = createGraphics(frameDim, frameDim);

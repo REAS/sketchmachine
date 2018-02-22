@@ -15,9 +15,9 @@ PAIR
   . Variable performace, see if "user agent" can be used
   x 256-256 or 512-512
 - Don't use a GIF for the color picker?
-- Convert Play, Next, Back to images buttons
 
 JAS
+- Design / cosmetic layout stuff.
 - Add button feature to "Export GIF", open new tab to define - https://github.com/spite/ccapture.js/#limitations
   GIF export features on a separate page
   . Share on GIPHY
@@ -43,6 +43,7 @@ CEB
 
 DONE
 
+X Convert Play, Next, Back to images buttons
 X Make keyboard shortcuts look nicer.
 X Better keyboard shortcut handler
 X Tap radio button tables to toggle button too
