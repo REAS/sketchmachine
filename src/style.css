@@ -57,13 +57,13 @@ input, button {
 
 #animation-view {
   position: relative;
-  width: 512px;
-  height: 587px;
+  /*width: 512px;*/
+  /*height: 587px;*/
 }
 
 #animation-border {
-  width: 512px;
-  height: 512px;
+  width: 100%;
+  padding-top: 100%;
   position: absolute;
   top: -4px;
   left: -4px;
