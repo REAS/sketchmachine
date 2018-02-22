@@ -98,7 +98,7 @@ function timeLineH() {
   rect(tx, ty + th, tw, th);
 
   // RANGE OF FRAMES, FIRST TO LAST
-  let tty = ty - th / 4;
+  let tty = ty + 6 - th / 4;
   let ffx = firstFrame * tw;
   let lfx = (lastFrame - 1) * tw;
 

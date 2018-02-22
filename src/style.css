@@ -47,12 +47,27 @@ input, button {
 }
 
 #ui {
-  padding: 10px;
+  padding: 14px 10px 10px 10px;
   box-sizing: border-box;
   margin: auto;
   display: flex;
   flex-direction: column;
   position: relative;
+}
+
+#animation-view {
+  position: relative;
+  width: 512px;
+  height: 587px;
+}
+
+#animation-border {
+  width: 512px;
+  height: 512px;
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  border: 4px inset;
 }
 
 #column {
@@ -103,15 +118,14 @@ hr {
 }
 
 #buttons {
+  height: 50px;
   padding-top: 4px;
   margin: 0 auto;
   display: flex;
-  background: yellow;
 }
 
 #erase-console, #select-buttons {
-  width: 150px;
-  background-color: lime;
+  padding: 0px 8px;
   display: flex;
 }
 
@@ -202,13 +216,12 @@ hr {
 }
 
 .select-range {
-  /*width: 35px;*/
   height: 35px;
   color: #FFFFFF;
   background-color: #333333;
   padding: 2px 2px 2px 2px;
   display: inline-block;
-  /*border-radius: 50%;*/
+  margin-right: 8px !important;
   border: none;
 }
 
