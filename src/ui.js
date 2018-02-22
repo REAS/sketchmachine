@@ -57,11 +57,11 @@ function closeBackgroundColorSelector() {
 function clickPlay() {
   pause = !pause;
   if (pause) {
-    document.getElementById("play").value = "play";
+    document.getElementById("play").value = "▶︎";
     document.getElementById("next").style.visibility = "visible";
     document.getElementById("back").style.visibility = "visible";
   } else {
-    document.getElementById("play").value = "pause";
+    document.getElementById("play").value = "◼︎";
     document.getElementById("next").style.visibility = "hidden";
     document.getElementById("back").style.visibility = "hidden";
     if (playbackMode === BACKANDFORTH && currentFrame === lastFrame-1) {

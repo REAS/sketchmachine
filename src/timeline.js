@@ -27,6 +27,9 @@ function timeLineH() {
         //rect(xx, tfmy , tw+1, th);
         triangle(xx, tfmy, xx + tw + 1, tfmy, xx + tw / 2, tfmy - th / 2);
         if (mouseIsPressed && mouseY >= ty + th && mouseY <= height) {
+          if(!pause) {
+            clickPlay()
+          }
           currentFrame = x;
           arrowLock = true;
         }

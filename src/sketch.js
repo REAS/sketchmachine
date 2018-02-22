@@ -11,8 +11,6 @@ let lastFrame = 24; //30;
 let currentFrame = firstFrame;
 
 let frameDim = 512;
-let surfaceDim = frameDim / 1;
-let frameSurfaceRatio = surfaceDim / frameDim;
 
 let lastTime = 0;
 let timeStep = 500; // In milliseconds
@@ -101,7 +99,7 @@ let randomXY = document.querySelector("#randomXY");
 let markers = [false, false, false, false, false];
 
 function setup() {
-  pixelDensity(1);
+  pixelDensity(window.devicePixelRatio);
   canvas = createCanvas(frameDim, frameDim + 75);
   noSmooth();
 
@@ -125,18 +123,22 @@ function setup() {
   backgroundColor = "#000000"; //web216[int(random(web216.length))];
   backgroundColorButton.style.backgroundColor = backgroundColor;
 
+  pixelDensity(1)
+
   for (let i = 0; i < numFrames; i++) {
-    frames[i] = createGraphics(surfaceDim, surfaceDim);
+    frames[i] = createGraphics(frameDim, frameDim);
   }
 
   for (let i = 0; i < numMarkerFrames; i++) {
-    markerFrames[i] = createGraphics(surfaceDim, surfaceDim);
+    markerFrames[i] = createGraphics(frameDim, frameDim);
   }
 
-  compositeFrame = createGraphics(surfaceDim, surfaceDim);
+  compositeFrame = createGraphics(frameDim, frameDim);
 
-  backgroundFrame = createGraphics(surfaceDim, surfaceDim);
+  backgroundFrame = createGraphics(frameDim, frameDim);
   backgroundFrame.background(backgroundColor);
+
+  pixelDensity(window.devicePixelRatio);
 
   lastTime = millis();
 }
@@ -146,11 +148,11 @@ function draw() {
     //mx = mouseX / dpi;
     //my = mouseY / dpi;
     if (smoothing) {
-      targetX = mouseX * frameSurfaceRatio;
-      targetY = mouseY * frameSurfaceRatio;
+      targetX = mouseX
+      targetY = mouseY
     } else {
-      mx = mouseX * frameSurfaceRatio;
-      my = mouseY * frameSurfaceRatio;
+      mx = mouseX
+      my = mouseY
     }
   }
 
@@ -225,19 +227,21 @@ function draw() {
   backgroundFrame.background(backgroundColor);
 
   // Now, finally, draw the animation to the screen
-  image(backgroundFrame, 0, 0, frameDim, frameDim);
-  image(frames[currentFrame], 0, 0, frameDim, frameDim);
+  // console.log(backgroundFrame)
+  drawingContext.drawImage(backgroundFrame.canvas, 0, 0, frameDim, frameDim)
+  drawingContext.drawImage(frames[currentFrame].canvas, 0, 0, frameDim, frameDim)
   for (let i = numMarkerFrames-1; i >= 0; i--) {
-    image(markerFrames[i], 0, 0, frameDim, frameDim);
+    drawingContext.drawImage(markerFrames[i].canvas, 0, 0, frameDim, frameDim)
   }
   if (pause && onionSkin) {
-    tint(255, 102);
+    // tint(255, 102);
+    drawingContext.globalAlpha = 0.5
     if (currentFrame > firstFrame) {
-      image(frames[currentFrame - 1], 0, 0, frameDim, frameDim);
+      drawingContext.drawImage(frames[currentFrame - 1].canvas, 0, 0, frameDim, frameDim);
     } else if (currentFrame === firstFrame) {
-      image(frames[lastFrame-1], 0, 0, frameDim, frameDim);
+      drawingContext.drawImage(frames[lastFrame - 1].canvas, 0, 0, frameDim, frameDim);
     }
-    //console.log(currentFrame, firstFrame, lastFrame);
+    drawingContext.globalAlpha = 1.0
   }
 
   noTint();
@@ -282,7 +286,7 @@ function writeMarkersIntoFrames() {
   // Composite each layer into one, then erase in turn
   for (let i = numMarkerFrames - 1; i >= 0; i--) {
     if (markers[i]) {
-      compositeFrame.drawingContext.drawImage(markerFrames[i].canvas, 0, 0)
+      compositeFrame.drawingContext.drawImage(markerFrames[i].canvas, 0, 0, frameDim, frameDim)
       markerFrames[i].drawingContext.clearRect(0, 0, frameDim, frameDim)
     }
   }
@@ -290,7 +294,7 @@ function writeMarkersIntoFrames() {
   // Write all "marker frames" composites into the selected frames
   for (let i = firstFrame; i < lastFrame; i++) {
     if (onFrame[i] || i === currentFrame) {
-      frames[i].drawingContext.drawImage(compositeFrame.canvas, 0, 0)
+      frames[i].drawingContext.drawImage(compositeFrame.canvas, 0, 0, frameDim, frameDim)
     }
   }
   compositeFrame.drawingContext.clearRect(0, 0, frameDim, frameDim);
@@ -323,11 +327,13 @@ window.addEventListener('keydown', (e) => {
     if (!pause) { clickPlay() } else {
       clickBack()
     }
+    e.preventDefault();
   }
   if (e.keyCode === RIGHT_ARROW) {
     if (!pause) { clickPlay() } else {
       clickNext()
     }
+    e.preventDefault();
   }
 
   if (e.key === 'u' || e.key === 'U') {
@@ -337,7 +343,6 @@ window.addEventListener('keydown', (e) => {
     onFrame.fill(true);
   }
 
-  e.preventDefault();
 })
 
 // Define an abstract pointer device
@@ -345,8 +350,8 @@ function pointerPressed() {
   // If click in animation area
   if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < width && !colorActive) {
     startDrawing = true;
-    pmx = mouseX * frameSurfaceRatio;
-    pmy = mouseY * frameSurfaceRatio;
+    pmx = mouseX
+    pmy = mouseY
     if (smoothing) {
       mx = pmx;
       my = pmy;
