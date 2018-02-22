@@ -8,41 +8,31 @@
 <body>
 
 <div id="macro-ui">
-
   <div id="ui">
     <div id="timeline">
-<<<<<<< Updated upstream
       <div id="animation-view">
         <!-- Canvas will be here -->
       </div>
-      <div id="playback-buttons">
-        <input onclick="clickBack()" tabindex="-1" id="back" type="button" value="⬅"
-               class="back-next">
-        <input onclick="clickPlay()" tabindex="-1" id="play" type="button" value="◼︎"
-               class="play">
-        <input onclick="clickNext()" tabindex="-1" id="next" type="button" value="⬅"
-               class="back-next mirror">
-      </div>
-=======
-
+      <div id="buttons">
         <div id="select-buttons">
-            <input onclick="selectRange()" id="selectrange" type="button" value="Select Range" class="select-range">
-            <input onclick="Deselect()" id="deselect" type="button" value="Deselect" class="select-range">
+          <input onclick="selectRange()" tabindex="-1" id="selectrange" type="button" value="Select Range" class="select-range">
+          <input onclick="Deselect()" tabindex="-1" id="deselect" type="button" value="Deselect" class="select-range">
         </div>
 
         <div id="playback-buttons">
-            <input onclick="clickBack()" id="back" type="button" value="<<" class="back-next">
-            <input onclick="clickPlay()" id="play" type="button" value="pause" class="play">
-            <input onclick="clickNext()" id="next" type="button" value=">>" class="back-next">
+          <input onclick="clickBack()" tabindex="-1" id="back" type="button" value="⬅"
+                 class="back-next">
+          <input onclick="clickPlay()" tabindex="-1" id="play" type="button" value="◼︎"
+                 class="play">
+          <input onclick="clickNext()" tabindex="-1" id="next" type="button" value="⬅"
+                 class="back-next mirror">
         </div>
 
         <div id="erase-console">
-            <input onclick="eraseFrames()" id="eraseconsole" type="button" value="Erase" class="select-range">
+          <input onclick="eraseFrames()" tabindex="-1" id="eraseconsole" type="button" value="Erase" class="select-range">
         </div>
-
->>>>>>> Stashed changes
+      </div>
     </div>
-
     <div id="column">
       <div id="controls">
         <div id="tools">

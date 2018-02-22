@@ -102,9 +102,21 @@ hr {
   flex-direction: column;
 }
 
-#playback-buttons {
+#buttons {
   padding-top: 4px;
   margin: 0 auto;
+  display: flex;
+  background: yellow;
+}
+
+#erase-console, #select-buttons {
+  width: 150px;
+  background-color: lime;
+  display: flex;
+}
+
+#erase-console input, #select-buttons input {
+  margin: auto;
 }
 
 #playback-buttons input {
@@ -132,7 +144,6 @@ hr {
   border: none;
   vertical-align: middle;
   font-size: 2em;
-  outline: 0;
 }
 
 .play[value="▶︎"] {
@@ -151,14 +162,16 @@ hr {
   border: none;
   font-size: 1.25em;
   vertical-align: middle;
+}
+
+#buttons input {
   outline: 0;
 }
 
-.play:active, .back-next:active {
+#buttons input:active {
   background-color: #555;
 }
 
-<<<<<<< Updated upstream
 #keyboard-shortcuts {
   padding: 0;
   list-style-type: none;
@@ -188,11 +201,6 @@ hr {
   transform: scaleX(-1);
 }
 
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-/*
-=======
 .select-range {
   /*width: 35px;*/
   height: 35px;
@@ -204,7 +212,7 @@ hr {
   border: none;
 }
 
->>>>>>> Stashed changes
+/*
 #tools {
   margin: 10px 10px 10px 20px;
 }
