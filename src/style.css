@@ -96,7 +96,11 @@ input, button {
 }
 
 #etc a, #etc a:visited {
-  color: #666666
+  color: #666666;
+}
+
+#fine-print, #fine-print a, #fine-print a:visited {
+  color: #AAA;
 }
 
 hr {
@@ -238,11 +242,13 @@ select option {
   font-family: monospace;
 }
 
-h1 {
-  color: #999;
+#sm-title {
+  color: #888;
   font-weight: normal;
-  font-size: 1.25em;
+  font-size: 1.3em;
   margin: 0;
+  padding-left: 0;
+  display: inline-block;
 }
 
 .sketch-title {
@@ -304,6 +310,23 @@ h1 {
 #export {
 }
 
+#export-button {
+  display: block;
+  width: 75px;
+  height: 75px;
+  border: 4px outset;
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: #ccc;
+  outline: none;
+  color: #555;
+  cursor: pointer;
+}
+
+#export-button:active {
+  border: 4px inset;
+}
+
 #speed-slider {
 }
 
@@ -315,7 +338,7 @@ h1 {
   visibility: hidden;
 }
 
-@media all and (min-width: 932px) {
+@media all and (min-width: 940px) {
   body {
   }
 
@@ -330,7 +353,6 @@ h1 {
   }
 
   #controls {
-    height: 637px;
     padding-left: 10px;
   }
 
