@@ -39,6 +39,7 @@ CEB
 - Move "Clear"/"Erase" to button area
 - Align frame rates to 60fps maximum and 1 or 2 fps minimum
 - Lock frame selection when using range UI element
+- Gray out tick lines for frames that aren't active
 
 DONE
 
