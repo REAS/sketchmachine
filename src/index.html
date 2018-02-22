@@ -9,34 +9,26 @@
 
 <div id="macro-ui">
   <div id="ui">
-    <div id="timeline">
-      <div id="animation-view">
-        <!-- Canvas will be here -->
-        <div id="animation-border"></div>
-      </div>
+    <div id="sketch-container">
       <div id="buttons">
         <div id="playback-buttons">
-          <input onclick="clickBack()" tabindex="-1" id="back" type="button" value="⬅"
-                 class="back-next">
-          <input onclick="clickPlay()" tabindex="-1" id="play" type="button" value="◼︎"
-                 class="play">
-          <input onclick="clickNext()" tabindex="-1" id="next" type="button" value="⬅"
-                 class="back-next mirror">
+          <input onclick="clickPlay()" tabindex="-1" id="play" type="button" value="◼︎" class="play">
+          <input onclick="clickBack()" tabindex="-1" id="back" type="button" value="⬅" class="back-next">
+          <input onclick="clickNext()" tabindex="-1" id="next" type="button" value="⬅" class="back-next mirror">
         </div>
         <div id="select-buttons">
           <input onclick="selectRange()" tabindex="-1" id="selectrange" type="button" value="Select Range" class="select-range">
           <input onclick="Deselect()" tabindex="-1" id="deselect" type="button" value="Deselect" class="select-range">
-        </div>
-        <div id="erase-console">
           <input onclick="eraseFrames()" tabindex="-1" id="eraseconsole" type="button" value="Erase" class="select-range">
         </div>
       </div>
     </div>
     <div id="column">
+      <h1><span class="sketch-title">sketch</span><span class="machine-title">machine</span></h1>
       <div id="controls">
         <div id="tools">
-          TOOLS<br/>
-          <div id="brush-1">
+          <h2>Tools</h2>
+          <div id="brush-1" class="brush">
             <input id="b1-select" type="checkbox" checked>
             <!-- Image dropdown -->
             <select id="b1-tools">
@@ -48,7 +40,7 @@
             <input onclick="openColorSelector(1)" id="b1-color" type="button"
                    value="" class="colorButton">
           </div>
-          <div id="brush-2">
+          <div id="brush-2" class="brush">
             <input id="b2-select" type="checkbox">
             <!-- Image dropdown -->
             <select id="b2-tools">
@@ -60,7 +52,7 @@
             <input onclick="openColorSelector(2)" id="b2-color" type="button"
                    value="" class="colorButton">
           </div>
-          <div id="brush-3">
+          <div id="brush-3" class="brush">
             <input id="b3-select" type="checkbox">
             <!-- Image dropdown -->
             <select id="b3-tools">
@@ -72,7 +64,7 @@
             <input onclick="openColorSelector(3)" id="b3-color" type="button"
                    value="" class="colorButton">
           </div>
-          <div id="brush-4">
+          <div id="brush-4" class="brush">
             <input id="b4-select" type="checkbox">
             <!-- Image dropdown -->
             <select id="b4-tools">
@@ -84,7 +76,7 @@
             <input onclick="openColorSelector(4)" id="b4-color" type="button"
                    value="" class="colorButton">
           </div>
-          <div id="brush-5">
+          <div id="brush-5" class="brush">
             <input id="b5-select" type="checkbox">
             <!-- Image dropdown -->
             <select id="b5-tools">
@@ -99,31 +91,37 @@
         </div>
 
         <div id="tool-modifiers">
-          TOOL MODIFIERS<br/><br/>
-          <form>Engorge:
-            <input onclick="speedSizeOff()" id="speed-size-on" type="radio"
-                   name="speed-size" value="off" checked><label for="speed-size-on">Off</label>
-            <input onclick="speedSizeOn()" id="speed-size-off" type="radio"
-                   name="speed-size" value="on"><label for="speed-size-off">On</label>
-          </form>
-          Jitter: <input id="randomXY" type="range" min="0" max="100" value="0"><br/>
-          Dawdle: <input id="easing-slider" type="range" min="0" max="100"
-                         value="0"><br/>
+          <h2>Tool Modifiers</h2>
+          <div class="setting">
+            <form>
+              Engorge:
+              <input onclick="speedSizeOff()" id="speed-size-on" type="radio"
+                     name="speed-size" value="off" checked><label for="speed-size-on">Off</label>
+              <input onclick="speedSizeOn()" id="speed-size-off" type="radio"
+                     name="speed-size" value="on"><label for="speed-size-off">On</label>
+            </form>
+          </div>
+          <div class="setting">
+            Jitter: <input id="randomXY" type="range" min="0" max="100" value="0">
+          </div>
+          <div class="setting">
+            Dawdle: <input id="easing-slider" type="range" min="0" max="100" value="0">
+          </div>
         </div>
 
         <div id="options">
-          OPTIONS<br/>
-          <div id="background-buttons">
+          <h2>Options</h2>
+          <div id="background-buttons" class="setting">
             Background: <input onclick="openBackgroundColorSelector()"
                                id="background-color-button"
                                type="button"
                                value="" class="colorButton">
           </div>
-          <div id="speed-slider">
+          <div id="speed-slider" class="setting">
             Speed: <input id="speed" style="direction: rtl" type="range" min="1"
                           max="10" value="1">
           </div>
-          <div id="onion-options">
+          <div id="onion-options" class="setting">
             <form>Onion skin:
               <input onclick="onionOff()" id="onion-off" type="radio"
                      name="onion" value="off" checked><label for="onion-off">Off</label>
@@ -131,21 +129,16 @@
                      value="on"><label for="onion-on">On</label>
             </form>
           </div>
-          <div id="playback-options">
+          <div id="playback-options" class="setting">
             <form>Playback:
-              <input onclick="clickForward()" id="forward" type="radio"
-                     name="playback"
-                     value="forward" checked><label for="forward">Forward</label>
-              <input onclick="clickReverse()" id="reverse" type="radio"
-                     name="playback"
-                     value="reverse"><label for="reverse">Reverse</label>
-              <input onclick="clickBackAndForth()" id="back-and-forth"
-                     type="radio" name="playback"
-                     value="back and forth"><label for="back-and-forth">Back and forth</label>
+              <input onclick="clickReverse()" id="reverse" type="radio" name="playback" value="reverse"><label for="reverse">⤆</label>
+              <input onclick="clickForward()" id="forward" type="radio" name="playback" value="forward" checked><label for="forward">⤇</label>
+              <input onclick="clickBackAndForth()" id="back-and-forth" type="radio" name="playback" value="back and forth"><label for="back-and-forth">⟺</label>
             </form>
           </div>
         </div>
 
+        <!--
         <div id="destroy">
           DESTROY
           <div id="erase-buttons">
@@ -155,6 +148,7 @@
                    value="erase all">
           </div>
         </div>
+        -->
 
         <div id="export">
           <div id="export-options">

@@ -1,16 +1,16 @@
 // POINTS
-function mark1(i, color, thickness) {
+function mark1(sketch, i, color, thickness) {
   if (smoothing) {
     mx += (targetX - mx) * easing;
     my += (targetY - my) * easing;
   }
 
-  markerFrames[i].strokeCap(ROUND);
+  markerFrames[i].strokeCap(sketch.ROUND);
   markerFrames[i].stroke(color);
 
   if (speedSize) {
-    let varThick = map(thickness, 1, 100, 0.25, 2.0);
-    let diameter = dist(pmx, pmy, mx, my) * varThick;
+    let varThick = sketch.map(thickness, 1, 100, 0.25, 2.0);
+    let diameter = sketch.dist(pmx, pmy, mx, my) * varThick;
     markerFrames[i].strokeWeight(diameter);
   } else {
     markerFrames[i].strokeWeight(thickness);
@@ -20,16 +20,16 @@ function mark1(i, color, thickness) {
 }
 
 // LINES
-function mark2(i, color, thickness) {
+function mark2(sketch, i, color, thickness) {
   if (smoothing) {
     mx += (targetX - mx) * easing;
     my += (targetY - my) * easing;
   }
-  markerFrames[i].strokeCap(ROUND);
+  markerFrames[i].strokeCap(sketch.ROUND);
   markerFrames[i].stroke(color);
   if (speedSize) {
-    let varThick = map(thickness, 1, 100, 0.25, 2.0);
-    let diameter = dist(pmx, pmy, mx, my) * varThick;
+    let varThick = sketch.map(thickness, 1, 100, 0.25, 2.0);
+    let diameter = sketch.dist(pmx, pmy, mx, my) * varThick;
     markerFrames[i].strokeWeight(diameter);
   } else {
     markerFrames[i].strokeWeight(thickness);
@@ -39,19 +39,19 @@ function mark2(i, color, thickness) {
 }
 
 // QUADS
-function mark3(i, color, thickness) {
+function mark3(sketch, i, color, thickness) {
   if (smoothing) {
     mx += (targetX - mx) * easing;
     my += (targetY - my) * easing;
   }
 
   if (pmx !== mx || pmy !== my) {
-    markerFrames[i].strokeCap(SQUARE);
+    markerFrames[i].strokeCap(sketch.SQUARE);
     markerFrames[i].noFill();
     markerFrames[i].stroke(color);
     if (speedSize) {
-      let varThick = map(thickness, 1, 100, 0.25, 3.0);
-      let diameter = dist(pmx, pmy, mx, my) * varThick;
+      let varThick = sketch.map(thickness, 1, 100, 0.25, 3.0);
+      let diameter = sketch.dist(pmx, pmy, mx, my) * varThick;
       markerFrames[i].strokeWeight(diameter);
     } else {
       markerFrames[i].strokeWeight(thickness + 5);

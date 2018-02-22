@@ -1,32 +1,28 @@
 let selectLastFrame = false;
 let selectFirstFrame = false;
 
-function timeLineH() {
+function timeLineH (sketch) {
+  sketch.background(204);
+
   let tw = frameDim / numFrames;
-  let ty = frameDim + 75 + 10;
-  let th = 20;  // Time line height
+  let ty = 10;
+  let th = 40;  // Time line height
   let th2 = th * 2;
 
-  // Change the height of the time line elements when running on a phone
-  // if (mobile) {
-    th = 40;
-    th2 = th * 2;
-  // }
-
-  let tx = map(currentFrame, 0, numFrames, 0, width);
+  let tx = sketch.map(currentFrame, 0, numFrames, 0, sketch.width);
 
   // CURRENT FRAME MARKER ARROW
   let tfmy = ty + th * 3 - th / 4;
 
   if (!startDrawing) {
     for (let x = firstFrame; x < lastFrame; x++) {
-      let xx = map(x, 0, numFrames, 0, width);
-      if ((mouseX > xx && mouseX < xx + tw && mouseY > ty + th && mouseY < tfmy + th / 2)) {
-        noStroke();
-        fill(255, 0, 0);
+      let xx = sketch.map(x, 0, numFrames, 0, sketch.width);
+      if ((sketch.mouseX > xx && sketch.mouseX < xx + tw && sketch.mouseY > ty + th && sketch.mouseY < tfmy + th / 2)) {
+        sketch.noStroke();
+        sketch.fill(255, 0, 0);
         //rect(xx, tfmy , tw+1, th);
-        triangle(xx, tfmy, xx + tw + 1, tfmy, xx + tw / 2, tfmy - th / 2);
-        if (mouseIsPressed && mouseY >= ty + th && mouseY <= height) {
+        sketch.triangle(xx, tfmy, xx + tw + 1, tfmy, xx + tw / 2, tfmy - th / 2);
+        if (sketch.mouseIsPressed && sketch.mouseY >= ty + th && sketch.mouseY <= sketch.height) {
           if(!pause) {
             clickPlay()
           }
@@ -37,9 +33,9 @@ function timeLineH() {
     }
   }
 
-  fill(0, 0, 255);
-  noStroke();
-  triangle(tx, tfmy, tx + tw + 1, tfmy, tx + tw / 2, tfmy - tw);
+  sketch.fill(0, 0, 255);
+  sketch.noStroke();
+  sketch.triangle(tx, tfmy, tx + tw + 1, tfmy, tx + tw / 2, tfmy - tw);
 
   /*
   // HIGHLIGHT FRAMES TO DRAW INTO
@@ -94,8 +90,8 @@ function timeLineH() {
   */
 
   // CURRENT FRAME MARKER (MIDDLE)
-  fill(0, 0, 255);
-  rect(tx, ty + th, tw, th);
+  sketch.fill(0, 0, 255);
+  sketch.rect(tx, ty + th, tw, th);
 
   // RANGE OF FRAMES, FIRST TO LAST
   let tty = ty + 6 - th / 4;
@@ -103,55 +99,55 @@ function timeLineH() {
   let lfx = (lastFrame - 1) * tw;
 
   // CONNECT IN AND OUT MARKERS
-  stroke(102);
-  line(firstFrame * tw, tty + th / 2, (  lastFrame - 1) * tw, tty + th / 2);
+  sketch.stroke(102);
+  sketch.line(firstFrame * tw + tw - 1, tty + th / 2, (lastFrame - 1) * tw, tty + th / 2);
 
   // IN MARKER
-  fill(102);
-  noStroke();
-  if (mouseX > ffx && mouseX < ffx + tw && mouseY > tty && mouseY < tty + th && !selectLastFrame) {
+  sketch.fill(102);
+  sketch.noStroke();
+  if (sketch.mouseX > ffx && sketch.mouseX < ffx + tw && sketch.mouseY > tty && sketch.mouseY < tty + th && !selectLastFrame) {
     if (!startDrawing) {
-      if (mouseIsPressed && !selectLastFrame) {
+      if (sketch.mouseIsPressed && !selectLastFrame) {
         selectFirstFrame = true;  // Goes "false" in mouseReleased
       }
-      fill(255, 0, 0);
+      sketch.fill(255, 0, 0);
     }
   }
   if (selectFirstFrame) {
-    firstFrame = floor(mouseX / tw);
-    firstFrame = constrain(firstFrame, 0, lastFrame - 2);
+    firstFrame = sketch.floor(sketch.mouseX / tw);
+    firstFrame = sketch.constrain(firstFrame, 0, lastFrame - 2);
     if (currentFrame < firstFrame) {
       currentFrame = firstFrame;
     }
-    fill(255, 0, 0);
+    sketch.fill(255, 0, 0);
   }
-  triangle(firstFrame * tw, tty, firstFrame * tw, tty + th, (firstFrame + 1) * tw, tty + th / 2);
+  sketch.triangle(firstFrame * tw, tty, firstFrame * tw, tty + th, (firstFrame + 1) * tw, tty + th / 2);
 
   // OUT MARKER
-  fill(102);
-  if (mouseX > lfx && mouseX < lfx + tw && mouseY > tty && mouseY < tty + th && !selectFirstFrame) {
+  sketch.fill(102);
+  if (sketch.mouseX > lfx && sketch.mouseX < lfx + tw && sketch.mouseY > tty && sketch.mouseY < tty + th && !selectFirstFrame) {
     if (!startDrawing) {
-      fill(255, 0, 0);
-      if (mouseIsPressed && !selectFirstFrame) {
+      sketch.fill(255, 0, 0);
+      if (sketch.mouseIsPressed && !selectFirstFrame) {
         selectLastFrame = true;  // Goes "false" in mouseReleased
       }
     }
   }
   if (selectLastFrame) {
-    lastFrame = ceil(mouseX / tw);
-    lastFrame = constrain(lastFrame, firstFrame + 2, numFrames);
+    lastFrame = sketch.ceil(sketch.mouseX / tw);
+    lastFrame = sketch.constrain(lastFrame, firstFrame + 2, numFrames);
     if (currentFrame > lastFrame - 1) {
       currentFrame = lastFrame - 1;
     }
-    fill(255, 0, 0);
+    sketch.fill(255, 0, 0);
   }
-  triangle(lastFrame * tw, tty, lastFrame * tw, tty + th, (lastFrame - 1) * tw, tty + th / 2);
+  sketch.triangle(lastFrame * tw, tty, lastFrame * tw, tty + th, (lastFrame - 1) * tw, tty + th / 2);
 
   // TICK MARKS, THE GRID OF FRAMES
-  stroke(0);
+  sketch.stroke(0);
   for (let x = 0; x <= numFrames; x++) {
-    let xx = map(x, 0, numFrames, 0, width);
-    line(xx, ty + th, xx, ty + th2);
+    let xx = sketch.map(x, 0, numFrames, 0, sketch.width);
+    sketch.line(xx, ty + th, xx, ty + th2);
   }
-  line(frameDim-1, ty + th, frameDim-1, ty + th2);
+  sketch.line(frameDim-1, ty + th, frameDim-1, ty + th2);
 }

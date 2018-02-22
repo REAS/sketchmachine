@@ -31,8 +31,7 @@ let currentColor = "#FFFFFF";
 let currentColorSelection = 1;
 
 const ui = document.querySelector('#ui');
-const timeline = document.querySelector('#timeline');
-const animationView = document.querySelector('#animation-view');
+const sketchContainer = document.querySelector('#sketch-container');
 const speedSlider = document.querySelector('#speed');
 
 const colorSelector = document.querySelector('#color-selector');
@@ -99,191 +98,237 @@ let backgroundColor = 0;
 let randomXY = document.querySelector("#randomXY");
 let markers = [false, false, false, false, false];
 
-let timeLineCanvas;
+let timelineCanvas;
 
-function setup() {
-  pixelDensity(window.devicePixelRatio);
-  canvas = createCanvas(frameDim, frameDim + 75 + 75);
-  noSmooth();
+const animationSketch = new p5(function (sketch) {
+  sketch.setup = function() {
+    sketch.pixelDensity(window.devicePixelRatio);
+    canvas = sketch.createCanvas(frameDim, frameDim);
+    sketch.noSmooth();
 
-  canvas.id('animation');
+    canvas.id('animation');
 
-  animationView.prepend(canvas.elt);
-  canvas.background(204);
+    sketchContainer.prepend(canvas.elt);
+    canvas.background(204);
 
-  marker1Color = "#FFFFFF"; //web216[int(random(web216.length))];
-  marker2Color = web216[int(random(web216.length))];
-  marker3Color = web216[int(random(web216.length))];
-  marker4Color = web216[int(random(web216.length))];
-  marker5Color = web216[int(random(web216.length))];
+    marker1Color = "#FFFFFF";
+    marker2Color = web216[sketch.int(sketch.random(web216.length))];
+    marker3Color = web216[sketch.int(sketch.random(web216.length))];
+    marker4Color = web216[sketch.int(sketch.random(web216.length))];
+    marker5Color = web216[sketch.int(sketch.random(web216.length))];
 
-  marker1ColorButton.style.backgroundColor = marker1Color;
-  marker2ColorButton.style.backgroundColor = marker2Color;
-  marker3ColorButton.style.backgroundColor = marker3Color;
-  marker4ColorButton.style.backgroundColor = marker4Color;
-  marker5ColorButton.style.backgroundColor = marker5Color;
+    marker1ColorButton.style.backgroundColor = marker1Color;
+    marker2ColorButton.style.backgroundColor = marker2Color;
+    marker3ColorButton.style.backgroundColor = marker3Color;
+    marker4ColorButton.style.backgroundColor = marker4Color;
+    marker5ColorButton.style.backgroundColor = marker5Color;
 
-  backgroundColor = "#000000"; //web216[int(random(web216.length))];
-  backgroundColorButton.style.backgroundColor = backgroundColor;
+    backgroundColor = "#000000"; //web216[int(random(web216.length))];
+    backgroundColorButton.style.backgroundColor = backgroundColor;
 
-  pixelDensity(1);
+    sketch.pixelDensity(1);
 
-  for (let i = 0; i < numFrames; i++) {
-    frames[i] = createGraphics(frameDim, frameDim);
-  }
-
-  for (let i = 0; i < numMarkerFrames; i++) {
-    markerFrames[i] = createGraphics(frameDim, frameDim);
-  }
-
-  compositeFrame = createGraphics(frameDim, frameDim);
-
-  backgroundFrame = createGraphics(frameDim, frameDim);
-  backgroundFrame.background(backgroundColor);
-
-  pixelDensity(window.devicePixelRatio);
-
-  lastTime = millis();
-}
-
-function draw() {
-  if (startDrawing) {
-    //mx = mouseX / dpi;
-    //my = mouseY / dpi;
-    if (smoothing) {
-      targetX = mouseX
-      targetY = mouseY
-    } else {
-      mx = mouseX
-      my = mouseY
+    for (let i = 0; i < numFrames; i++) {
+      frames[i] = sketch.createGraphics(frameDim, frameDim);
     }
-  }
 
-  canvas.drawingContext.fillStyle = 'rgb(204, 204, 204)'
-  canvas.drawingContext.fillRect(0, 0, width, height)
-
-  // TIMELINE
-  timeStep = fpsOptions[parseInt(speedSlider.value)-1];
-
-  // MARKERS
-  markers[0] = marker1Select.checked;
-  markers[1] = marker2Select.checked;
-  markers[2] = marker3Select.checked;
-  markers[3] = marker4Select.checked;
-  markers[4] = marker5Select.checked;
-
-  let whichTool;
-
-  let markFunctions = [ mark1, mark2, mark3, mark4, mark5 ];
-
-  let rxy = parseInt(randomXY.value);
-
-  rx = 0;
-  ry = 0;
-
-  let tempEasing = parseInt(easingSlider.value);
-  //easing = 1.0 - parseFloat(easingSlider.value);
-  if (tempEasing > 0) {
-    easing = map(tempEasing, 0, 100, 0.1, 0.01);
-    smoothing = true;
-  } else {
-    smoothing = false;
-  }
-
-  // if (frameCount % 60 === 0) {
-    // console.log('Easing:', easing);
-  // }
-
-  if (rxy !== 0) {
-    rx = random(-rxy, rxy);
-    ry = random(-rxy, rxy);
-  }
-
-  if (startDrawing && !colorActive) {
-    if (markers[0]) {
-      whichTool = parseInt(marker1Tools.value);
-      markFunctions[whichTool - 1](0, marker1Color, parseInt(marker1Slider.value));
-      didDrawAnything = true
+    for (let i = 0; i < numMarkerFrames; i++) {
+      markerFrames[i] = sketch.createGraphics(frameDim, frameDim);
     }
-    if (markers[1]) {
-      whichTool = parseInt(marker2Tools.value);
-      markFunctions[whichTool - 1](1, marker2Color, parseInt(marker2Slider.value));
-      didDrawAnything = true
-    }
-    if (markers[2]) {
-      whichTool = parseInt(marker3Tools.value);
-      markFunctions[whichTool - 1](2, marker3Color, parseInt(marker3Slider.value));
-      didDrawAnything = true
-    }
-    if (markers[3]) {
-      whichTool = parseInt(marker4Tools.value);
-      markFunctions[whichTool - 1](3, marker4Color, parseInt(marker4Slider.value));
-      didDrawAnything = true
-    }
-    if (markers[4]) {
-      whichTool = parseInt(marker5Tools.value);
-      markFunctions[whichTool - 1](4, marker5Color, parseInt(marker5Slider.value));
-      didDrawAnything = true
-    }
-  }
 
-  backgroundFrame.background(backgroundColor);
+    compositeFrame = sketch.createGraphics(frameDim, frameDim);
 
-  // Now, finally, draw the animation to the screen
-  // console.log(backgroundFrame)
-  drawingContext.drawImage(backgroundFrame.canvas, 0, 0, frameDim, frameDim)
-  drawingContext.drawImage(frames[currentFrame].canvas, 0, 0, frameDim, frameDim)
-  for (let i = numMarkerFrames-1; i >= 0; i--) {
-    drawingContext.drawImage(markerFrames[i].canvas, 0, 0, frameDim, frameDim)
-  }
-  if (pause && onionSkin) {
-    // tint(255, 102);
-    drawingContext.globalAlpha = 0.5
-    if (currentFrame > firstFrame) {
-      drawingContext.drawImage(frames[currentFrame - 1].canvas, 0, 0, frameDim, frameDim);
-    } else if (currentFrame === firstFrame) {
-      drawingContext.drawImage(frames[lastFrame - 1].canvas, 0, 0, frameDim, frameDim);
-    }
-    drawingContext.globalAlpha = 1.0
-  }
+    backgroundFrame = sketch.createGraphics(frameDim, frameDim);
+    backgroundFrame.background(backgroundColor);
 
-  noTint();
+    sketch.pixelDensity(window.devicePixelRatio);
 
-  // Draw the time line to set the boolean values for
-  // frames on and off before frames are drawn into
-  timeLineH();
+    lastTime = sketch.millis();
+  };
 
-  if (startDrawing) {
-    pmx = mx;
-    pmy = my;
-    prx = rx;
-    pry = ry;
-  }
-
-  if (!pause) {
-    if (millis() > lastTime + timeStep) {
-      writeMarkersIntoFrames();
-
-      if (playbackMode === FORWARD) {
-        currentFrame++;  // Go to the next frame
-        if (currentFrame >= lastFrame) {
-          currentFrame = firstFrame;
-        }
-      } else if (playbackMode === REVERSE) {
-        currentFrame--;  // Go to the next frame
-        if (currentFrame < firstFrame) {
-          currentFrame = lastFrame - 1;
-        }
-      } else if (playbackMode === BACKANDFORTH) {
-        currentFrame += playbackDirection;  // Go to the next frame
-        if (currentFrame >= lastFrame - 1 || currentFrame <= firstFrame) {
-          playbackDirection *= -1;
-        }
+  sketch.draw = function () {
+    if (startDrawing) {
+      if (smoothing) {
+        targetX = sketch.mouseX - 4
+        targetY = sketch.mouseY - 4
+      } else {
+        mx = sketch.mouseX - 4
+        my = sketch.mouseY - 4
       }
-      lastTime = millis();
+    }
+
+    canvas.drawingContext.fillStyle = 'rgb(204, 204, 204)'
+    canvas.drawingContext.fillRect(0, 0, sketch.width, sketch.height)
+
+    // TIMELINE
+    timeStep = fpsOptions[parseInt(speedSlider.value)-1];
+
+    // MARKERS
+    markers[0] = marker1Select.checked;
+    markers[1] = marker2Select.checked;
+    markers[2] = marker3Select.checked;
+    markers[3] = marker4Select.checked;
+    markers[4] = marker5Select.checked;
+
+    let whichTool;
+
+    let markFunctions = [ mark1, mark2, mark3, mark4, mark5 ];
+
+    let rxy = parseInt(randomXY.value);
+
+    rx = 0;
+    ry = 0;
+
+    let tempEasing = parseInt(easingSlider.value);
+    //easing = 1.0 - parseFloat(easingSlider.value);
+    if (tempEasing > 0) {
+      easing = sketch.map(tempEasing, 0, 100, 0.1, 0.01);
+      smoothing = true;
+    } else {
+      smoothing = false;
+    }
+
+    if (rxy !== 0) {
+      rx = sketch.random(-rxy, rxy);
+      ry = sketch.random(-rxy, rxy);
+    }
+
+    if (startDrawing && !colorActive) {
+      if (markers[0]) {
+        whichTool = parseInt(marker1Tools.value);
+        markFunctions[whichTool - 1](sketch, 0, marker1Color, parseInt(marker1Slider.value));
+        didDrawAnything = true
+      }
+      if (markers[1]) {
+        whichTool = parseInt(marker2Tools.value);
+        markFunctions[whichTool - 1](sketch, 1, marker2Color, parseInt(marker2Slider.value));
+        didDrawAnything = true
+      }
+      if (markers[2]) {
+        whichTool = parseInt(marker3Tools.value);
+        markFunctions[whichTool - 1](sketch, 2, marker3Color, parseInt(marker3Slider.value));
+        didDrawAnything = true
+      }
+      if (markers[3]) {
+        whichTool = parseInt(marker4Tools.value);
+        markFunctions[whichTool - 1](sketch, 3, marker4Color, parseInt(marker4Slider.value));
+        didDrawAnything = true
+      }
+      if (markers[4]) {
+        whichTool = parseInt(marker5Tools.value);
+        markFunctions[whichTool - 1](sketch, 4, marker5Color, parseInt(marker5Slider.value));
+        didDrawAnything = true
+      }
+    }
+
+    backgroundFrame.background(backgroundColor);
+
+    // Now, finally, draw the animation to the screen
+    // console.log(backgroundFrame)
+    sketch.drawingContext.drawImage(backgroundFrame.canvas, 0, 0, frameDim, frameDim)
+    sketch.drawingContext.drawImage(frames[currentFrame].canvas, 0, 0, frameDim, frameDim)
+    for (let i = numMarkerFrames-1; i >= 0; i--) {
+      sketch.drawingContext.drawImage(markerFrames[i].canvas, 0, 0, frameDim, frameDim)
+    }
+    if (pause && onionSkin) {
+      // tint(255, 102);
+      sketch.drawingContext.globalAlpha = 0.5
+      if (currentFrame > firstFrame) {
+        sketch.drawingContext.drawImage(frames[currentFrame - 1].canvas, 0, 0, frameDim, frameDim);
+      } else if (currentFrame === firstFrame) {
+        sketch.drawingContext.drawImage(frames[lastFrame - 1].canvas, 0, 0, frameDim, frameDim);
+      }
+      sketch.drawingContext.globalAlpha = 1.0
+    }
+
+    // noTint();
+
+    // Draw the time line to set the boolean values for
+    // frames on and off before frames are drawn into
+    // timeLineH();
+
+    if (startDrawing) {
+      pmx = mx;
+      pmy = my;
+      prx = rx;
+      pry = ry;
+    }
+
+    if (!pause) {
+      if (sketch.millis() > lastTime + timeStep) {
+        writeMarkersIntoFrames();
+
+        if (playbackMode === FORWARD) {
+          currentFrame++;  // Go to the next frame
+          if (currentFrame >= lastFrame) {
+            currentFrame = firstFrame;
+          }
+        } else if (playbackMode === REVERSE) {
+          currentFrame--;  // Go to the next frame
+          if (currentFrame < firstFrame) {
+            currentFrame = lastFrame - 1;
+          }
+        } else if (playbackMode === BACKANDFORTH) {
+          currentFrame += playbackDirection;  // Go to the next frame
+          if (currentFrame >= lastFrame - 1 || currentFrame <= firstFrame) {
+            playbackDirection *= -1;
+          }
+        }
+        lastTime = sketch.millis();
+      }
+    }
+  };
+
+  // Define an abstract pointer device
+  function pointerPressed() {
+    // If click in animation area
+    if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.width && !colorActive) {
+      startDrawing = true;
+      pmx = sketch.mouseX - 4
+      pmy = sketch.mouseY - 4
+      if (smoothing) {
+        mx = pmx;
+        my = pmy;
+      }
+    }
+    if (triggerColorActive) {
+      colorActive = false;
+      triggerColorActive = false;
     }
   }
-}
+
+  function pointerReleased() {
+    startDrawing = false;
+    selectFirstFrame = false;
+    selectLastFrame = false;
+    writeMarkersIntoFrames();
+  }
+
+  sketch.mousePressed = () => { pointerPressed() };
+  sketch.mouseReleased = () => { pointerReleased() };
+
+  sketch.touchStarted = (e) => { pointerPressed() };
+
+  sketch.touchMoved = (e) => {
+    if (startDrawing && e.touches && e.touches.length === 1) { // Prevent pan gesture on mobile
+      e.preventDefault();
+    }
+  };
+
+  sketch.touchReleased = () => { pointerReleased() };
+});
+
+const timelineSketch = new p5(function (sketch) {
+  sketch.setup = function () {
+    sketch.pixelDensity(window.devicePixelRatio);
+    timelineCanvas = sketch.createCanvas(frameDim, 75);
+    timelineCanvas.id('timeline');
+    sketch.noSmooth();
+    sketchContainer.append(timelineCanvas.elt);
+  }
+
+  sketch.draw = function () { timeLineH(sketch) }
+});
 
 function writeMarkersIntoFrames() {
   // Composite each layer into one, then erase in turn
@@ -326,13 +371,14 @@ window.addEventListener('keydown', (e) => {
     clickPlay();
   }
 
-  if (e.keyCode === LEFT_ARROW) {
+  console.log(e.keyCode)
+  if (e.keyCode === 37) { // Left arrow
     if (!pause) { clickPlay() } else {
       clickBack()
     }
     e.preventDefault();
   }
-  if (e.keyCode === RIGHT_ARROW) {
+  if (e.keyCode === 39) { // Right arrow
     if (!pause) { clickPlay() } else {
       clickNext()
     }
@@ -347,46 +393,6 @@ window.addEventListener('keydown', (e) => {
   }
 
 })
-
-// Define an abstract pointer device
-function pointerPressed() {
-  // If click in animation area
-  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < width && !colorActive) {
-    startDrawing = true;
-    pmx = mouseX
-    pmy = mouseY
-    if (smoothing) {
-      mx = pmx;
-      my = pmy;
-    }
-  }
-  if (triggerColorActive) {
-    colorActive = false;
-    triggerColorActive = false;
-  }
-}
-
-function pointerReleased() {
-  startDrawing = false;
-  selectFirstFrame = false;
-  selectLastFrame = false;
-  writeMarkersIntoFrames();
-}
-
-// Link mouse
-function mousePressed() { pointerPressed() }
-function mouseReleased() { pointerReleased() }
-
-// Link touch
-function touchStarted(e) { pointerPressed() }
-
-function touchMoved(e) {
-  if (startDrawing && e.touches && e.touches.length === 1) { // Prevent pan gesture on mobile
-    e.preventDefault()
-  }
-}
-
-function touchReleased() { pointerReleased() }
 
 /*
 // GIF Export

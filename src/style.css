@@ -8,10 +8,18 @@ body {
   user-select: none;
 }
 
-canvas {
- /* Override p5.js sizing to fit viewport. */
- width: 100% !important;
+/* Override p5.js sizing to fit viewport. */
+#animation {
+ width: calc(100% - 8px) !important;
  height: auto !important;
+ cursor: crosshair;
+}
+
+#timeline {
+  margin-left: 4px;
+  max-width: 512px;
+  width: calc(100% - 8px) !important;
+  height: auto !important;
 }
 
 input, button {
@@ -55,18 +63,7 @@ input, button {
   position: relative;
 }
 
-#animation-view {
-  position: relative;
-  /*width: 512px;*/
-  /*height: 587px;*/
-}
-
-#animation-border {
-  width: 100%;
-  padding-top: 100%;
-  position: absolute;
-  top: -4px;
-  left: -4px;
+#animation {
   border: 4px inset;
 }
 
@@ -110,34 +107,43 @@ hr {
   border-right: none;
 }
 
-#timeline {
+#sketch-container {
   position: relative;
-  max-width: 512px;
-  max-height: 637px;
+  max-width: 520px;
+  max-height: 662px;
   display: flex;
   flex-direction: column;
 }
 
 #buttons {
-  position: absolute;
-  top: 516px;
-  height: 71px;
+  height: 50px;
   width: 100%;
   padding-top: 4px;
-  margin: 0 auto;
+  margin: 2px auto 0 auto;
   display: flex;
 }
 
-#erase-console, #select-buttons {
-  padding: 0px 8px;
-  display: flex;
-}
-
-#erase-console input, #select-buttons input {
-  margin: auto;
+#playback-buttons {
+  margin-left: 4px;
 }
 
 #playback-buttons input {
+  cursor: pointer;
+}
+
+#select-buttons {
+  margin-left: auto;
+  height: 50px;
+  display: flex;
+  margin-right: 4px;
+}
+
+#select-buttons input {
+  margin: auto;
+  border-radius: 4px;
+  padding: 0 6px;
+  height: 32px;
+  margin-left: 4px;
   cursor: pointer;
 }
 
@@ -225,7 +231,6 @@ hr {
   background-color: #333333;
   padding: 2px 2px 2px 2px;
   display: inline-block;
-  margin-right: 8px !important;
   border: none;
 }
 
@@ -233,27 +238,71 @@ select option {
   font-family: monospace;
 }
 
-/*
-#tools {
-  margin: 10px 10px 10px 20px;
+h1 {
+  color: #999;
+  font-weight: normal;
+  font-size: 1.25em;
+  margin: 0;
 }
 
+.sketch-title {
+  font-family: Arial, sans-serif;
+}
+
+.machine-title {
+  font-family: monospace;
+  font-size: 1.25em;
+}
+
+#controls {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+#controls h2 {
+  font-size: 1em;
+  font-weight: normal;
+  color: #777;
+  margin: 8px 0 4px 0;
+}
+
+.brush, .setting {
+  background-color: #BBB;
+  display: inline-block;
+  border-radius: 4px;
+  padding: 4px;
+  margin-bottom: 4px;
+  height: 30px;
+    min-width: 200px;
+}
+
+.brush input, .brush select {
+  margin: 0;
+  height: 30px;
+  vertical-align: top;
+}
+
+.brush input[type="checkbox"] {
+  width: 20px;
+  margin-left: 3px;
+  background-color: lime;
+}
+
+
+#tools {
+ margin-bottom: 1em;
+}
+
+
 #tool-modifiers {
-  margin: 30px 10px 10px 20px;
+  margin-bottom: 1em;
 }
 
 #options {
-  margin: 30px 10px 10px 20px;
-}
-
-#destroy {
-  margin: 30px 10px 10px 20px;
 }
 
 #export {
-  margin: 30px 10px 10px 20px;
 }
-*/
 
 #speed-slider {
 }
@@ -282,6 +331,10 @@ select option {
 
   #controls {
     height: 637px;
+    padding-left: 10px;
+  }
+
+  h1 {
     padding-left: 10px;
   }
 
