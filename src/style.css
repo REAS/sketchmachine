@@ -371,6 +371,14 @@ input[type=range] {
   background: #eee;
 }
 
+#export-options {
+  background-color: #BBB;
+  padding: 8px;
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px inset;
+}
+
 #export-overlay {
   position: fixed;
   z-index: 1;
@@ -433,24 +441,25 @@ input[type=range] {
 }
 
 #export-button {
-  z-index: 2;
   display: block;
   width: 75px;
   height: 75px;
-  border: 4px outset #c3c3c3;
+  /*border: 4px outset #c3c3c3;*/
   font-size: 1.5em;
   font-weight: bold;
   background-color: #dcdcdc;
   outline: none;
   color: #555;
   cursor: pointer;
+  border: 0;
 }
 
 #export-button:active, #export-button.active {
-  border: 4px inset;
-  background-color: #bbb;
-  padding-top: 4px;
-  padding-right: 4px;
+  /*border: 4px inset;*/
+  background-color: #aaa;
+  color: #888;
+  /*padding-top: 4px;*/
+  /*padding-right: 4px;*/
 }
 
 #speed-slider {
