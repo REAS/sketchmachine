@@ -12,14 +12,14 @@ PAIR
   . Export toggle changes timeline icons
   . Triangles too difficult to grab
 - Final resolution decision
-  . Variable performace, see if "user agent" can be used
+  . Variable performance, see if "user agent" can be used
   x 256-256 or 512-512
 - Don't use a GIF for the color picker?
 
 JAS
+
 - Design / cosmetic layout stuff.
   - New color picker
-  -
 - Line smoothing
 - Share on GIPHY
 -> Requires Phone to test:

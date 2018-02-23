@@ -18,7 +18,7 @@
         </div>
         <div id="select-buttons">
           <input onclick="selectRange()" tabindex="-1" id="selectrange" type="button" value="Select Range" class="select-range">
-          <input onclick="Deselect()" tabindex="-1" id="deselect" type="button" value="Deselect" class="select-range">
+          <input onclick="deselect()" tabindex="-1" id="deselect" type="button" value="Deselect" class="select-range">
           <input onclick="eraseFrames()" tabindex="-1" id="eraseconsole" type="button" value="Erase" class="select-range">
         </div>
       </div>
@@ -97,20 +97,25 @@
             </form>
           </div>
           <div class="setting">
-            Jitter: <input id="randomXY" type="range" min="0" max="100" value="0">
+            <span class="setting-label">Jitter</span>
+            <input id="randomXY" type="range" min="0" max="100" value="0">
           </div>
           <div class="setting">
-            Dawdle: <input id="easing-slider" type="range" min="0" max="100" value="0">
+            <span class="setting-label">Dawdle</span>
+            <input id="easing-slider" type="range" min="0" max="100" value="0">
           </div>
         </div>
 
         <div id="options">
           <h2>Options</h2>
           <div id="background-buttons" class="setting">
-            Background: <input onclick="openBackgroundColorSelector()" id="background-color-button" type="button" value="" class="colorButton">
+            <input id="background-check" onclick="backgroundToggle()" checked type="checkbox">
+            <span class="setting-label">Background</span>
+            <input onclick="openBackgroundColorSelector()" id="background-color-button" type="button" value="" class="colorButton">
           </div>
           <div id="speed-slider" class="setting">
-            Speed: <input id="speed" style="direction: rtl" type="range" min="1" max="10" value="1">
+            <span class="setting-label">Speed</span>
+            <input id="speed" style="direction: rtl" type="range" min="1" max="10" value="1">
           </div>
           <div id="onion-options" class="setting">
             <form>
@@ -119,10 +124,11 @@
             </form>
           </div>
           <div id="playback-options" class="setting">
-            <form>Playback:
+            <form>
+              <span class="setting-label">Playback</span>
               <input onclick="clickReverse()" id="reverse" type="radio" name="playback" value="reverse"><label for="reverse">⤆</label>
-              <input onclick="clickForward()" id="forward" type="radio" name="playback" value="forward" checked><label for="forward">⤇</label>
               <input onclick="clickBackAndForth()" id="back-and-forth" type="radio" name="playback" value="back and forth"><label for="back-and-forth">⟺</label>
+              <input onclick="clickForward()" id="forward" type="radio" name="playback" value="forward" checked><label for="forward">⤇</label>
             </form>
           </div>
         </div>
@@ -183,15 +189,12 @@
   </div>
   <div id="color-selector">
     <h1>Choose your color.</h1>
-    <input onclick="closeColorSelector()" id="color-selector-close"
-           type="button" value="close">
+    <input onclick="closeColorSelector()" id="color-selector-close" type="button" value="close">
   </div>
-</div>
-
-<div id="background-color-selector">
-  <h1>Choose your color.</h1>
-  <input onclick="closeBackgroundColorSelector()"
-         id="background-color-selector-close" type="button" value="close">
+  <div id="background-color-selector">
+    <h1>Choose your color.</h1>
+    <input onclick="closeBackgroundColorSelector()" id="background-color-selector-close" type="button" value="close">
+  </div>
 </div>
 
 <script src="vendor/p5.min.js"></script>

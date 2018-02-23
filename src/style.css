@@ -13,6 +13,8 @@ body {
  width: calc(100% - 8px) !important;
  height: auto !important;
  cursor: crosshair;
+ background: url(checkers.png);
+ image-rendering: pixelated;
 }
 
 #timeline {
@@ -276,10 +278,29 @@ select option {
   background-color: #BBB;
   display: inline-block;
   border-radius: 4px;
-  padding: 4px;
+  padding: 4px 8px 4px 4px;
   margin-bottom: 4px;
   height: 30px;
-    min-width: 200px;
+}
+
+.setting {
+  padding-left: 8px;
+}
+
+.setting input {
+  vertical-align: middle;
+  height: 30px;
+  margin: 0;
+}
+
+input[type=range] {
+  margin-right: 8px;
+}
+
+.setting-label {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
 }
 
 .brush input, .brush select {
@@ -293,15 +314,16 @@ select option {
   margin-left: 3px;
 }
 
-#engorge-check, #onion-check {
+#engorge-check, #onion-check, #background-check {
   width: 20px;
   height: 30px;
-  margin: 0 0 0 3px;
+  margin: 0 0 0 -1px;
   vertical-align: middle;
 }
 
 #engorge-label, #onion-label {
   vertical-align: middle;
+  margin-right: 4px;
 }
 
 #tools {
@@ -316,7 +338,18 @@ select option {
   margin-bottom: 1em;
 }
 
-#export {
+#playback-options label {
+  padding: 0 8px;
+  background: red;
+  display: inline-block;
+}
+
+#playback-options input[type="radio"] {
+  display: none;
+}
+
+#playback-options input[type="radio"]:checked+label {
+  background: lime;
 }
 
 #export-overlay {

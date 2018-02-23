@@ -6,10 +6,14 @@ function onionToggle() {
   onionSkin = !onionSkin;
 }
 
-function openColorSelector() {
+function backgroundToggle() {
+  backgroundEnabled = !backgroundEnabled;
+}
+
+function openColorSelector (n) {
   colorSelector.classList.add('active');
   colorActive = true;
-  currentColorSelection = arguments[0];
+  currentColorSelection = n;
 }
 
 function closeColorSelector() {

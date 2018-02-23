@@ -96,6 +96,7 @@ const marker5ColorButton = document.querySelector("#b5-color");
 let marker5Color = 0;
 
 let backgroundColor = 0;
+let backgroundEnabled = true;
 let randomXY = document.querySelector("#randomXY");
 let markers = [false, false, false, false, false];
 
@@ -159,8 +160,8 @@ const animationSketch = new p5(function (sketch) {
       }
     }
 
-    canvas.drawingContext.fillStyle = 'rgb(204, 204, 204)'
-    canvas.drawingContext.fillRect(0, 0, sketch.width, sketch.height)
+    // canvas.drawingContext.fillStyle = 'rgb(204, 204, 204)'
+    canvas.drawingContext.clearRect(0, 0, sketch.width, sketch.height)
 
     // TIMELINE
     timeStep = fpsOptions[parseInt(speedSlider.value)-1];
@@ -223,11 +224,13 @@ const animationSketch = new p5(function (sketch) {
       }
     }
 
-    backgroundFrame.background(backgroundColor);
 
     // Now, finally, draw the animation to the screen
     // console.log(backgroundFrame)
-    sketch.drawingContext.drawImage(backgroundFrame.canvas, 0, 0, frameDim, frameDim)
+    if (backgroundEnabled === true) {
+      backgroundFrame.background(backgroundColor)
+      sketch.drawingContext.drawImage(backgroundFrame.canvas, 0, 0, frameDim, frameDim)
+    }
     sketch.drawingContext.drawImage(frames[currentFrame].canvas, 0, 0, frameDim, frameDim)
     for (let i = numMarkerFrames-1; i >= 0; i--) {
       sketch.drawingContext.drawImage(markerFrames[i].canvas, 0, 0, frameDim, frameDim)
@@ -412,7 +415,11 @@ const exportedGIFSpinner = document.getElementById('exported-gif-spinner')
 const exportedGIFImg = document.getElementById('exported-gif-img')
 
 function renderFrameGIF (gif, i) {
-  exportFrame.drawingContext.drawImage(backgroundFrame.canvas, 0, 0, frameDim, frameDim);
+  if (backgroundEnabled === true) {
+    exportFrame.drawingContext.drawImage(backgroundFrame.canvas, 0, 0, frameDim, frameDim);
+  } else {
+    exportFrame.drawingContext.clearRect(0, 0, frameDim, frameDim);
+  }
   exportFrame.drawingContext.drawImage(frames[i].canvas, 0, 0, frameDim, frameDim);
   gif.addFrame(exportFrame.canvas, {delay: timeStep * 2, copy: true});
 }
@@ -430,9 +437,10 @@ function exportGIF () {
   exportButton.classList.add('active');
 
   let isTransparent = null
+  if (backgroundEnabled === false) { isTransparent = 0x000000 }
 
   const gif = new GIF({
-    workers: 2,
+    workers: 3,
     quality: 10,
     background: backgroundColor,
     transparent: isTransparent,
