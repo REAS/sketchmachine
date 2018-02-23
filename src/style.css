@@ -269,7 +269,7 @@ select option {
   font-size: 1em;
   font-weight: normal;
   color: #777;
-  margin: 8px 0 4px 0;
+  margin: 0 0 4px 0;
 }
 
 .brush, .setting {
@@ -305,6 +305,7 @@ select option {
 }
 
 #options {
+  margin-bottom: 1em;
 }
 
 #export {
@@ -329,6 +330,36 @@ select option {
 
 #exported-gif {
   margin: auto;
+}
+
+#exported-gif-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  margin-top: -16px;
+  margin-left: -16px;
+  background: white;
+  border-radius: 100%;
+  animation: spinner 1s infinite;
+  pointer-events: none;
+}
+
+#exported-gif-spinner.hidden {
+  display: none;
+}
+
+@keyframes spinner {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 #exported-gif-img {

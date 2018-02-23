@@ -408,6 +408,7 @@ window.addEventListener('keydown', (e) => {
 // GIF Export
 const exportButton = document.getElementById('export-button')
 const exportOverlay = document.getElementById('export-overlay')
+const exportedGIFSpinner = document.getElementById('exported-gif-spinner')
 const exportedGIFImg = document.getElementById('exported-gif-img')
 
 function renderFrameGIF (gif, i) {
@@ -417,6 +418,14 @@ function renderFrameGIF (gif, i) {
 }
 
 function exportGIF () {
+
+  if (didDrawAnything === false) {
+    alert("You haven't drawn anything to export.")
+    return
+  }
+
+  if(!pause) { clickPlay() }
+
   exportOverlay.classList.add('active');
   exportButton.classList.add('active');
 
@@ -447,6 +456,7 @@ function exportGIF () {
     if (exportOverlay.classList.contains('active')) {
       exportedGIFImg.onload = function () {
         exportedGIFImg.classList.add('active');
+        exportedGIFSpinner.classList.add('hidden')
       }
       exportedGIFImg.src = URL.createObjectURL(blob);
     }
@@ -462,6 +472,7 @@ exportOverlay.onclick = (e) => {
 function cancelOrCloseGIF () {
   exportOverlay.classList.remove('active');
   exportButton.classList.remove('active');
+  exportedGIFSpinner.classList.remove('hidden')
   exportedGIFImg.classList.remove('active');
 }
 

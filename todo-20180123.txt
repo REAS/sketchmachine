@@ -18,10 +18,10 @@ PAIR
 
 JAS
 - Design / cosmetic layout stuff.
-- Add button feature to "Export GIF", open new tab to define - https://github.com/spite/ccapture.js/#limitations
-  GIF export features on a separate page
-  . Share on GIPHY
-  . See this page: https://media.giphy.com/media/xULW8LE3usQAw9kSGc/source.gif
+  - New color picker
+  -
+- Line smoothing
+- Share on GIPHY
 -> Requires Phone to test:
     - Disable tap delay
     - Configure multitouch
@@ -43,6 +43,7 @@ CEB
 
 DONE
 
+X Add button feature to "Export GIF"
 X Convert Play, Next, Back to images buttons
 X Make keyboard shortcuts look nicer.
 X Better keyboard shortcut handler
