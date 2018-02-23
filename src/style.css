@@ -94,7 +94,7 @@ input, button {
   margin: auto;
   padding-left: 5px;
   padding-top: 5px;
-  /*padding: 10px 0px;*/
+  padding-bottom: 10px;
 }
 
 #etc a, #etc a:visited {
@@ -161,6 +161,7 @@ hr {
   display: inline-block;
   border-radius: 50%;
   border: 1px solid #FFFFFF;
+  cursor: pointer;
 }
 
 .play {
@@ -244,7 +245,7 @@ select option {
   font-family: monospace;
 }
 
-#sm-title {
+.sm-title {
   color: #888;
   font-weight: normal;
   font-size: 1.3em;
@@ -263,6 +264,7 @@ select option {
 }
 
 #controls {
+  margin-top: 1em;
   font-family: Arial, sans-serif;
   color: #333;
 }
@@ -271,7 +273,7 @@ select option {
   font-size: 1em;
   font-weight: normal;
   color: #777;
-  margin: 0 0 4px 0;
+  margin: 0 0 6px 0;
 }
 
 .brush, .setting {
@@ -279,8 +281,9 @@ select option {
   display: inline-block;
   border-radius: 4px;
   padding: 4px 8px 4px 4px;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
   height: 30px;
+  border: 1px inset;
 }
 
 .setting {
@@ -324,6 +327,11 @@ input[type=range] {
 #engorge-label, #onion-label {
   vertical-align: middle;
   margin-right: 4px;
+  cursor: pointer;
+}
+
+#background-label {
+  cursor: pointer;
 }
 
 #tools {
@@ -339,9 +347,19 @@ input[type=range] {
 }
 
 #playback-options label {
-  padding: 0 8px;
-  background: red;
+  padding: 3px 4px 0px 4px;
+  color: #666;
   display: inline-block;
+  cursor: pointer;
+  font-size: 1.25em;
+  height: 27px;
+  vertical-align: middle;
+  background: #999;
+  border-radius: 4px;
+}
+
+#playback-options {
+    padding-right: 6px;
 }
 
 #playback-options input[type="radio"] {
@@ -349,7 +367,8 @@ input[type=range] {
 }
 
 #playback-options input[type="radio"]:checked+label {
-  background: lime;
+  color: #222;
+  background: #eee;
 }
 
 #export-overlay {
@@ -460,7 +479,9 @@ input[type=range] {
   }
 
   #controls {
-    padding-left: 10px;
+    padding-top: 8px;
+    padding-left: 16px;
+    margin-top: 0;
   }
 
   h1 {

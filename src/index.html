@@ -26,13 +26,13 @@
     <div id="column">
       <div id="controls">
         <div id="tools">
-          <h2>Tools</h2>
+          <h2>Drawing Tools</h2>
           <div id="brush-1" class="brush">
             <input id="b1-select" type="checkbox" checked>
             <!-- Image dropdown -->
             <select id="b1-tools">
               <option value="1">Point</option>
-              <option value="2" selected>〰</option>
+              <option value="2" selected>Line</option>
               <option value="3">Plane</option>
             </select>
             <input id="b1-slider" type="range" min="1" max="100" value="20">
@@ -89,11 +89,11 @@
         </div>
 
         <div id="tool-modifiers">
-          <h2>Tool Modifiers</h2>
+          <h2>Modifiers</h2>
           <div class="setting">
             <form>
               <input id="engorge-check" onclick="speedSizeToggle()" type="checkbox">
-              <span id="engorge-label">Engorge</span>
+              <label for="engorge-check" id="engorge-label">Engorge</label>
             </form>
           </div>
           <div class="setting">
@@ -110,7 +110,7 @@
           <h2>Options</h2>
           <div id="background-buttons" class="setting">
             <input id="background-check" onclick="backgroundToggle()" checked type="checkbox">
-            <span class="setting-label">Background</span>
+            <label for="background-check" id="background-label" class="setting-label">Background</label>
             <input onclick="openBackgroundColorSelector()" id="background-color-button" type="button" value="" class="colorButton">
           </div>
           <div id="speed-slider" class="setting">
@@ -120,15 +120,15 @@
           <div id="onion-options" class="setting">
             <form>
               <input id="onion-check" onclick="onionToggle()" type="checkbox">
-              <span id="onion-label">Onion skin</span>
+              <label for="onion-check" id="onion-label">Onion skin</label>
             </form>
           </div>
           <div id="playback-options" class="setting">
             <form>
               <span class="setting-label">Playback</span>
-              <input onclick="clickReverse()" id="reverse" type="radio" name="playback" value="reverse"><label for="reverse">⤆</label>
-              <input onclick="clickBackAndForth()" id="back-and-forth" type="radio" name="playback" value="back and forth"><label for="back-and-forth">⟺</label>
-              <input onclick="clickForward()" id="forward" type="radio" name="playback" value="forward" checked><label for="forward">⤇</label>
+              <input onclick="clickReverse()" id="reverse" type="radio" name="playback" value="reverse"><label for="reverse">←</label>
+              <input onclick="clickBackAndForth()" id="back-and-forth" type="radio" name="playback" value="back and forth"><label for="back-and-forth">↔︎</label>
+              <input onclick="clickForward()" id="forward" type="radio" name="playback" value="forward" checked><label for="forward">→</label>
             </form>
           </div>
         </div>
@@ -179,7 +179,7 @@
     </ul>
 
     <div id="credits">
-      <h1 id="sm-title"><span class="sketch-title">sketch</span><span class="machine-title">machine</span></h1> was created by <a href="http://caesuras.net" target="_blank">Casey REAS</a> with help from <a href="https://giphy.com/">GIPHY</a>.
+      <h1 class="sm-title"><span class="sketch-title">sketch</span><span class="machine-title">machine</span></h1> was created by <a href="http://caesuras.net" target="_blank">Casey REAS</a> with help from <a href="https://giphy.com/">GIPHY</a>.
       <br/>
       <br/>
       <div id="fine-print">
