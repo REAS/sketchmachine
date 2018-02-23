@@ -1,9 +1,5 @@
-function speedSizeOn() {
-  speedSize = true;
-}
-
-function speedSizeOff() {
-  speedSize = false;
+function speedSizeToggle() {
+  speedSize = !speedSize;
 }
 
 function onionOn() {

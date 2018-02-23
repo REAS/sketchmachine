@@ -84,8 +84,7 @@
               <option value="3">Plane</option>
             </select>
             <input id="b5-slider" type="range" min="1" max="100" value="60">
-            <input onclick="openColorSelector(5)" id="b5-color" type="button"
-                   value="" class="colorButton">
+            <input onclick="openColorSelector(5)" id="b5-color" type="button" value="" class="colorButton">
           </div>
         </div>
 
@@ -93,11 +92,8 @@
           <h2>Tool Modifiers</h2>
           <div class="setting">
             <form>
-              Engorge:
-              <input onclick="speedSizeOff()" id="speed-size-on" type="radio"
-                     name="speed-size" value="off" checked><label for="speed-size-on">Off</label>
-              <input onclick="speedSizeOn()" id="speed-size-off" type="radio"
-                     name="speed-size" value="on"><label for="speed-size-off">On</label>
+              <input id="engorge-check" onclick="speedSizeToggle()" type="checkbox">
+              <span id="engorge-label">Engorge</span>
             </form>
           </div>
           <div class="setting">
@@ -111,10 +107,7 @@
         <div id="options">
           <h2>Options</h2>
           <div id="background-buttons" class="setting">
-            Background: <input onclick="openBackgroundColorSelector()"
-                               id="background-color-button"
-                               type="button"
-                               value="" class="colorButton">
+            Background: <input onclick="openBackgroundColorSelector()" id="background-color-button" type="button" value="" class="colorButton">
           </div>
           <div id="speed-slider" class="setting">
             Speed: <input id="speed" style="direction: rtl" type="range" min="1"

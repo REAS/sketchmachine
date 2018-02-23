@@ -291,14 +291,22 @@ select option {
 .brush input[type="checkbox"] {
   width: 20px;
   margin-left: 3px;
-  background-color: lime;
 }
 
+#engorge-check {
+  width: 20px;
+  height: 30px;
+  margin: 0 0 0 3px;
+  vertical-align: middle;
+}
+
+#engorge-label {
+  vertical-align: middle;
+}
 
 #tools {
  margin-bottom: 1em;
 }
-
 
 #tool-modifiers {
   margin-bottom: 1em;
