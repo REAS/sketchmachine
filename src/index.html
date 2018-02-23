@@ -110,15 +110,12 @@
             Background: <input onclick="openBackgroundColorSelector()" id="background-color-button" type="button" value="" class="colorButton">
           </div>
           <div id="speed-slider" class="setting">
-            Speed: <input id="speed" style="direction: rtl" type="range" min="1"
-                          max="10" value="1">
+            Speed: <input id="speed" style="direction: rtl" type="range" min="1" max="10" value="1">
           </div>
           <div id="onion-options" class="setting">
-            <form>Onion skin:
-              <input onclick="onionOff()" id="onion-off" type="radio"
-                     name="onion" value="off" checked><label for="onion-off">Off</label>
-              <input onclick="onionOn()" id="onion-on" type="radio" name="onion"
-                     value="on"><label for="onion-on">On</label>
+            <form>
+              <input id="onion-check" onclick="onionToggle()" type="checkbox">
+              <span id="onion-label">Onion skin</span>
             </form>
           </div>
           <div id="playback-options" class="setting">

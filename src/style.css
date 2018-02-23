@@ -293,14 +293,14 @@ select option {
   margin-left: 3px;
 }
 
-#engorge-check {
+#engorge-check, #onion-check {
   width: 20px;
   height: 30px;
   margin: 0 0 0 3px;
   vertical-align: middle;
 }
 
-#engorge-label {
+#engorge-label, #onion-label {
   vertical-align: middle;
 }
 

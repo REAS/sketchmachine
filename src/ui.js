@@ -2,12 +2,8 @@ function speedSizeToggle() {
   speedSize = !speedSize;
 }
 
-function onionOn() {
-  onionSkin = true;
-}
-
-function onionOff() {
-  onionSkin = false;
+function onionToggle() {
+  onionSkin = !onionSkin;
 }
 
 function openColorSelector() {
