@@ -310,21 +310,56 @@ select option {
 #export {
 }
 
+#export-overlay {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  visibility: hidden;
+  display: flex;
+}
+
+#export-overlay.active, #exported-gif-img.active {
+  visibility: visible;
+}
+
+
+#exported-gif {
+  margin: auto;
+}
+
+#exported-gif-img {
+  margin: 8px;
+  max-width: calc(100% - 24px);
+  width: 512px;
+  border: 4px outset;
+  visibility: hidden;
+  cursor: context-menu;
+  image-rendering: pixelated;
+}
+
 #export-button {
+  z-index: 2;
   display: block;
   width: 75px;
   height: 75px;
-  border: 4px outset;
+  border: 4px outset #c3c3c3;
   font-size: 1.5em;
   font-weight: bold;
-  background-color: #ccc;
+  background-color: #dcdcdc;
   outline: none;
   color: #555;
   cursor: pointer;
 }
 
-#export-button:active {
+#export-button:active, #export-button.active {
   border: 4px inset;
+  background-color: #bbb;
+  padding-top: 4px;
+  padding-right: 4px;
 }
 
 #speed-slider {
@@ -359,7 +394,6 @@ select option {
   h1 {
     padding-left: 10px;
   }
-
 }
 
 .dev * {

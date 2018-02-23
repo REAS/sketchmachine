@@ -51,7 +51,6 @@ function closeBackgroundColorSelector() {
   backgroundColorButton.style.backgroundColor = currentColor;
   backgroundColorSelector.classList.remove('active');
   triggerColorActive = true;
-  console.log(backgroundColor);
 }
 
 function clickPlay() {

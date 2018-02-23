@@ -3,6 +3,7 @@ let frames = [];
 let backgroundFrame;
 let markerFrames = [];
 let compositeFrame;
+let exportFrame;
 
 let numFrames = 36; // 48
 let numMarkerFrames = 5;
@@ -137,6 +138,7 @@ const animationSketch = new p5(function (sketch) {
     }
 
     compositeFrame = sketch.createGraphics(frameDim, frameDim);
+    exportFrame = sketch.createGraphics(frameDim, frameDim);
 
     backgroundFrame = sketch.createGraphics(frameDim, frameDim);
     backgroundFrame.background(backgroundColor);
@@ -280,7 +282,16 @@ const animationSketch = new p5(function (sketch) {
   };
 
   // Define an abstract pointer device
-  function pointerPressed() {
+  function pointerPressed (e) {
+
+    console.log(e.target)
+    // Cancel event if not clicking inside a sketch.
+    if (e.target !== canvas.elt && e.target !== timelineCanvas.elt) {
+      return
+    }
+
+    e.target.focus()
+
     // If click in animation area
     if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.width && !colorActive) {
       startDrawing = true;
@@ -304,10 +315,10 @@ const animationSketch = new p5(function (sketch) {
     writeMarkersIntoFrames();
   }
 
-  sketch.mousePressed = () => { pointerPressed() };
+  sketch.mousePressed = (e) => { pointerPressed(e) };
   sketch.mouseReleased = () => { pointerReleased() };
 
-  sketch.touchStarted = (e) => { pointerPressed() };
+  sketch.touchStarted = (e) => { pointerPressed(e) };
 
   sketch.touchMoved = (e) => {
     if (startDrawing && e.touches && e.touches.length === 1) { // Prevent pan gesture on mobile
@@ -394,25 +405,65 @@ window.addEventListener('keydown', (e) => {
 
 })
 
-/*
 // GIF Export
+const exportButton = document.getElementById('export-button')
+const exportOverlay = document.getElementById('export-overlay')
+const exportedGIFImg = document.getElementById('exported-gif-img')
+
+function renderFrameGIF (gif, i) {
+  exportFrame.drawingContext.drawImage(backgroundFrame.canvas, 0, 0, frameDim, frameDim);
+  exportFrame.drawingContext.drawImage(frames[i].canvas, 0, 0, frameDim, frameDim);
+  gif.addFrame(exportFrame.canvas, {delay: timeStep * 2, copy: true});
+}
+
 function exportGIF () {
+  exportOverlay.classList.add('active');
+  exportButton.classList.add('active');
+
+  let isTransparent = null
+
   const gif = new GIF({
     workers: 2,
-    quality: 10
+    quality: 10,
+    background: backgroundColor,
+    transparent: isTransparent,
+    workerScript: "vendor/gif.worker.js"
   });
 
-  // TODO: Add from start frame to end frame, and include ping-ponging.
-  gif.addFrame(ctx, {delay: 100, copy: true});
+  switch(playbackMode) {
+    case FORWARD:
+      for (let i = firstFrame; i < lastFrame; i += 1) { renderFrameGIF(gif, i) }
+      break;
+    case REVERSE:
+      for (let i = lastFrame - 1; i > firstFrame; i -= 1) { renderFrameGIF(gif, i) }
+      break;
+    case BACKANDFORTH:
+      for (let i = firstFrame; i < lastFrame; i += 1) { renderFrameGIF(gif, i) }
+      for (let i = lastFrame - 2; i >= firstFrame + 1; i -= 1) { renderFrameGIF(gif, i) }
+      break;
+  }
 
   gif.on('finished', function(blob) {
-    window.open(URL.createObjectURL(blob));
+    if (exportOverlay.classList.contains('active')) {
+      exportedGIFImg.onload = function () {
+        exportedGIFImg.classList.add('active');
+      }
+      exportedGIFImg.src = URL.createObjectURL(blob);
+    }
   });
 
-  // TODO: Show spinner.
   gif.render()
 }
-*/
+
+exportOverlay.onclick = (e) => {
+  cancelOrCloseGIF()
+}
+
+function cancelOrCloseGIF () {
+  exportOverlay.classList.remove('active');
+  exportButton.classList.remove('active');
+  exportedGIFImg.classList.remove('active');
+}
 
 // Leave page warning
 window.onbeforeunload = (e) => {

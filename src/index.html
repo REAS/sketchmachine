@@ -152,7 +152,12 @@
         <div id="export">
           <h2>Export</h2>
           <div id="export-options">
-            <input id="export-button" tabindex="-1" type="button" value=".gif">
+            <div id="export-overlay">
+              <div id="exported-gif">
+                <img id="exported-gif-img">
+              </div>
+            </div>
+            <input id="export-button" onclick="exportGIF()" tabindex="-1" type="button" value=".gif">
             <!--<input id="bitmark" type="button" value="Register Bitmark (not working)">-->
           </div>
         </div>

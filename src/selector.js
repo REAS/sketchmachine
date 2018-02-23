@@ -58,7 +58,6 @@ let backgroundColorSelectorCanvas = function (p) {
       let cc = p.get(p.mouseX, p.mouseY);
       currentColor = rgbToHex(cc[0], cc[1], cc[2]);
       closeBackgroundColorSelector();
-      console.log(currentColor);
     }
   };
 };
