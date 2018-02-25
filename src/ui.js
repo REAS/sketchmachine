@@ -89,6 +89,11 @@ function clickForward() {
 }
 
 function clickBackAndForth() {
+  if (playbackMode === REVERSE) {
+    playbackDirection = -1
+  } else if (playbackMode === FORWARD) {
+    playbackDirection = 1
+  }
   playbackMode = BACKANDFORTH;
 }
 
