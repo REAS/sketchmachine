@@ -1,6 +1,5 @@
 JAS
 
-- Share on GIPHY
 -> Requires Phone to test:
     - Disable tap delay
     - Configure multitouch
@@ -8,6 +7,7 @@ JAS
       . One finger to draw
     - Scroll up/down not working on Android
 - Webpack / bundling.
+- Description meta tag.
 
 CEB
 
@@ -21,6 +21,7 @@ CEB
 
 DONE
 
+X Share on GIPHY
 X Line smoothing
 X Don't repaint every frame while paused.
 X Add og:image for Facebook properties.

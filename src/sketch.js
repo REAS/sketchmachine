@@ -392,6 +392,11 @@ function eraseAllFrames() {
 }
 
 window.addEventListener('keydown', (e) => {
+
+  if(e.altKey || e.shiftKey) {
+    return
+  }
+
   if (e.key === 'f' || e.key === 'F') {
     eraseFrame();
   }
