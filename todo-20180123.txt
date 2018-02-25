@@ -2,6 +2,7 @@ JAS
 
 - Don't repaint every frame while paused.
 - Line smoothing
+
 -> Requires Phone to test:
     - Disable tap delay
     - Configure multitouch

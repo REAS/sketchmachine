@@ -14,12 +14,7 @@ let currentFrame = firstFrame;
 let frameDim = 512;
 let surfaceDim = Math.min(1024, 512 * window.devicePixelRatio);
 let resInt = parseInt(window.location.search.replace('?res=', ''));
-
-console.log(resInt)
-
-if (resInt) {
-  surfaceDim = Math.min(1024, resInt);
-}
+if (resInt) { surfaceDim = Math.min(1024, resInt); }
 
 let frameSurfaceRatio = frameDim / surfaceDim;
 
@@ -168,8 +163,6 @@ const animationSketch = new p5(function (sketch) {
       }
     }
 
-    canvas.drawingContext.clearRect(0, 0, sketch.width, sketch.height)
-
     // TIMELINE
     timeStep = fpsOptions[parseInt(speedSlider.value)-1];
 
@@ -231,23 +224,8 @@ const animationSketch = new p5(function (sketch) {
     }
 
     // Now, finally, draw the animation to the screen
-    // console.log(backgroundFrame)
-    if (backgroundEnabled === true) {
-      backgroundFrame.background(backgroundColor)
-      sketch.drawingContext.drawImage(backgroundFrame.canvas, 0, 0, frameDim, frameDim)
-    }
-    sketch.drawingContext.drawImage(frames[currentFrame].canvas, 0, 0, frameDim, frameDim)
-    for (let i = numMarkerFrames-1; i >= 0; i--) {
-      sketch.drawingContext.drawImage(markerFrames[i].canvas, 0, 0, frameDim, frameDim)
-    }
-    if (pause && onionSkin) {
-      sketch.drawingContext.globalAlpha = 0.5
-      if (currentFrame > firstFrame) {
-        sketch.drawingContext.drawImage(frames[currentFrame - 1].canvas, 0, 0, frameDim, frameDim);
-      } else if (currentFrame === firstFrame) {
-        sketch.drawingContext.drawImage(frames[lastFrame - 1].canvas, 0, 0, frameDim, frameDim);
-      }
-      sketch.drawingContext.globalAlpha = 1.0
+    if (!pause || startDrawing) {
+      displayFrame(sketch)
     }
 
     if (startDrawing) {
@@ -293,7 +271,7 @@ const animationSketch = new p5(function (sketch) {
     e.target.focus()
 
     // If click in animation area
-    if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.width) {
+    if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.height) {
       startDrawing = true;
       lastLineFrames = []
       lastPointFrames = []
@@ -333,16 +311,46 @@ const timelineSketch = new p5(function (sketch) {
     sketch.pixelDensity(window.devicePixelRatio);
     timelineCanvas = sketch.createCanvas(frameDim, 75);
     timelineCanvas.id('timeline');
-    sketch.noSmooth();
     sketchContainer.append(timelineCanvas.elt);
+    sketch.noSmooth();
   }
 
   sketch.draw = function () {
-    timeLineH(sketch)
+    if (!pause || sketch.mouseIsPressed) {
+      displayTimeline(sketch)
+    }
+  }
+
+  sketch.mouseMoved = function () {
+    if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.height) {
+      displayTimeline(sketch)
+    }
   }
 });
 
-function writeMarkersIntoFrames() {
+function displayFrame (sketch) {
+  canvas.drawingContext.clearRect(0, 0, sketch.width, sketch.height)
+  if (backgroundEnabled === true) {
+    backgroundFrame.background(backgroundColor)
+    sketch.drawingContext.drawImage(backgroundFrame.canvas, 0, 0, frameDim, frameDim)
+  }
+  sketch.drawingContext.drawImage(frames[currentFrame].canvas, 0, 0, frameDim, frameDim)
+  for (let i = numMarkerFrames-1; i >= 0; i--) {
+    sketch.drawingContext.drawImage(markerFrames[i].canvas, 0, 0, frameDim, frameDim)
+  }
+
+  if (pause && onionSkin) {
+    sketch.drawingContext.globalAlpha = 0.5
+    if (currentFrame > firstFrame) {
+      sketch.drawingContext.drawImage(frames[currentFrame - 1].canvas, 0, 0, frameDim, frameDim);
+    } else if (currentFrame === firstFrame) {
+      sketch.drawingContext.drawImage(frames[lastFrame - 1].canvas, 0, 0, frameDim, frameDim);
+    }
+    sketch.drawingContext.globalAlpha = 1.0
+  }
+}
+
+function writeMarkersIntoFrames () {
   // Composite each layer into one, then erase in turn
   for (let i = numMarkerFrames - 1; i >= 0; i--) {
     if (markers[i]) {
@@ -383,7 +391,6 @@ window.addEventListener('keydown', (e) => {
     clickPlay();
   }
 
-  console.log(e.keyCode)
   if (e.keyCode === 37) { // Left arrow
     if (!pause) { clickPlay() } else {
       clickBack()

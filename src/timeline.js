@@ -1,7 +1,7 @@
 let selectLastFrame = false;
 let selectFirstFrame = false;
 
-function timeLineH (sketch) {
+function displayTimeline (sketch) {
 
   sketch.drawingContext.clearRect(0, 0, sketch.width, sketch.height)
 

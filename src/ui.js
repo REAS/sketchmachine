@@ -4,10 +4,12 @@ function speedSizeToggle() {
 
 function onionToggle() {
   onionSkin = !onionSkin;
+  displayFrame(animationSketch);
 }
 
 function backgroundToggle() {
   backgroundEnabled = !backgroundEnabled;
+  displayFrame(animationSketch);
 }
 
 function openColorSelector (n) {
@@ -17,11 +19,11 @@ function openColorSelector (n) {
 }
 
 function closeColorSelector (e) {
-
   currentColor = e.target.dataset.color
 
   if (currentColorSelection === 0) {
     backgroundColor = currentColor;
+    displayFrame(animationSketch);
     backgroundColorButton.style.backgroundColor = currentColor;
   } else if (currentColorSelection === 1) {
     marker1Color = currentColor;
@@ -46,6 +48,7 @@ function closeColorSelector (e) {
 function clickPlay() {
   pause = !pause;
   if (pause) {
+    displayFrame(animationSketch)
     document.getElementById("play").value = "▶︎";
     document.getElementById("next").style.visibility = "visible";
     document.getElementById("back").style.visibility = "visible";
@@ -64,6 +67,8 @@ function clickBack() {
   if (currentFrame < firstFrame) {
     currentFrame = lastFrame - 1;
   }
+  displayFrame(animationSketch)
+  displayTimeline(timelineSketch)
 }
 
 function clickNext() {
@@ -71,6 +76,8 @@ function clickNext() {
   if (currentFrame >= lastFrame) {
     currentFrame = firstFrame;
   }
+  displayFrame(animationSketch)
+  displayTimeline(timelineSketch)
 }
 
 function clickReverse() {
