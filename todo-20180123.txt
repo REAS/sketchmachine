@@ -1,42 +1,24 @@
-PAIR
-
-- GUI
-  . Keep similar feel
-  . Increase button size
-- TOOLS
-  . Vertically center each tool line
-- Timeline
-  . Use the single frame selector and add "select/deselect"
-  . Drag frame selection left and right
-  . Doesn't work well on phone
-  . Export toggle changes timeline icons
-  . Triangles too difficult to grab
-- Final resolution decision
-  . Variable performance, see if "user agent" can be used
-  x 256-256 or 512-512
-- Don't use a GIF for the color picker?
-
 JAS
 
 - Don't repaint every frame while paused.
 - Line smoothing
-- Share on GIPHY
 -> Requires Phone to test:
     - Disable tap delay
     - Configure multitouch
       . Two fingers for scale
       . One finger to draw
     - Scroll up/down not working on Android
+- Share on GIPHY
+    - Set up an express server.
+- Webpack / bundling.
 
 CEB
 
-- Default drawing tool larger
-- Color picker
-  . Full screen or not?
-  . Transparent option with gray grid for background color select
-  . "Close" button changes to an x
+- Timeline
+  . Use the single frame selector and add "select/deselect"
+  . Drag frame selection left and right
+  . Export toggle changes timeline icons
 - Move "Clear"/"Erase" to button area
-- Align frame rates to 60fps maximum and 1 or 2 fps minimum
 - Lock frame selection when using range UI element
 - Gray out tick lines for frames that aren't active
 
