@@ -111,8 +111,6 @@ function mark2(sketch, i, color, thickness) {
     lastLine.x2 !== x2 ||
     lastLine.y2 !== y2;
 
-  let points
-
   if (lineChanged) {
     points = curvePoints(x0, y0, x1, y1, x2, y2);
     pastLines[i].lastLineFrames = [currentFrame]
@@ -121,10 +119,14 @@ function mark2(sketch, i, color, thickness) {
     points = curvePoints(x0, y0, x1, y1, x2, y2);
   }
 
-  if (points) {
-    markerFrames[i].beginShape();
-    points.forEach((p) => { markerFrames[i].vertex(...p); })
-    markerFrames[i].endShape();
+  if (points && points.length > 0) {
+    if (points.length === 2 && points[0][0] === points[1][0] && points[0][1] === points[1][1]) {
+      markerFrames[i].point(... points[0])
+    } else {
+      markerFrames[i].beginShape();
+      points.forEach((p) => { markerFrames[i].vertex(...p); })
+      markerFrames[i].endShape();
+    }
   }
 
   pastLines[i].lastLine = {

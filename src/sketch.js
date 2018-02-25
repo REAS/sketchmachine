@@ -108,7 +108,10 @@ const animationSketch = new p5(function (sketch) {
   sketch.setup = function() {
     sketch.pixelDensity(window.devicePixelRatio);
     canvas = sketch.createCanvas(frameDim, frameDim);
-    sketch.noSmooth();
+
+    if (surfaceDim < frameDim) {
+      sketch.noSmooth()
+    }
 
     canvas.id('animation');
 
@@ -272,8 +275,6 @@ const animationSketch = new p5(function (sketch) {
       return
     }
 
-    e.target.focus()
-
     // If click in animation area
     if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.height) {
       startDrawing = true;
@@ -304,6 +305,11 @@ const animationSketch = new p5(function (sketch) {
   sketch.touchStarted = (e) => { pointerPressed(e) };
 
   sketch.touchMoved = (e) => {
+
+    if (e.touches.length === 2) {
+      e.preventDefault()
+    }
+
     if (startDrawing && e.touches && e.touches.length === 1) { // Prevent pan gesture on mobile
       e.preventDefault();
     }
@@ -567,7 +573,7 @@ function uploadToGiphy () {
     if (res.meta && res.meta.status === 200) {
       let id = res.data.id
       let url = 'https://giphy.com/gifs/' + username + '-' + id
-      window.open(url, '_blank');
+      window.open(url);
       giphyUploadOverlay.classList.remove('active');
     } else {
       console.error('Upload failed.')

@@ -6,6 +6,7 @@ body {
   margin: 0;
   background-color: #CCCCCC;
   user-select: none;
+  -webkit-text-size-adjust: none;
 }
 
 body.noscroll {
@@ -19,7 +20,6 @@ body.noscroll {
  height: auto !important;
  cursor: crosshair;
  background: url(checkers.png);
- image-rendering: pixelated;
 }
 
 #timeline {
@@ -31,6 +31,10 @@ body.noscroll {
 
 input, button {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+input[type="button"], button {
+  -webkit-appearance: none;
 }
 
 #color-selector {
@@ -56,6 +60,7 @@ input, button {
   border: 0;
   /*outline: 0;*/
   cursor: pointer;
+  margin: 0;
 }
 
 #colors button:active {
@@ -189,17 +194,19 @@ hr {
   height: 50px;
   color: #FFFFFF;
   background-color: #333333;
-  padding: 4px 2px 2px 2px;
   display: inline-block;
   border-radius: 50%;
   border: none;
   vertical-align: middle;
   font-size: 2em;
+  line-height: 50px;
+  padding: 2px 0px 0px 0px;
+  font-family: Arial, sans-serif;
 }
 
 .play[value="▶︎"] {
-  padding-left: 6px;
-  padding-top: 1px;
+  padding-top: 2px;
+  padding-left: 5px;
 }
 
 .back-next {
@@ -299,62 +306,21 @@ select option {
   background-color: #BBB;
   display: inline-block;
   border-radius: 4px;
-  padding: 4px 8px 4px 4px;
   margin-bottom: 5px;
-  height: 30px;
   border: 1px inset;
-}
-
-.setting {
-  padding-left: 8px;
-}
-
-.setting input {
-  vertical-align: middle;
-  height: 30px;
-  margin: 0;
-  outline: 0;
-}
-
-select {
-  outline: 0;
-}
-
-input[type=range] {
-  margin-right: 8px;
-}
-
-.setting-label {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 4px;
-}
-
-.brush input, .brush select {
-  margin: 0;
-  height: 30px;
   vertical-align: top;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 8px;
+  padding-right: 12px;
+  padding-bottom: 2px;
 }
 
-.brush input[type="checkbox"] {
-  width: 20px;
-  margin-left: 3px;
-}
-
-#engorge-check, #onion-check, #background-check {
-  width: 20px;
-  height: 30px;
-  margin: 0 0 0 -1px;
+.brush input, .brush select, .setting input, .setting .setting-label, .setting label  {
   vertical-align: middle;
 }
 
-#engorge-label, #onion-label {
-  vertical-align: middle;
-  margin-right: 4px;
-  cursor: pointer;
-}
-
-#background-label {
+#engorge-label, #onion-label, #background-label {
   cursor: pointer;
 }
 
@@ -371,15 +337,19 @@ input[type=range] {
 }
 
 #playback-options label {
-  padding: 3px 4px 0px 4px;
+  padding: 1px 4px 2px 4px;
   color: #666;
   display: inline-block;
   cursor: pointer;
   font-size: 1.25em;
+  line-height: 27px;
   height: 27px;
-  vertical-align: middle;
   background: #999;
   border-radius: 4px;
+}
+
+#playback-options .setting-label {
+  padding-right: 4px;
 }
 
 #playback-options {
@@ -542,6 +512,9 @@ input[type=range] {
   color: #555;
   cursor: pointer;
   border: 0;
+  border-radius: 0;
+  font-family: Arial, sans-serif;
+  padding: 0;
 }
 
 #export-button:active, #export-button.active {
