@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <meta property="og:image" content="https://www.sketchmachine.net/og-image.png">
+  <meta name="description" content="Sketch Machine is a free animation tool created by Casey REAS in 2018, with help from GIPHY.">
 </head>
 <body>
-
 <div id="macro-ui">
   <div id="ui">
     <div id="sketch-container">
@@ -32,7 +32,6 @@
           <h2>Drawing Tools</h2>
           <div id="brush-1" class="brush">
             <input id="b1-select" tabindex="-1" type="checkbox" checked>
-            <!-- Image dropdown -->
             <select id="b1-tools">
               <option value="1">Point</option>
               <option value="2" selected>Line</option>
@@ -43,7 +42,6 @@
           </div>
           <div id="brush-2" class="brush">
             <input id="b2-select" tabindex="-1" type="checkbox">
-            <!-- Image dropdown -->
             <select id="b2-tools" tabindex="-1">
               <option value="1">Point</option>
               <option value="2" selected>Line</option>
@@ -54,7 +52,6 @@
           </div>
           <div id="brush-3" class="brush">
             <input id="b3-select" tabindex="-1" type="checkbox">
-            <!-- Image dropdown -->
             <select id="b3-tools" tabindex="-1">
               <option value="1">Point</option>
               <option value="2" selected>Line</option>
@@ -65,7 +62,6 @@
           </div>
           <div id="brush-4" class="brush">
             <input id="b4-select" tabindex="-1" type="checkbox">
-            <!-- Image dropdown -->
             <select id="b4-tools" tabindex="-1">
               <option value="1">Point</option>
               <option value="2" selected>Line</option>
@@ -76,7 +72,6 @@
           </div>
           <div id="brush-5" class="brush">
             <input id="b5-select" tabindex="-1" type="checkbox">
-            <!-- Image dropdown -->
             <select id="b5-tools" tabindex="-1">
               <option value="1">Point</option>
               <option value="2" selected>Line</option>
@@ -86,7 +81,6 @@
             <input onclick="openColorSelector(5)" tabindex="-1" id="b5-color" type="button" value="" class="colorButton">
           </div>
         </div>
-
         <div id="tool-modifiers">
           <h2>Modifiers</h2>
           <div class="setting">
@@ -104,7 +98,6 @@
             <input id="easing-slider" tabindex="-1" type="range" min="0" max="100" value="0">
           </div>
         </div>
-
         <div id="options">
           <h2>Options</h2>
           <div id="background-buttons" class="setting">
@@ -131,19 +124,6 @@
             </form>
           </div>
         </div>
-
-        <!--
-        <div id="destroy">
-          DESTROY
-          <div id="erase-buttons">
-            <input onclick="eraseFrame()" id="erase-frame" type="button"
-                   value="erase frame">
-            <input onclick="eraseAllFrames()" id="erase-all" type="button"
-                   value="erase all">
-          </div>
-        </div>
-        -->
-
         <div id="export">
           <h2>Export</h2>
           <div id="export-options">
@@ -170,9 +150,7 @@
       </div>
     </div>
   </div>
-
   <hr>
-
   <footer>
     <div id="etc">
       Keyboard Shorcuts
@@ -187,7 +165,6 @@
         <li><span class="keyboard-shortcut">F</span> Erase Frame</li>
         <li><span class="keyboard-shortcut">C</span> Erase <b>All</b> Frames</li>
       </ul>
-
       <div id="credits">
         Too slow? Try a different resolution: <a class="res" href="/?res=1024">1024</a>, <a class="res" href="/?res=512">512</a>, <a class="res" href="/?res=256">256</a>, <a class="res" href="/?res=128">128</a>, <a class="res" href="/?res=64">64</a>.
         <br>
@@ -208,7 +185,6 @@
     </div>
   </div>
 </div>
-
 <script src="vendor/p5.min.js"></script>
 <script src="vendor/gif.js"></script>
 <script src="sketch.js"></script>
@@ -216,6 +192,5 @@
 <script src="marks.js"></script>
 <script src="selector.js"></script>
 <script src="ui.js"></script>
-
 </body>
 </html>
