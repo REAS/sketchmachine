@@ -85,6 +85,7 @@ function mark2(sketch, i, color, thickness) {
   markerFrames[i].strokeCap(sketch.ROUND);
   markerFrames[i].strokeJoin(sketch.ROUND);
   markerFrames[i].stroke(color);
+  markerFrames[i].noFill();
   if (speedSize) {
     let varThick = sketch.map(thickness, 1, 100, 0.25, 2.0);
     let diameter = sketch.dist(pmx, pmy, mx, my) * varThick;
