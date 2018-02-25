@@ -1,10 +1,4 @@
-JAS
-
-- Webpack / bundling.
-- Description meta tag.
-
 CEB
-
 - Timeline
   . Use the single frame selector and add "select/deselect"
   . Drag frame selection left and right
@@ -35,6 +29,3 @@ X GUI Naming
   x "random" to "jitter"
   x "smooth" to "chase"
   x Change "Playback" to "Direction: Forward, Reverse, Back and Forth", remove once
-
-Leftovers
-- Add line smoothing (JAS)
