@@ -18,8 +18,7 @@ PAIR
 
 JAS
 
-- Design / cosmetic layout stuff.
-  - New color picker
+- Don't repaint every frame while paused.
 - Line smoothing
 - Share on GIPHY
 -> Requires Phone to test:
@@ -43,6 +42,10 @@ CEB
 
 DONE
 
+X Add og:image for Facebook properties.
+X Don't draw on every frame if mouse hasn't moved.
+X Design / cosmetic layout stuff.
+X New color picker
 X Add button feature to "Export GIF"
 X Convert Play, Next, Back to images buttons
 X Make keyboard shortcuts look nicer.

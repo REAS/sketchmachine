@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Sketch Machine</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
+  <meta property="og:image" content="https://www.sketchmachine.net/og-image.png">
 </head>
 <body>
 
@@ -28,63 +31,59 @@
         <div id="tools">
           <h2>Drawing Tools</h2>
           <div id="brush-1" class="brush">
-            <input id="b1-select" type="checkbox" checked>
+            <input id="b1-select" tabindex="-1" type="checkbox" checked>
             <!-- Image dropdown -->
             <select id="b1-tools">
               <option value="1">Point</option>
               <option value="2" selected>Line</option>
               <option value="3">Plane</option>
             </select>
-            <input id="b1-slider" type="range" min="1" max="100" value="20">
-            <input onclick="openColorSelector(1)" id="b1-color" type="button"
-                   value="" class="colorButton">
+            <input id="b1-slider" tabindex="-1" type="range" min="1" max="100" value="20">
+            <input onclick="openColorSelector(1)" tabindex="-1" id="b1-color" type="button" value="" class="colorButton">
           </div>
           <div id="brush-2" class="brush">
-            <input id="b2-select" type="checkbox">
+            <input id="b2-select" tabindex="-1" type="checkbox">
             <!-- Image dropdown -->
-            <select id="b2-tools">
+            <select id="b2-tools" tabindex="-1">
               <option value="1">Point</option>
               <option value="2" selected>Line</option>
               <option value="3">Plane</option>
             </select>
-            <input id="b2-slider" type="range" min="1" max="100" value="30">
-            <input onclick="openColorSelector(2)" id="b2-color" type="button"
-                   value="" class="colorButton">
+            <input id="b2-slider" tabindex="-1" type="range" min="1" max="100" value="30">
+            <input onclick="openColorSelector(2)" tabindex="-1" id="b2-color" type="button" value="" class="colorButton">
           </div>
           <div id="brush-3" class="brush">
-            <input id="b3-select" type="checkbox">
+            <input id="b3-select" tabindex="-1" type="checkbox">
             <!-- Image dropdown -->
-            <select id="b3-tools">
+            <select id="b3-tools" tabindex="-1">
               <option value="1">Point</option>
               <option value="2" selected>Line</option>
               <option value="3">Plane</option>
             </select>
-            <input id="b3-slider" type="range" min="1" max="100" value="40">
-            <input onclick="openColorSelector(3)" id="b3-color" type="button"
-                   value="" class="colorButton">
+            <input id="b3-slider" tabindex="-1" type="range" min="1" max="100" value="40">
+            <input onclick="openColorSelector(3)" tabindex="-1" id="b3-color" type="button" value="" class="colorButton">
           </div>
           <div id="brush-4" class="brush">
-            <input id="b4-select" type="checkbox">
+            <input id="b4-select" tabindex="-1" type="checkbox">
             <!-- Image dropdown -->
-            <select id="b4-tools">
+            <select id="b4-tools" tabindex="-1">
               <option value="1">Point</option>
               <option value="2" selected>Line</option>
               <option value="3">Plane</option>
             </select>
-            <input id="b4-slider" type="range" min="1" max="100" value="50">
-            <input onclick="openColorSelector(4)" id="b4-color" type="button"
-                   value="" class="colorButton">
+            <input id="b4-slider" tabindex="-1" type="range" min="1" max="100" value="50">
+            <input onclick="openColorSelector(4)" tabindex="-1" id="b4-color" type="button" value="" class="colorButton">
           </div>
           <div id="brush-5" class="brush">
-            <input id="b5-select" type="checkbox">
+            <input id="b5-select" tabindex="-1" type="checkbox">
             <!-- Image dropdown -->
-            <select id="b5-tools">
+            <select id="b5-tools" tabindex="-1">
               <option value="1">Point</option>
               <option value="2" selected>Line</option>
               <option value="3">Plane</option>
             </select>
-            <input id="b5-slider" type="range" min="1" max="100" value="60">
-            <input onclick="openColorSelector(5)" id="b5-color" type="button" value="" class="colorButton">
+            <input id="b5-slider" tabindex="-1" type="range" min="1" max="100" value="60">
+            <input onclick="openColorSelector(5)" tabindex="-1" id="b5-color" type="button" value="" class="colorButton">
           </div>
         </div>
 
@@ -92,43 +91,43 @@
           <h2>Modifiers</h2>
           <div class="setting">
             <form>
-              <input id="engorge-check" onclick="speedSizeToggle()" type="checkbox">
+              <input id="engorge-check" tabindex="-1" onclick="speedSizeToggle()" type="checkbox">
               <label for="engorge-check" id="engorge-label">Engorge</label>
             </form>
           </div>
           <div class="setting">
             <span class="setting-label">Jitter</span>
-            <input id="randomXY" type="range" min="0" max="100" value="0">
+            <input id="randomXY" tabindex="-1" type="range" min="0" max="100" value="0">
           </div>
           <div class="setting">
             <span class="setting-label">Dawdle</span>
-            <input id="easing-slider" type="range" min="0" max="100" value="0">
+            <input id="easing-slider" tabindex="-1" type="range" min="0" max="100" value="0">
           </div>
         </div>
 
         <div id="options">
           <h2>Options</h2>
           <div id="background-buttons" class="setting">
-            <input id="background-check" onclick="backgroundToggle()" checked type="checkbox">
+            <input id="background-check" tabindex="-1" onclick="backgroundToggle()" checked type="checkbox">
             <label for="background-check" id="background-label" class="setting-label">Background</label>
-            <input onclick="openBackgroundColorSelector()" id="background-color-button" type="button" value="" class="colorButton">
+            <input onclick="openColorSelector(0)" tabindex="-1" id="background-color-button" type="button" value="" class="colorButton">
           </div>
           <div id="speed-slider" class="setting">
             <span class="setting-label">Speed</span>
-            <input id="speed" style="direction: rtl" type="range" min="1" max="10" value="1">
+            <input id="speed" style="direction: rtl" tabindex="-1" type="range" min="1" max="10" value="1">
           </div>
           <div id="onion-options" class="setting">
             <form>
-              <input id="onion-check" onclick="onionToggle()" type="checkbox">
+              <input id="onion-check" tabindex="-1" onclick="onionToggle()" type="checkbox">
               <label for="onion-check" id="onion-label">Onion skin</label>
             </form>
           </div>
           <div id="playback-options" class="setting">
             <form>
               <span class="setting-label">Playback</span>
-              <input onclick="clickReverse()" id="reverse" type="radio" name="playback" value="reverse"><label for="reverse">←</label>
-              <input onclick="clickBackAndForth()" id="back-and-forth" type="radio" name="playback" value="back and forth"><label for="back-and-forth">↔︎</label>
-              <input onclick="clickForward()" id="forward" type="radio" name="playback" value="forward" checked><label for="forward">→</label>
+              <input onclick="clickReverse()" id="reverse" tabindex="-1" type="radio" name="playback" value="reverse"><label for="reverse">←</label>
+              <input onclick="clickBackAndForth()" id="back-and-forth" tabindex="-1" type="radio" name="playback" value="back and forth"><label for="back-and-forth">↔︎</label>
+              <input onclick="clickForward()" id="forward" type="radio" tabindex="-1" name="playback" value="forward" checked><label for="forward">→</label>
             </form>
           </div>
         </div>
@@ -164,36 +163,39 @@
 
   <hr>
 
-  <div id="etc">
-    Keyboard Shorcuts
-    <ul id="keyboard-shortcuts">
-      <li><span class="keyboard-shortcut">P</span> Pause / Play</li>
-      <br>
-      <li>
-        <span class="keyboard-shortcut">⬅</span>
-        <span class="keyboard-shortcut"><span class="mirror">⬅</span></span> Prev & Next Frame
-      </li>
-      <br>
-      <li><span class="keyboard-shortcut">F</span> Erase Frame</li>
-      <li><span class="keyboard-shortcut">C</span> Erase <b>All</b> Frames</li>
-    </ul>
+  <footer>
+    <div id="etc">
+      Keyboard Shorcuts
+      <ul id="keyboard-shortcuts">
+        <li><span class="keyboard-shortcut">P</span> Pause / Play</li>
+        <br>
+        <li>
+          <span class="keyboard-shortcut">⬅</span>
+          <span class="keyboard-shortcut"><span class="mirror">⬅</span></span> Prev & Next Frame
+        </li>
+        <br>
+        <li><span class="keyboard-shortcut">F</span> Erase Frame</li>
+        <li><span class="keyboard-shortcut">C</span> Erase <b>All</b> Frames</li>
+      </ul>
 
-    <div id="credits">
-      <h1 class="sm-title"><span class="sketch-title">sketch</span><span class="machine-title">machine</span></h1> was created by <a href="http://caesuras.net" target="_blank">Casey REAS</a> with help from <a href="https://giphy.com/">GIPHY</a>.
-      <br/>
-      <br/>
-      <div id="fine-print">
-        <a href="">Find all the Sketch Machine GIFs on Giphy</a>. The <a href="https://github.com/REAS/sketchmachine" target="_blank">source code</a> for Sketch Machine is on GitHub. For related work, see this informal list of "<a href="https://github.com/REAS/sketchmachine/wiki/Weird-Drawing-Software" target="_blank">Weird Drawing Software</a>."
+      <div id="credits">
+        Too slow? Try a different resolution: <a class="res" href="/?res=1024">1024</a>, <a class="res" href="/?res=512">512</a>, <a class="res" href="/?res=256">256</a>, <a class="res" href="/?res=128">128</a>, <a class="res" href="/?res=64">64</a>.
+        <br>
+        <br>
+        <h1 class="sm-title"><span class="sketch-title">sketch</span><span class="machine-title">machine</span></h1> v1 was created by <a href="http://caesuras.net" target="_blank">Casey REAS</a> with help from <a href="https://giphy.com/">GIPHY</a>.
+        <br/>
+        <br/>
+        <div id="fine-print">
+          <a href="">Find all the Sketch Machine GIFs on Giphy</a>. The <a href="https://github.com/REAS/sketchmachine" target="_blank">source code</a> for Sketch Machine is on GitHub. For related work, see this informal list of <a href="https://github.com/REAS/sketchmachine/wiki/Weird-Drawing-Software" target="_blank">Weird Drawing Software</a>.
+        </div>
+        <br>
+        <a href="https://giphy.com"><img id="giphy-logo" src="giphy-arts-logo.svg"></a>
       </div>
     </div>
-  </div>
+  </footer>
   <div id="color-selector">
-    <h1>Choose your color.</h1>
-    <input onclick="closeColorSelector()" id="color-selector-close" type="button" value="close">
-  </div>
-  <div id="background-color-selector">
-    <h1>Choose your color.</h1>
-    <input onclick="closeBackgroundColorSelector()" id="background-color-selector-close" type="button" value="close">
+    <div id="colors">
+    </div>
   </div>
 </div>
 

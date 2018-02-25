@@ -1,4 +1,5 @@
 // COLOR SELECTOR
+/*
 let colorSelectorCanvas = function (p) {
   //var gray = 0;
 
@@ -63,3 +64,4 @@ let backgroundColorSelectorCanvas = function (p) {
 };
 
 new p5(backgroundColorSelectorCanvas, backgroundColorSelector);
+*/

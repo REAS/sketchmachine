@@ -8,6 +8,11 @@ body {
   user-select: none;
 }
 
+body.noscroll {
+  height: 100%;
+  overflow: hidden;
+}
+
 /* Override p5.js sizing to fit viewport. */
 #animation {
  width: calc(100% - 8px) !important;
@@ -31,21 +36,30 @@ input, button {
 #color-selector {
   width: 100%;
   height: 100%;
-  background-color: white;
+  background-color: black;
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 }
 
-#background-color-selector {
-  width: 100%;
+#colors {
+  font-size: 0;
   height: 100%;
-  background-color: white;
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+#colors button {
+  width: 12.5%;
+  padding: 12.5% 0 0 0;
+  border: 0;
+  /*outline: 0;*/
+  cursor: pointer;
+}
+
+#colors button:active {
+  filter: invert(1);
 }
 
 #color-selector.active {
@@ -57,12 +71,13 @@ input, button {
 }
 
 #ui {
-  padding: 14px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
   box-sizing: border-box;
   margin: auto;
   display: flex;
   flex-direction: column;
   position: relative;
+  user-select: none;
 }
 
 #animation {
@@ -90,19 +105,24 @@ input, button {
   display: flex;
   flex-direction: column;
   position: relative;
-  max-width: 512px;
+  max-width: 520px;
   margin: auto;
-  padding-left: 5px;
-  padding-top: 5px;
-  padding-bottom: 10px;
+}
+
+footer {
+  padding: 10px;
 }
 
 #etc a, #etc a:visited {
   color: #666666;
 }
 
+.current-resolution {
+  color: #111 !important;
+}
+
 #fine-print, #fine-print a, #fine-print a:visited {
-  color: #AAA;
+  /*color: #AAA;*/
 }
 
 hr {
@@ -246,7 +266,6 @@ select option {
 }
 
 .sm-title {
-  color: #888;
   font-weight: normal;
   font-size: 1.3em;
   margin: 0;
@@ -294,6 +313,11 @@ select option {
   vertical-align: middle;
   height: 30px;
   margin: 0;
+  outline: 0;
+}
+
+select {
+  outline: 0;
 }
 
 input[type=range] {
@@ -438,13 +462,13 @@ input[type=range] {
   visibility: hidden;
   cursor: context-menu;
   image-rendering: pixelated;
+  background: url(checkers.png);
 }
 
 #export-button {
   display: block;
-  width: 75px;
-  height: 75px;
-  /*border: 4px outset #c3c3c3;*/
+  width: 77px;
+  height: 77px;
   font-size: 1.5em;
   font-weight: bold;
   background-color: #dcdcdc;
@@ -455,11 +479,8 @@ input[type=range] {
 }
 
 #export-button:active, #export-button.active {
-  /*border: 4px inset;*/
   background-color: #aaa;
   color: #888;
-  /*padding-top: 4px;*/
-  /*padding-right: 4px;*/
 }
 
 #speed-slider {
@@ -471,6 +492,16 @@ input[type=range] {
 
 #back {
   visibility: hidden;
+}
+
+#giphy-logo {
+  width: 100px;
+  filter: grayscale(1);
+  transition: 0.25s filter;
+}
+
+#giphy-logo:hover, #giphy-logo:active {
+  filter: none;
 }
 
 @media all and (min-width: 940px) {

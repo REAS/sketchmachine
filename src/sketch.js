@@ -12,7 +12,16 @@ let lastFrame = 24; //30;
 let currentFrame = firstFrame;
 
 let frameDim = 512;
-// let surfaceDim = 256; // TODO: Add this back in.
+let surfaceDim = Math.min(1024, 512 * window.devicePixelRatio);
+let resInt = parseInt(window.location.search.replace('?res=', ''));
+
+console.log(resInt)
+
+if (resInt) {
+  surfaceDim = Math.min(1024, resInt);
+}
+
+let frameSurfaceRatio = frameDim / surfaceDim;
 
 let lastTime = 0;
 let timeStep = 500; // In milliseconds
@@ -27,7 +36,6 @@ let mx, my, pmx, pmy = 0;
 let rx, ry, prx, pry = 0;
 let targetX, targetY = 0;
 
-let colorActive = false;
 let currentColor = "#FFFFFF";
 let currentColorSelection = 1;
 
@@ -40,7 +48,6 @@ const backgroundColorSelector = document.querySelector('#background-color-select
 const backgroundColorButton = document.querySelector('#background-color-button');
 
 let speedSize = false;
-let triggerColorActive = false;
 let onionSkin = false;
 let smoothing = false;
 let easingSlider = document.querySelector("#easing-slider");
@@ -62,7 +69,7 @@ const FORWARD = 1;
 const BACKANDFORTH = 2;
 
 let playbackMode = FORWARD;
-const fpsOptions = [17, 20, 25, 33, 42, 12, 125, 250, 500, 1000];
+const fpsOptions = [17, 20, 25, 33, 42, 80, 125, 250, 500, 1000];
 
 // MARKERS
 const marker1Select = document.querySelector("#b1-select");
@@ -131,17 +138,17 @@ const animationSketch = new p5(function (sketch) {
     sketch.pixelDensity(1);
 
     for (let i = 0; i < numFrames; i++) {
-      frames[i] = sketch.createGraphics(frameDim, frameDim);
+      frames[i] = sketch.createGraphics(surfaceDim, surfaceDim);
     }
 
     for (let i = 0; i < numMarkerFrames; i++) {
-      markerFrames[i] = sketch.createGraphics(frameDim, frameDim);
+      markerFrames[i] = sketch.createGraphics(surfaceDim, surfaceDim);
     }
 
-    compositeFrame = sketch.createGraphics(frameDim, frameDim);
-    exportFrame = sketch.createGraphics(frameDim, frameDim);
+    compositeFrame = sketch.createGraphics(surfaceDim, surfaceDim);
+    exportFrame = sketch.createGraphics(surfaceDim, surfaceDim);
 
-    backgroundFrame = sketch.createGraphics(frameDim, frameDim);
+    backgroundFrame = sketch.createGraphics(surfaceDim, surfaceDim);
     backgroundFrame.background(backgroundColor);
 
     sketch.pixelDensity(window.devicePixelRatio);
@@ -151,16 +158,16 @@ const animationSketch = new p5(function (sketch) {
 
   sketch.draw = function () {
     if (startDrawing) {
+
       if (smoothing) {
-        targetX = sketch.mouseX - 4
-        targetY = sketch.mouseY - 4
+        targetX = Math.floor((sketch.mouseX - 4) / frameSurfaceRatio)
+        targetY = Math.floor((sketch.mouseY - 4) / frameSurfaceRatio)
       } else {
-        mx = sketch.mouseX - 4
-        my = sketch.mouseY - 4
+        mx = Math.floor((sketch.mouseX - 4) / frameSurfaceRatio)
+        my = Math.floor((sketch.mouseY - 4) / frameSurfaceRatio)
       }
     }
 
-    // canvas.drawingContext.fillStyle = 'rgb(204, 204, 204)'
     canvas.drawingContext.clearRect(0, 0, sketch.width, sketch.height)
 
     // TIMELINE
@@ -175,7 +182,7 @@ const animationSketch = new p5(function (sketch) {
 
     let whichTool;
 
-    let markFunctions = [ mark1, mark2, mark3, mark4, mark5 ];
+    let markFunctions = [ mark1, mark2, mark3 ];
 
     let rxy = parseInt(randomXY.value);
 
@@ -183,7 +190,6 @@ const animationSketch = new p5(function (sketch) {
     ry = 0;
 
     let tempEasing = parseInt(easingSlider.value);
-    //easing = 1.0 - parseFloat(easingSlider.value);
     if (tempEasing > 0) {
       easing = sketch.map(tempEasing, 0, 100, 0.1, 0.01);
       smoothing = true;
@@ -196,34 +202,33 @@ const animationSketch = new p5(function (sketch) {
       ry = sketch.random(-rxy, rxy);
     }
 
-    if (startDrawing && !colorActive) {
+    if (startDrawing) {
       if (markers[0]) {
         whichTool = parseInt(marker1Tools.value);
-        markFunctions[whichTool - 1](sketch, 0, marker1Color, parseInt(marker1Slider.value));
+        markFunctions[whichTool - 1](sketch, 0, marker1Color, calculateThickness(marker1Slider.value));
         didDrawAnything = true
       }
       if (markers[1]) {
         whichTool = parseInt(marker2Tools.value);
-        markFunctions[whichTool - 1](sketch, 1, marker2Color, parseInt(marker2Slider.value));
+        markFunctions[whichTool - 1](sketch, 1, marker2Color, calculateThickness(marker2Slider.value));
         didDrawAnything = true
       }
       if (markers[2]) {
         whichTool = parseInt(marker3Tools.value);
-        markFunctions[whichTool - 1](sketch, 2, marker3Color, parseInt(marker3Slider.value));
+        markFunctions[whichTool - 1](sketch, 2, marker3Color, calculateThickness(marker3Slider.value));
         didDrawAnything = true
       }
       if (markers[3]) {
         whichTool = parseInt(marker4Tools.value);
-        markFunctions[whichTool - 1](sketch, 3, marker4Color, parseInt(marker4Slider.value));
+        markFunctions[whichTool - 1](sketch, 3, marker4Color, calculateThickness(marker4Slider.value));
         didDrawAnything = true
       }
       if (markers[4]) {
         whichTool = parseInt(marker5Tools.value);
-        markFunctions[whichTool - 1](sketch, 4, marker5Color, parseInt(marker5Slider.value));
+        markFunctions[whichTool - 1](sketch, 4, marker5Color, calculateThickness(marker5Slider.value));
         didDrawAnything = true
       }
     }
-
 
     // Now, finally, draw the animation to the screen
     // console.log(backgroundFrame)
@@ -236,7 +241,6 @@ const animationSketch = new p5(function (sketch) {
       sketch.drawingContext.drawImage(markerFrames[i].canvas, 0, 0, frameDim, frameDim)
     }
     if (pause && onionSkin) {
-      // tint(255, 102);
       sketch.drawingContext.globalAlpha = 0.5
       if (currentFrame > firstFrame) {
         sketch.drawingContext.drawImage(frames[currentFrame - 1].canvas, 0, 0, frameDim, frameDim);
@@ -245,12 +249,6 @@ const animationSketch = new p5(function (sketch) {
       }
       sketch.drawingContext.globalAlpha = 1.0
     }
-
-    // noTint();
-
-    // Draw the time line to set the boolean values for
-    // frames on and off before frames are drawn into
-    // timeLineH();
 
     if (startDrawing) {
       pmx = mx;
@@ -287,7 +285,6 @@ const animationSketch = new p5(function (sketch) {
   // Define an abstract pointer device
   function pointerPressed (e) {
 
-    console.log(e.target)
     // Cancel event if not clicking inside a sketch.
     if (e.target !== canvas.elt && e.target !== timelineCanvas.elt) {
       return
@@ -296,18 +293,17 @@ const animationSketch = new p5(function (sketch) {
     e.target.focus()
 
     // If click in animation area
-    if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.width && !colorActive) {
+    if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.width) {
       startDrawing = true;
-      pmx = sketch.mouseX - 4
-      pmy = sketch.mouseY - 4
+      lastLineFrames = []
+      lastPointFrames = []
+      lastQuadFrames = []
+      pmx = Math.floor((sketch.mouseX - 4) / frameSurfaceRatio)
+      pmy = Math.floor((sketch.mouseY - 4) / frameSurfaceRatio)
       if (smoothing) {
         mx = pmx;
         my = pmy;
       }
-    }
-    if (triggerColorActive) {
-      colorActive = false;
-      triggerColorActive = false;
     }
   }
 
@@ -341,25 +337,27 @@ const timelineSketch = new p5(function (sketch) {
     sketchContainer.append(timelineCanvas.elt);
   }
 
-  sketch.draw = function () { timeLineH(sketch) }
+  sketch.draw = function () {
+    timeLineH(sketch)
+  }
 });
 
 function writeMarkersIntoFrames() {
   // Composite each layer into one, then erase in turn
   for (let i = numMarkerFrames - 1; i >= 0; i--) {
     if (markers[i]) {
-      compositeFrame.drawingContext.drawImage(markerFrames[i].canvas, 0, 0, frameDim, frameDim)
-      markerFrames[i].drawingContext.clearRect(0, 0, frameDim, frameDim)
+      compositeFrame.drawingContext.drawImage(markerFrames[i].canvas, 0, 0, surfaceDim, surfaceDim)
+      markerFrames[i].drawingContext.clearRect(0, 0, surfaceDim, surfaceDim)
     }
   }
 
   // Write all "marker frames" composites into the selected frames
   for (let i = firstFrame; i < lastFrame; i++) {
     if (onFrame[i] || i === currentFrame) {
-      frames[i].drawingContext.drawImage(compositeFrame.canvas, 0, 0, frameDim, frameDim)
+      frames[i].drawingContext.drawImage(compositeFrame.canvas, 0, 0, surfaceDim, surfaceDim)
     }
   }
-  compositeFrame.drawingContext.clearRect(0, 0, frameDim, frameDim);
+  compositeFrame.drawingContext.clearRect(0, 0, surfaceDim, surfaceDim);
 }
 
 function eraseFrame() {
@@ -408,6 +406,10 @@ window.addEventListener('keydown', (e) => {
 
 })
 
+function calculateThickness(t) {
+  return Math.max(1, Math.floor(parseInt(t) / frameSurfaceRatio))
+}
+
 // GIF Export
 const exportButton = document.getElementById('export-button')
 const exportOverlay = document.getElementById('export-overlay')
@@ -416,11 +418,11 @@ const exportedGIFImg = document.getElementById('exported-gif-img')
 
 function renderFrameGIF (gif, i) {
   if (backgroundEnabled === true) {
-    exportFrame.drawingContext.drawImage(backgroundFrame.canvas, 0, 0, frameDim, frameDim);
+    exportFrame.drawingContext.drawImage(backgroundFrame.canvas, 0, 0, surfaceDim, surfaceDim);
   } else {
-    exportFrame.drawingContext.clearRect(0, 0, frameDim, frameDim);
+    exportFrame.drawingContext.clearRect(0, 0, surfaceDim, surfaceDim);
   }
-  exportFrame.drawingContext.drawImage(frames[i].canvas, 0, 0, frameDim, frameDim);
+  exportFrame.drawingContext.drawImage(frames[i].canvas, 0, 0, surfaceDim, surfaceDim);
   gif.addFrame(exportFrame.canvas, {delay: timeStep * 2, copy: true});
 }
 
@@ -435,12 +437,13 @@ function exportGIF () {
 
   exportOverlay.classList.add('active');
   exportButton.classList.add('active');
+  document.body.classList.add('noscroll');
 
   let isTransparent = null
   if (backgroundEnabled === false) { isTransparent = 0x000000 }
 
   const gif = new GIF({
-    workers: 3,
+    workers: 4,
     quality: 10,
     background: backgroundColor,
     transparent: isTransparent,
@@ -482,6 +485,7 @@ function cancelOrCloseGIF () {
   exportButton.classList.remove('active');
   exportedGIFSpinner.classList.remove('hidden')
   exportedGIFImg.classList.remove('active');
+  document.body.classList.remove('noscroll');
 }
 
 // Leave page warning

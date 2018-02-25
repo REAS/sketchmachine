@@ -1,4 +1,17 @@
 // POINTS
+let pastPoints = []
+for (let i = 0; i < markers.length; i += 1) {
+  pastPoints.push({
+    lastPoint: {
+      color: undefined,
+      thickness: undefined,
+      x: undefined,
+      y: undefined,
+    },
+    lastPointFrames: []
+  })
+}
+
 function mark1(sketch, i, color, thickness) {
   if (smoothing) {
     mx += (targetX - mx) * easing;
@@ -16,10 +29,54 @@ function mark1(sketch, i, color, thickness) {
     markerFrames[i].strokeWeight(thickness);
   }
 
-  markerFrames[i].point(mx + rx, my + ry);
+  let x = mx + rx
+  let y = my + ry
+
+  let lastPoint = pastPoints[i].lastPoint
+  let lastPointFrames = pastPoints[i].lastPointFrames
+
+  let pointChanged = lastPoint.color !== color ||
+    lastPoint.thickness !== thickness ||
+    lastPoint.x !== x ||
+    lastPoint.y !== y;
+
+  markerFrames[i].drawingContext.globalCompositeOperation = 'copy'
+
+  if (pointChanged) {
+    markerFrames[i].point(x, y);
+    pastPoints[i].lastPointFrames = [currentFrame]
+  } else if (lastPointFrames.includes(currentFrame) === false) {
+    lastPointFrames.push(currentFrame)
+    markerFrames[i].point(x, y);
+  }
+
+  markerFrames[i].drawingContext.globalCompositeOperation = 'source-over'
+
+  pastPoints[i].lastPoint = {
+    color: color,
+    thickness: thickness,
+    x: x,
+    y: y,
+  }
+
 }
 
 // LINES
+let pastLines = []
+for (let i = 0; i < markers.length; i += 1) {
+  pastLines.push({
+    lastLine: {
+      color: undefined,
+      thickness: undefined,
+      x1: undefined,
+      y1: undefined,
+      x2: undefined,
+      y2: undefined
+    },
+    lastLineFrames: []
+  })
+}
+
 function mark2(sketch, i, color, thickness) {
   if (smoothing) {
     mx += (targetX - mx) * easing;
@@ -34,8 +91,38 @@ function mark2(sketch, i, color, thickness) {
   } else {
     markerFrames[i].strokeWeight(thickness);
   }
-  // console.log(pmx + prx, pmy + pry, mx + rx, my + ry);
-  markerFrames[i].line(pmx + prx, pmy + pry, mx + rx, my + ry);
+
+  let x1 = pmx + prx
+  let y1 = pmy + pry
+  let x2 = mx + rx
+  let y2 = my + ry
+
+  let lastLine = pastLines[i].lastLine
+  let lastLineFrames = pastLines[i].lastLineFrames
+
+  let lineChanged = lastLine.color !== color ||
+    lastLine.thickness !== thickness ||
+    lastLine.x1 !== x1 ||
+    lastLine.y1 !== y1 ||
+    lastLine.x2 !== x2 ||
+    lastLine.y2 !== y2;
+
+  if (lineChanged) {
+    markerFrames[i].line(x1, y1, x2, y2);
+    pastLines[i].lastLineFrames = [currentFrame]
+  } else if (lastLineFrames.includes(currentFrame) === false) {
+    lastLineFrames.push(currentFrame)
+    markerFrames[i].line(x1, y1, x2, y2);
+  }
+
+  pastLines[i].lastLine = {
+    color: color,
+    thickness: thickness,
+    x1: x1,
+    y1: y1,
+    x2: x2,
+    y2: y2,
+  }
 }
 
 // QUADS
@@ -56,30 +143,11 @@ function mark3(sketch, i, color, thickness) {
     } else {
       markerFrames[i].strokeWeight(thickness + 5);
     }
-    markerFrames[i].line(pmx + prx, pmy + pry, mx + rx, my + ry);
+
+    let x1 = pmx + prx
+    let y1 = pmy + pry
+    let x2 = mx + rx
+    let y2 = my + ry
+    markerFrames[i].line(x1, y1, x2, y2);
   }
 }
-
-// VARIABLE-SIZE LINES / RETIRED
-function mark4(i, color, thickness) {
-  /*
-  markerFrames[i].strokeCap(ROUND);
-  markerFrames[i].stroke(color);
-  let varThick = map(thickness, 1, 100, 0.25, 2.0);
-  let diameter = dist(pmx, pmy, mx, my) * varThick;
-  markerFrames[i].strokeWeight(diameter);
-  markerFrames[i].line(pmx, pmy, mx + rx, my + ry);
-  */
-}
-
-// VARIABLE-SIZE CIRCLES / RETIRED
-function mark5(i, color, thickness) {
-  /*
-  markerFrames[i].noStroke();
-  markerFrames[i].fill(color);
-  let varThick = map(thickness, 1, 100, 0.25, 2.0);
-  let diameter = dist(pmx, pmy, mx, my) * varThick;
-  markerFrames[i].ellipse(mx + rx, my + ry, diameter, diameter);
-  */
-}
-

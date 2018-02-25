@@ -2,7 +2,8 @@ let selectLastFrame = false;
 let selectFirstFrame = false;
 
 function timeLineH (sketch) {
-  sketch.background(204);
+
+  sketch.drawingContext.clearRect(0, 0, sketch.width, sketch.height)
 
   let tw = frameDim / numFrames;
   let ty = 10;
