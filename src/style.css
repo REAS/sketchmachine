@@ -414,6 +414,7 @@ input[type=range] {
   visibility: hidden;
   display: flex;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 #export-overlay.active,
@@ -478,11 +479,15 @@ input[type=range] {
 #export-controls {
   display: flex;
   visibility: hidden;
-  margin: 0px 8px;
+  margin: 0px 8px 8px 8px;
 }
 
 #export-upload-to-giphy {
   margin-left: auto;
+}
+
+#export-upload-to-giphy.hidden {
+  visibility: hidden;
 }
 
 #export-upload-to-giphy, #export-close {
@@ -502,6 +507,21 @@ input[type=range] {
   border: 4px inset;
   padding: 7px 7px 3px 9px;
   background-color: #bbb;
+}
+
+#giphy-upload-overlay {
+  visibility: hidden;
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+#giphy-upload-overlay.active {
+  visibility: visible;
 }
 
 #giphy-logo {

@@ -327,7 +327,8 @@ const timelineSketch = new p5(function (sketch) {
     }
   }
 
-  sketch.mouseMoved = function () {
+  sketch.mouseMoved = function (e) {
+    if (e.target !== timelineCanvas) { return }
     if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.height) {
       displayTimeline(sketch)
     }
@@ -448,6 +449,7 @@ function renderFrameGIF (gif, i) {
 }
 
 let checkInterval
+let gifBlob
 
 function exportGIF () {
   if (didDrawAnything === false) {
@@ -488,11 +490,10 @@ function exportGIF () {
   let totalFrames = gif.frames.length
 
   checkInterval = window.setInterval(() => {
-    console.log(gif.finishedFrames, totalFrames)
     let progress = gif.finishedFrames / totalFrames
     exportedGIFSpinner.style.borderRadius = ((1 - progress) * 50) + '%'
     exportProgress.innerText = Math.round(progress * 100) + '%'
-  }, 150)
+  }, 150);
 
   gif.on('finished', function(blob) {
     if (exportOverlay.classList.contains('active')) {
@@ -502,6 +503,7 @@ function exportGIF () {
         exportControls.classList.add('active');
         exportedGIFSpinner.classList.add('hidden')
       }
+      gifBlob = blob
       exportedGIFImg.src = URL.createObjectURL(blob);
     }
   });
@@ -509,8 +511,15 @@ function exportGIF () {
   gif.render()
 }
 
+exportOverlay.onclick = (e) => {
+  if (exportedGIFImg.classList.contains('active') === false) {
+    cancelOrCloseGIF()
+  }
+}
+
 function cancelOrCloseGIF () {
   window.clearInterval(checkInterval)
+  gifBlob = undefined
   exportedGIFSpinner.removeAttribute('style')
   exportProgress.innerText = '0%'
   exportOverlay.classList.remove('active');
@@ -519,10 +528,48 @@ function cancelOrCloseGIF () {
   exportedGIFImg.classList.remove('active');
   exportControls.classList.remove('active');
   document.body.classList.remove('noscroll');
+  exportUploadToGiphy.classList.remove('hidden');
+  giphyUploadOverlay.classList.remove('active');
 }
 
+const exportUploadToGiphy = document.getElementById('export-upload-to-giphy')
+const giphyUploadOverlay = document.getElementById('giphy-upload-overlay')
+
 function uploadToGiphy () {
-  console.log('Uploading...', exportedGIFImg)
+
+  exportUploadToGiphy.classList.add('hidden');
+  giphyUploadOverlay.classList.add('active');
+
+  let username = 'justanothersystem'
+  let apiKey = 'quBE8iysbH8LC'
+
+  let formData = new FormData();
+  formData.append('file', gifBlob, 'sketchmachine.gif');
+  formData.append('username', username);
+  formData.append('api_key', apiKey);
+  formData.append('tags', 'sketchmachine');
+  formData.append('source_post_url', 'https://sketchmachine.net');
+
+  fetch('https://upload.giphy.com/v1/gifs', {
+    method: 'POST',
+    body: formData,
+    mode: 'cors'
+  }).then((response) => {
+    return response.json()
+  })
+  .catch((error) => { console.error('Error:', error) })
+  .then((res) => {
+    if (res.meta && res.meta.status === 200) {
+      let id = res.data.id
+      let url = 'https://giphy.com/gifs/' + username + '-' + id
+      window.open(url, '_blank');
+      giphyUploadOverlay.classList.remove('active');
+    } else {
+      console.error('Upload failed.')
+      exportUploadToGiphy.classList.remove('hidden');
+      giphyUploadOverlay.classList.remove('active');
+    }
+  });
 }
 
 // Leave page warning
