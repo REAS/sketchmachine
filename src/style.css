@@ -413,12 +413,14 @@ input[type=range] {
   background-color: rgba(0, 0, 0, 0.75);
   visibility: hidden;
   display: flex;
+  overflow-y: scroll;
 }
 
-#export-overlay.active, #exported-gif-img.active {
+#export-overlay.active,
+#exported-gif-img.active,
+#export-controls.active {
   visibility: visible;
 }
-
 
 #exported-gif {
   margin: auto;
@@ -428,14 +430,22 @@ input[type=range] {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 32px;
-  height: 32px;
-  margin-top: -16px;
-  margin-left: -16px;
+  width: 64px;
+  height: 64px;
+  margin-top: -32px;
+  margin-left: -32px;
   background: white;
-  border-radius: 100%;
+  border-radius: 50%;
   animation: spinner 1s infinite;
   pointer-events: none;
+  transition: 0.5s border-radius;
+  display: flex;
+}
+
+#export-progress {
+  font-family: monospace;
+  font-size: 1.5em;
+  margin: auto;
 }
 
 #exported-gif-spinner.hidden {
@@ -447,7 +457,7 @@ input[type=range] {
       transform: scale(1);
   }
   50% {
-    transform: scale(0.5);
+    transform: scale(1.5);
   }
   100% {
     transform: scale(1);
@@ -463,6 +473,42 @@ input[type=range] {
   cursor: context-menu;
   image-rendering: pixelated;
   background: url(checkers.png);
+}
+
+#export-controls {
+  display: flex;
+  visibility: hidden;
+  margin: 0px 8px;
+}
+
+#export-upload-to-giphy {
+  margin-left: auto;
+}
+
+#export-upload-to-giphy, #export-close {
+  display: block;
+  font-size: 1.25em;
+  color: black;
+  font-weight: bold;
+  background-color: #ddd;
+  padding: 6px 8px 4px 8px;
+  text-transform: uppercase;
+  border: 4px outset;
+  cursor: pointer;
+  outline: none;
+}
+
+#export-upload-to-giphy:active, #export-close:active {
+  border: 4px inset;
+  padding: 7px 7px 3px 9px;
+  background-color: #bbb;
+}
+
+#giphy-logo {
+  width: 100px;
+  vertical-align: top;
+  padding-left: 4px;
+  padding-top: 1px;
 }
 
 #export-button {
@@ -494,13 +540,13 @@ input[type=range] {
   visibility: hidden;
 }
 
-#giphy-logo {
+#giphy-arts-logo {
   width: 100px;
   filter: grayscale(1);
   transition: 0.25s filter;
 }
 
-#giphy-logo:hover, #giphy-logo:active {
+#giphy-arts-logo:hover, #giphy-arts-logo:active {
   filter: none;
 }
 

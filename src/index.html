@@ -149,12 +149,21 @@
           <div id="export-options">
             <div id="export-overlay">
               <div id="exported-gif">
-                <div id="exported-gif-spinner"></div>
+                <div id="exported-gif-spinner">
+                  <div id="export-progress">0%</div>
+                </div>
                 <img id="exported-gif-img">
+                <div id="export-controls">
+                  <button id="export-close" onclick="cancelOrCloseGIF()">
+                    BACK
+                  </button>
+                  <button id="export-upload-to-giphy" onclick="uploadToGiphy()">
+                    ↳ <img id="giphy-logo" src="giphy-logo.svg">
+                  </button>
+                </div>
               </div>
             </div>
             <input id="export-button" onclick="exportGIF()" tabindex="-1" type="button" value=".gif">
-            <!--<input id="bitmark" type="button" value="Register Bitmark (not working)">-->
           </div>
         </div>
       </div>
@@ -189,7 +198,7 @@
           <a href="">Find all the Sketch Machine GIFs on Giphy</a>. The <a href="https://github.com/REAS/sketchmachine" target="_blank">source code</a> for Sketch Machine is on GitHub. For related work, see this informal list of <a href="https://github.com/REAS/sketchmachine/wiki/Weird-Drawing-Software" target="_blank">Weird Drawing Software</a>.
         </div>
         <br>
-        <a href="https://giphy.com"><img id="giphy-logo" src="giphy-arts-logo.svg"></a>
+        <a href="https://giphy.com"><img id="giphy-arts-logo" src="giphy-arts-logo.svg"></a>
       </div>
     </div>
   </footer>

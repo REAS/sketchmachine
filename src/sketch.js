@@ -375,12 +375,18 @@ function writeMarkersIntoFrames () {
 }
 
 function eraseFrame() {
-  frames[currentFrame].clear();
+  if (window.confirm("Erase this frame?")) {
+    frames[currentFrame].clear();
+    displayFrame(animationSketch)
+  }
 }
 
 function eraseAllFrames() {
-  for (let i = 0; i < numFrames; i++) {
-    frames[i].clear();
+  if (window.confirm("Are you sure you want to erase all frames?")) {
+    for (let i = 0; i < numFrames; i++) {
+      frames[i].clear();
+    }
+    displayFrame(animationSketch)
   }
 }
 
@@ -428,6 +434,8 @@ const exportButton = document.getElementById('export-button')
 const exportOverlay = document.getElementById('export-overlay')
 const exportedGIFSpinner = document.getElementById('exported-gif-spinner')
 const exportedGIFImg = document.getElementById('exported-gif-img')
+const exportControls = document.getElementById('export-controls')
+const exportProgress = document.getElementById('export-progress')
 
 function renderFrameGIF (gif, i) {
   if (backgroundEnabled === true) {
@@ -439,8 +447,9 @@ function renderFrameGIF (gif, i) {
   gif.addFrame(exportFrame.canvas, {delay: timeStep * 2, copy: true});
 }
 
-function exportGIF () {
+let checkInterval
 
+function exportGIF () {
   if (didDrawAnything === false) {
     alert("You haven't drawn anything to export.")
     return
@@ -476,10 +485,21 @@ function exportGIF () {
       break;
   }
 
+  let totalFrames = gif.frames.length
+
+  checkInterval = window.setInterval(() => {
+    console.log(gif.finishedFrames, totalFrames)
+    let progress = gif.finishedFrames / totalFrames
+    exportedGIFSpinner.style.borderRadius = ((1 - progress) * 50) + '%'
+    exportProgress.innerText = Math.round(progress * 100) + '%'
+  }, 150)
+
   gif.on('finished', function(blob) {
     if (exportOverlay.classList.contains('active')) {
+      window.clearInterval(checkInterval)
       exportedGIFImg.onload = function () {
         exportedGIFImg.classList.add('active');
+        exportControls.classList.add('active');
         exportedGIFSpinner.classList.add('hidden')
       }
       exportedGIFImg.src = URL.createObjectURL(blob);
@@ -489,16 +509,20 @@ function exportGIF () {
   gif.render()
 }
 
-exportOverlay.onclick = (e) => {
-  cancelOrCloseGIF()
-}
-
 function cancelOrCloseGIF () {
+  window.clearInterval(checkInterval)
+  exportedGIFSpinner.removeAttribute('style')
+  exportProgress.innerText = '0%'
   exportOverlay.classList.remove('active');
   exportButton.classList.remove('active');
   exportedGIFSpinner.classList.remove('hidden')
   exportedGIFImg.classList.remove('active');
+  exportControls.classList.remove('active');
   document.body.classList.remove('noscroll');
+}
+
+function uploadToGiphy () {
+  console.log('Uploading...', exportedGIFImg)
 }
 
 // Leave page warning
