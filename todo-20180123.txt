@@ -1,8 +1,5 @@
 JAS
 
-- Don't repaint every frame while paused.
-- Line smoothing
-
 -> Requires Phone to test:
     - Disable tap delay
     - Configure multitouch
@@ -25,6 +22,8 @@ CEB
 
 DONE
 
+X Line smoothing
+X Don't repaint every frame while paused.
 X Add og:image for Facebook properties.
 X Don't draw on every frame if mouse hasn't moved.
 X Design / cosmetic layout stuff.

@@ -83,6 +83,7 @@ function mark2(sketch, i, color, thickness) {
     my += (targetY - my) * easing;
   }
   markerFrames[i].strokeCap(sketch.ROUND);
+  markerFrames[i].strokeJoin(sketch.ROUND);
   markerFrames[i].stroke(color);
   if (speedSize) {
     let varThick = sketch.map(thickness, 1, 100, 0.25, 2.0);
@@ -92,6 +93,8 @@ function mark2(sketch, i, color, thickness) {
     markerFrames[i].strokeWeight(thickness);
   }
 
+  let x0 = ppmx + pprx
+  let y0 = ppmy + ppry
   let x1 = pmx + prx
   let y1 = pmy + pry
   let x2 = mx + rx
@@ -107,12 +110,20 @@ function mark2(sketch, i, color, thickness) {
     lastLine.x2 !== x2 ||
     lastLine.y2 !== y2;
 
+  let points
+
   if (lineChanged) {
-    markerFrames[i].line(x1, y1, x2, y2);
+    points = curvePoints(x0, y0, x1, y1, x2, y2);
     pastLines[i].lastLineFrames = [currentFrame]
   } else if (lastLineFrames.includes(currentFrame) === false) {
     lastLineFrames.push(currentFrame)
-    markerFrames[i].line(x1, y1, x2, y2);
+    points = curvePoints(x0, y0, x1, y1, x2, y2);
+  }
+
+  if (points) {
+    markerFrames[i].beginShape();
+    points.forEach((p) => { markerFrames[i].vertex(...p); })
+    markerFrames[i].endShape();
   }
 
   pastLines[i].lastLine = {
@@ -150,4 +161,44 @@ function mark3(sketch, i, color, thickness) {
     let y2 = my + ry
     markerFrames[i].line(x1, y1, x2, y2);
   }
+}
+
+function curvePoints(x0, y0, x1, y1, x2, y2) {
+  // Update pastPast, past, and current points.
+  let midp1 = midp([], [x0, y0], [x1, y1])
+  let midp2 = midp([], [x1, y1], [x2, y2])
+
+  let flow = 1
+
+  // Make a low res (flattened) quadratic bezier curve from three control points, so that a completely new curve is generated each time a mouse coordinate gets added.
+  // A: Midpoint of past and pastPast points.
+  // B: pastPoint
+  // C: Midpoint of pastPoint and current point.
+  let dist = Math.hypot(midp2[0] - midp1[0], midp2[1] - midp1[1])
+  let segmentCount = 1 + Math.floor(dist / flow)
+  let step = 1 / segmentCount
+  let bezierPoints = []
+  for (let i = 0; i <= segmentCount; i += 1) {
+    let t = i*step
+    bezierPoints.push(quadBez(t, midp1, [x1, y1], midp2))
+  }
+
+  return bezierPoints
+}
+
+function quadBez (t, p1, p2, p3) {
+  return [quadBezXY(t, [p1[0], p2[0], p3[0]]), quadBezXY(t, [p1[1], p2[1], p3[1]])]
+}
+
+function quadBezXY(t, w) {
+  t2 = t * t
+  mt = 1 - t
+  mt2 = mt * mt
+  return w[0] * mt2 + w[1] * 2 * mt * t + w[2] * t2
+}
+
+function midp (out, a, b) {
+  out[0] = (a[0] + b[0]) / 2
+  out[1] = (a[1] + b[1]) / 2
+  return out
 }

@@ -27,8 +27,8 @@ let didDrawAnything = false;
 
 let mobile = false; // Global variable, if on phone or not
 
-let mx, my, pmx, pmy = 0;
-let rx, ry, prx, pry = 0;
+let mx, my, pmx, pmy, ppmx, ppmy = 0;
+let rx, ry, prx, pry, pprx, ppry = 0;
 let targetX, targetY = 0;
 
 let currentColor = "#FFFFFF";
@@ -229,6 +229,10 @@ const animationSketch = new p5(function (sketch) {
     }
 
     if (startDrawing) {
+      ppmx = pmx;
+      ppmy = pmy;
+      pprx = prx;
+      ppry = pry;
       pmx = mx;
       pmy = my;
       prx = rx;
@@ -278,6 +282,8 @@ const animationSketch = new p5(function (sketch) {
       lastQuadFrames = []
       pmx = Math.floor((sketch.mouseX - 4) / frameSurfaceRatio)
       pmy = Math.floor((sketch.mouseY - 4) / frameSurfaceRatio)
+      ppmx = pmx
+      ppmy = pmy
       if (smoothing) {
         mx = pmx;
         my = pmy;
