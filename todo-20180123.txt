@@ -8,25 +8,8 @@ CEB
 - Lock frame selection when using range UI element
 - Gray out tick lines for frames that aren't active
 
-DONE
+New Bugs / Regressions
 
-X Consistent mobile / cross-browser UI aesthetics.
-X Prevent zoom with two fingers
-X Share on GIPHY
-X Line smoothing
-X Don't repaint every frame while paused.
-X Add og:image for Facebook properties.
-X Don't draw on every frame if mouse hasn't moved.
-X Design / cosmetic layout stuff.
-X New color picker
-X Add button feature to "Export GIF"
-X Convert Play, Next, Back to images buttons
-X Make keyboard shortcuts look nicer.
-X Better keyboard shortcut handler
-X Tap radio button tables to toggle button too
-X Intercept the "back" swipe "Do you want to cancel your drawing?"
-X Add "user select none"
-X GUI Naming
-  x "random" to "jitter"
-  x "smooth" to "chase"
-  x Change "Playback" to "Direction: Forward, Reverse, Back and Forth", remove once
+- Onion skin transparency extends to current frame's data.
+- Dragging the in/out markers should displayFrame.
+- Playback direction gets caught when on BACKANDFORTH and a frame is next to the in/out marker.
