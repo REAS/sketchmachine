@@ -262,6 +262,8 @@ const animationSketch = new p5(function (sketch) {
           currentFrame += playbackDirection;  // Go to the next frame
           if (currentFrame >= lastFrame - 1 || currentFrame <= firstFrame) {
             playbackDirection *= -1;
+            if (currentFrame >= lastFrame - 1) { currentFrame = lastFrame - 1 }
+            if (currentFrame <= firstFrame) { currentFrame = firstFrame }
           }
         }
         lastTime = sketch.millis();
@@ -308,7 +310,7 @@ const animationSketch = new p5(function (sketch) {
 
   sketch.touchMoved = (e) => {
 
-    if (e.touches.length === 2) {
+    if (e.touches && e.touches.length === 2) {
       e.preventDefault()
     }
 
@@ -336,11 +338,18 @@ const timelineSketch = new p5(function (sketch) {
   }
 
   sketch.mouseMoved = function (e) {
-    if (e.target !== timelineCanvas) { return }
+    if (e.target !== timelineCanvas.elt) { return }
     if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.height) {
       displayTimeline(sketch)
     }
   }
+
+  sketch.mouseDragged = function (e) {
+    if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.height) {
+      displayFrame(animationSketch)
+    }
+  }
+
 });
 
 function displayFrame (sketch) {

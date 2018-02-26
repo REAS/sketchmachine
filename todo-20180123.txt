@@ -8,8 +8,3 @@ CEB
 - Lock frame selection when using range UI element
 - Gray out tick lines for frames that aren't active
 
-New Bugs / Regressions
-
-- Onion skin transparency extends to current frame's data.
-- Dragging the in/out markers should displayFrame.
-- Playback direction gets caught when on BACKANDFORTH and a frame is next to the in/out marker.
