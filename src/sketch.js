@@ -36,6 +36,7 @@ let currentColorSelection = 1;
 
 const ui = document.querySelector('#ui');
 const sketchContainer = document.querySelector('#sketch-container');
+const animationDummy = document.querySelector('#animation-dummy');
 const speedSlider = document.querySelector('#speed');
 
 const colorSelector = document.querySelector('#color-selector');
@@ -115,6 +116,7 @@ const animationSketch = new p5(function (sketch) {
 
     canvas.id('animation');
 
+    animationDummy.remove()
     sketchContainer.prepend(canvas.elt);
     canvas.background(204);
 

@@ -15,11 +15,12 @@ body.noscroll {
 }
 
 /* Override p5.js sizing to fit viewport. */
-#animation {
+#animation, #animation-dummy  {
  width: calc(100% - 8px) !important;
  height: auto !important;
  cursor: crosshair;
  background: url(checkers.png);
+ border: 4px inset;
 }
 
 #timeline {
@@ -83,10 +84,6 @@ input[type="button"], button {
   flex-direction: column;
   position: relative;
   user-select: none;
-}
-
-#animation {
-  border: 4px inset;
 }
 
 #column {
