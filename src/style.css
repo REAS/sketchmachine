@@ -312,7 +312,7 @@ select option {
   height: 40px;
   line-height: 40px;
   padding-left: 8px;
-  padding-right: 12px;
+  padding-right: 11px;
   padding-bottom: 2px;
 }
 
@@ -322,6 +322,10 @@ select option {
 
 #engorge-label, #onion-label, #background-label {
   cursor: pointer;
+}
+
+#background-label {
+  padding-right: 4px;
 }
 
 #tools {

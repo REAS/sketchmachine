@@ -1,4 +1,5 @@
 CEB
+- Should 'Engorge' be set relative to a mark's thickness?
 - Timeline
   . Use the single frame selector and add "select/deselect"
   . Drag frame selection left and right
