@@ -8,3 +8,6 @@ CEB
 - Lock frame selection when using range UI element
 - Gray out tick lines for frames that aren't active
 
+Bugs / Regressions
+
+- Clicking and holding mouse without moving it no longer draws just once.
