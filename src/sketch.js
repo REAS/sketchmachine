@@ -562,10 +562,8 @@ function uploadToGiphy () {
   exportUploadToGiphy.classList.add('hidden');
   giphyUploadOverlay.classList.add('active');
 
-  let username = 'justanothersystem'
-  // let apiKey = 'quBE8iysbH8LC'
-
-  let apiKey = '68a0104d721648a5870afeef6341799c'
+  let username = 'sketchmachine'
+  let apiKey = 'ul0HNk8uS4G92IEFad7Y9XabW2pOBfK9'
 
   let formData = new FormData();
   formData.append('file', gifBlob, 'sketchmachine.gif');
