@@ -11,6 +11,9 @@ let firstFrame = 12; //18;
 let lastFrame = 24; //30;
 let currentFrame = firstFrame;
 
+let timelineRangeSelected = false;
+let timelineLock = false;
+
 let frameDim = 512;
 let surfaceDim = Math.min(1024, 512 * window.devicePixelRatio);
 let resInt = parseInt(window.location.search.replace('?res=', ''));
@@ -476,7 +479,8 @@ function renderFrameGIF (gif, i) {
     exportFrame.drawingContext.clearRect(0, 0, surfaceDim, surfaceDim);
   }
   exportFrame.drawingContext.drawImage(frames[i].canvas, 0, 0, surfaceDim, surfaceDim);
-  gif.addFrame(exportFrame.canvas, {delay: timeStep * 2, copy: true});
+  //gif.addFrame(exportFrame.canvas, {delay: timeStep * 2, copy: true});
+  gif.addFrame(exportFrame.canvas, {delay: timeStep * 1.25, copy: true});
 }
 
 let checkInterval;

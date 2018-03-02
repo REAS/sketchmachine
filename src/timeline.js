@@ -117,6 +117,21 @@ function displayTimeline (sketch) {
   let ffx = firstFrame * tw;
   let lfx = (lastFrame - 1) * tw;
 
+
+
+  // BETWEEN THE IN AND OUT MARKER
+  if (sketch.mouseX > ffx + tw && sketch.mouseX < lfx && sketch.mouseY > tty && sketch.mouseY < tty + th && !selectFirstFrame) {
+    if (!startDrawing) {
+      sketch.fill(126, 126, 126);
+      sketch.noStroke();
+      sketch.rect(ffx, tty, lfx-ffx+tw, th);
+      timelineRangeSelected = true;
+      timelineRangeLock = true;
+    }
+  } else {
+    timelineRangeSelected = false;
+  }
+
   // CONNECT IN AND OUT MARKERS
   sketch.stroke(102);
   sketch.line(firstFrame * tw + tw - 1, tty + th / 2, (lastFrame - 1) * tw, tty + th / 2);
@@ -162,12 +177,14 @@ function displayTimeline (sketch) {
   }
   sketch.triangle(lastFrame * tw, tty, lastFrame * tw, tty + th, (lastFrame - 1) * tw, tty + th / 2);
 
+
+
   // TICK MARKS, THE GRID OF FRAMES
   for (let x = 0; x <= numFrames; x++) {
 
     let xx = sketch.map(x, 0, numFrames, 0, sketch.width);
     if (x < firstFrame || x > lastFrame) {
-      sketch.stroke(102);
+      sketch.stroke(153);
     } else {
       sketch.stroke(0);
     }
