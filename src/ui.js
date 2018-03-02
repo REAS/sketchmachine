@@ -67,8 +67,8 @@ function clickBack() {
   if (currentFrame < firstFrame) {
     currentFrame = lastFrame - 1;
   }
-  displayFrame(animationSketch)
-  displayTimeline(timelineSketch)
+  displayFrame(animationSketch);
+  displayTimeline(timelineSketch);
 }
 
 function clickNext() {
@@ -76,8 +76,8 @@ function clickNext() {
   if (currentFrame >= lastFrame) {
     currentFrame = firstFrame;
   }
-  displayFrame(animationSketch)
-  displayTimeline(timelineSketch)
+  displayFrame(animationSketch);
+  displayTimeline(timelineSketch);
 }
 
 function clickReverse() {
@@ -327,21 +327,21 @@ const web216 = [
 
 // Populate color picker with buttons.
 
-const colors = document.querySelector('#colors')
+const colors = document.querySelector('#colors');
 
 web216.forEach((c) => {
-  let btn = document.createElement('button')
-  btn.onclick = closeColorSelector
-  btn.dataset.color = c
-  btn.style.backgroundColor = c
+  let btn = document.createElement('button');
+  btn.onclick = closeColorSelector;
+  btn.dataset.color = c;
+  btn.style.backgroundColor = c;
   colors.append(btn)
-})
+});
 
 // Resolution links
 
 document.querySelectorAll('a.res').forEach((el) => {
   if (el.href === window.location.href || surfaceDim === parseInt(el.innerText)) {
-    el.classList.add('current-resolution')
+    el.classList.add('current-resolution');
   }
-})
+});
 

@@ -4,7 +4,7 @@ html {
 
 body {
   margin: 0;
-  background-color: #CCCCCC;
+  background-color: #CCC;
   user-select: none;
   -webkit-text-size-adjust: none;
 }
@@ -198,7 +198,7 @@ hr {
   font-size: 2em;
   line-height: 50px;
   padding: 2px 0px 0px 0px;
-  font-family: Arial, sans-serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .play[value="▶︎"] {
@@ -242,7 +242,7 @@ hr {
   min-width: 1em;
   height: 1.5em;
   display: inline-block;
-  font-family: Arial, sans-serif;
+  font-family: "Times New Roman", Times, serif;
   background-color: #eee;
   border: 0.25em outset #c3c3c3;
   padding: 0 0.2em;
@@ -278,7 +278,7 @@ select option {
 }
 
 .sketch-title {
-  font-family: Arial, sans-serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .machine-title {
@@ -288,7 +288,7 @@ select option {
 
 #controls {
   margin-top: 1.5em;
-  font-family: Arial, sans-serif;
+  font-family: "Times New Roman", Times, serif;
   color: #333;
 }
 
@@ -514,7 +514,7 @@ select option {
   cursor: pointer;
   border: 0;
   border-radius: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Times New Roman", Times, serif;
   padding: 0;
 }
 

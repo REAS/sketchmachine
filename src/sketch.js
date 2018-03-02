@@ -14,7 +14,7 @@ let currentFrame = firstFrame;
 let frameDim = 512;
 let surfaceDim = Math.min(1024, 512 * window.devicePixelRatio);
 let resInt = parseInt(window.location.search.replace('?res=', ''));
-if (resInt) { surfaceDim = Math.min(1024, resInt); }
+if (resInt) { surfaceDim = Math.min(512, resInt); }
 
 let frameSurfaceRatio = frameDim / surfaceDim;
 
@@ -65,7 +65,7 @@ const FORWARD = 1;
 const BACKANDFORTH = 2;
 
 let playbackMode = FORWARD;
-const fpsOptions = [17, 20, 25, 33, 42, 80, 125, 250, 500, 1000];
+const fpsOptions = [17, 22, 33, 42, 80, 125, 250, 500, 1000];
 
 // MARKERS
 const marker1Select = document.querySelector("#b1-select");
@@ -116,7 +116,7 @@ const animationSketch = new p5(function (sketch) {
 
     canvas.id('animation');
 
-    animationDummy.remove()
+    animationDummy.remove();
     sketchContainer.prepend(canvas.elt);
     canvas.background(204);
 
@@ -282,13 +282,13 @@ const animationSketch = new p5(function (sketch) {
     // If click in animation area
     if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.height) {
       startDrawing = true;
-      lastLineFrames = []
-      lastPointFrames = []
-      lastQuadFrames = []
-      pmx = Math.floor((sketch.mouseX - 4) / frameSurfaceRatio)
-      pmy = Math.floor((sketch.mouseY - 4) / frameSurfaceRatio)
-      ppmx = pmx
-      ppmy = pmy
+      lastLineFrames = [];
+      lastPointFrames = [];
+      lastQuadFrames = [];
+      pmx = Math.floor((sketch.mouseX - 4) / frameSurfaceRatio);
+      pmy = Math.floor((sketch.mouseY - 4) / frameSurfaceRatio);
+      ppmx = pmx;
+      ppmy = pmy;
       if (smoothing) {
         mx = pmx;
         my = pmy;
@@ -325,7 +325,7 @@ const animationSketch = new p5(function (sketch) {
 const timelineSketch = new p5(function (sketch) {
   sketch.setup = function () {
     sketch.pixelDensity(window.devicePixelRatio);
-    timelineCanvas = sketch.createCanvas(frameDim, 75);
+    timelineCanvas = sketch.createCanvas(frameDim, 90);
     timelineCanvas.id('timeline');
     sketchContainer.append(timelineCanvas.elt);
     sketch.noSmooth();
@@ -353,18 +353,18 @@ const timelineSketch = new p5(function (sketch) {
 });
 
 function displayFrame (sketch) {
-  canvas.drawingContext.clearRect(0, 0, sketch.width, sketch.height)
+  canvas.drawingContext.clearRect(0, 0, sketch.width, sketch.height);
   if (backgroundEnabled === true) {
-    backgroundFrame.background(backgroundColor)
+    backgroundFrame.background(backgroundColor);
     sketch.drawingContext.drawImage(backgroundFrame.canvas, 0, 0, frameDim, frameDim)
   }
-  sketch.drawingContext.drawImage(frames[currentFrame].canvas, 0, 0, frameDim, frameDim)
+  sketch.drawingContext.drawImage(frames[currentFrame].canvas, 0, 0, frameDim, frameDim);
   for (let i = numMarkerFrames-1; i >= 0; i--) {
-    sketch.drawingContext.drawImage(markerFrames[i].canvas, 0, 0, frameDim, frameDim)
+    sketch.drawingContext.drawImage(markerFrames[i].canvas, 0, 0, frameDim, frameDim);
   }
 
   if (pause && onionSkin) {
-    sketch.drawingContext.globalAlpha = 0.5
+    sketch.drawingContext.globalAlpha = 0.5;
     if (currentFrame > firstFrame) {
       sketch.drawingContext.drawImage(frames[currentFrame - 1].canvas, 0, 0, frameDim, frameDim);
     } else if (currentFrame === firstFrame) {
@@ -400,7 +400,7 @@ function eraseFrame() {
 }
 
 function eraseAllFrames() {
-  if (window.confirm("Are you sure you want to erase all frames?")) {
+  if (window.confirm("Are you sure you want to clear all frames?")) {
     for (let i = 0; i < numFrames; i++) {
       frames[i].clear();
     }
@@ -453,12 +453,12 @@ function calculateThickness(t) {
 }
 
 // GIF Export
-const exportButton = document.getElementById('export-button')
-const exportOverlay = document.getElementById('export-overlay')
-const exportedGIFSpinner = document.getElementById('exported-gif-spinner')
-const exportedGIFImg = document.getElementById('exported-gif-img')
-const exportControls = document.getElementById('export-controls')
-const exportProgress = document.getElementById('export-progress')
+const exportButton = document.getElementById('export-button');
+const exportOverlay = document.getElementById('export-overlay');
+const exportedGIFSpinner = document.getElementById('exported-gif-spinner');
+const exportedGIFImg = document.getElementById('exported-gif-img');
+const exportControls = document.getElementById('export-controls');
+const exportProgress = document.getElementById('export-progress');
 
 function renderFrameGIF (gif, i) {
   if (backgroundEnabled === true) {
@@ -470,12 +470,12 @@ function renderFrameGIF (gif, i) {
   gif.addFrame(exportFrame.canvas, {delay: timeStep * 2, copy: true});
 }
 
-let checkInterval
-let gifBlob
+let checkInterval;
+let gifBlob;
 
 function exportGIF () {
   if (didDrawAnything === false) {
-    alert("You haven't drawn anything to export.")
+    alert("You haven't drawn anything to export.");
     return
   }
 
@@ -485,7 +485,7 @@ function exportGIF () {
   exportButton.classList.add('active');
   document.body.classList.add('noscroll');
 
-  let isTransparent = null
+  let isTransparent = null;
   if (backgroundEnabled === false) { isTransparent = 0x000000 }
 
   const gif = new GIF({
@@ -509,23 +509,23 @@ function exportGIF () {
       break;
   }
 
-  let totalFrames = gif.frames.length
+  let totalFrames = gif.frames.length;
 
   checkInterval = window.setInterval(() => {
-    let progress = gif.finishedFrames / totalFrames
-    exportedGIFSpinner.style.borderRadius = ((1 - progress) * 50) + '%'
+    let progress = gif.finishedFrames / totalFrames;
+    exportedGIFSpinner.style.borderRadius = ((1 - progress) * 50) + '%';
     exportProgress.innerText = Math.round(progress * 100) + '%'
   }, 150);
 
   gif.on('finished', function(blob) {
     if (exportOverlay.classList.contains('active')) {
-      window.clearInterval(checkInterval)
+      window.clearInterval(checkInterval);
       exportedGIFImg.onload = function () {
         exportedGIFImg.classList.add('active');
         exportControls.classList.add('active');
         exportedGIFSpinner.classList.add('hidden')
       }
-      gifBlob = blob
+      gifBlob = blob;
       exportedGIFImg.src = URL.createObjectURL(blob);
     }
   });
@@ -540,13 +540,13 @@ exportOverlay.onclick = (e) => {
 }
 
 function cancelOrCloseGIF () {
-  window.clearInterval(checkInterval)
-  gifBlob = undefined
-  exportedGIFSpinner.removeAttribute('style')
-  exportProgress.innerText = '0%'
+  window.clearInterval(checkInterval);
+  gifBlob = undefined;
+  exportedGIFSpinner.removeAttribute('style');
+  exportProgress.innerText = '0%';
   exportOverlay.classList.remove('active');
   exportButton.classList.remove('active');
-  exportedGIFSpinner.classList.remove('hidden')
+  exportedGIFSpinner.classList.remove('hidden');
   exportedGIFImg.classList.remove('active');
   exportControls.classList.remove('active');
   document.body.classList.remove('noscroll');
@@ -554,16 +554,16 @@ function cancelOrCloseGIF () {
   giphyUploadOverlay.classList.remove('active');
 }
 
-const exportUploadToGiphy = document.getElementById('export-upload-to-giphy')
-const giphyUploadOverlay = document.getElementById('giphy-upload-overlay')
+const exportUploadToGiphy = document.getElementById('export-upload-to-giphy');
+const giphyUploadOverlay = document.getElementById('giphy-upload-overlay');
 
 function uploadToGiphy () {
 
   exportUploadToGiphy.classList.add('hidden');
   giphyUploadOverlay.classList.add('active');
 
-  let username = 'sketchmachine'
-  let apiKey = 'ul0HNk8uS4G92IEFad7Y9XabW2pOBfK9'
+  let username = 'sketchmachine';
+  let apiKey = 'ul0HNk8uS4G92IEFad7Y9XabW2pOBfK9';
 
   let formData = new FormData();
   formData.append('file', gifBlob, 'sketchmachine.gif');
@@ -582,12 +582,12 @@ function uploadToGiphy () {
   .catch((error) => { console.error('Error:', error) })
   .then((res) => {
     if (res.meta && res.meta.status === 200) {
-      let id = res.data.id
-      let url = 'https://giphy.com/gifs/' + username + '-' + id
+      let id = res.data.id;
+      let url = 'https://giphy.com/gifs/' + username + '-' + id;
       window.open(url);
       giphyUploadOverlay.classList.remove('active');
     } else {
-      console.error('Upload failed.')
+      console.error('Upload failed.');
       exportUploadToGiphy.classList.remove('hidden');
       giphyUploadOverlay.classList.remove('active');
     }

@@ -4,9 +4,9 @@ CEB
   . Use the single frame selector and add "select/deselect"
   . Drag frame selection left and right
   . Export toggle changes timeline icons
-- Move "Clear"/"Erase" to button area
+x Move "Clear"/"Erase" to button area
 - Lock frame selection when using range UI element
-- Gray out tick lines for frames that aren't active
+x Gray out tick lines for frames that aren't active
 
 Bugs / Regressions
 

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <meta property="og:image" content="https://www.sketchmachine.net/og-image.png">
-  <meta name="description" content="Sketch Machine is a free animation tool created by Casey REAS in 2018, with help from GIPHY.">
+  <meta name="description" content="Sketch Machine is a free (FLOSS) animation tool created by Casey REAS in 2018, with help from GIPHY.">
 </head>
 <body>
 <div id="macro-ui">
@@ -17,13 +17,13 @@
       <div id="buttons">
         <div id="playback-buttons">
           <input onclick="clickPlay()" tabindex="-1" id="play" type="button" value="◼︎" class="play">
-          <input onclick="clickBack()" tabindex="-1" id="back" type="button" value="➜" class="back-next mirror">
-          <input onclick="clickNext()" tabindex="-1" id="next" type="button" value="➜" class="back-next">
+          <input onclick="clickBack()" tabindex="-1" id="back" type="button" value="→" class="back-next mirror">
+          <input onclick="clickNext()" tabindex="-1" id="next" type="button" value="→" class="back-next">
         </div>
         <div id="select-buttons">
           <input onclick="selectRange()" tabindex="-1" id="selectrange" type="button" value="Select Range" class="select-range">
           <input onclick="deselect()" tabindex="-1" id="deselect" type="button" value="Deselect" class="select-range">
-          <input onclick="eraseFrames()" tabindex="-1" id="eraseconsole" type="button" value="Erase" class="select-range">
+          <input onclick="eraseAllFrames()" tabindex="-1" id="eraseconsole" type="button" value="Clear" class="select-range">
         </div>
       </div>
     </div>
@@ -95,7 +95,7 @@
             <input id="randomXY" tabindex="-1" type="range" min="0" max="100" value="0">
           </div>
           <div class="setting">
-            <span class="setting-label">Dawdle</span>
+            <span class="setting-label">Sluggish</span>
             <input id="easing-slider" tabindex="-1" type="range" min="0" max="100" value="0">
           </div>
         </div>
@@ -108,7 +108,7 @@
           </div>
           <div id="speed-slider" class="setting">
             <span class="setting-label">Speed</span>
-            <input id="speed" style="direction: rtl" tabindex="-1" type="range" min="1" max="10" value="1">
+            <input id="speed" style="direction: rtl" tabindex="-1" type="range" min="1" max="9" value="4">
           </div>
           <div id="onion-options" class="setting">
             <form>
@@ -163,14 +163,14 @@
           <span class="keyboard-shortcut">➜</span> Prev & Next Frame
         </li>
         <br>
-        <li><span class="keyboard-shortcut">F</span> Erase Frame</li>
-        <li><span class="keyboard-shortcut">C</span> Erase <b>All</b> Frames</li>
+        <li><span class="keyboard-shortcut">F</span> Clear Frame</li>
+        <li><span class="keyboard-shortcut">C</span> Clear <b>All</b> Frames</li>
       </ul>
       <div id="credits">
         Too slow? Try a different resolution: <a class="res" href="/?res=1024">1024</a>, <a class="res" href="/?res=512">512</a>, <a class="res" href="/?res=256">256</a>, <a class="res" href="/?res=128">128</a>, <a class="res" href="/?res=64">64</a>.
         <br>
         <br>
-        <h1 class="sm-title"><span class="sketch-title">sketch</span><span class="machine-title">machine</span></h1> v1 was created by <a href="http://caesuras.net" target="_blank">Casey REAS</a> with help from <a href="https://giphy.com/">GIPHY</a>.
+        Sketch Machine v1 was created by <a href="http://caesuras.net" target="_blank">Casey REAS</a> with help from <a href="https://giphy.com/">GIPHY</a>.
         <br/>
         <br/>
         <div id="fine-print">
