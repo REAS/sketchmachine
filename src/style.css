@@ -265,6 +265,16 @@ hr {
   border: none;
 }
 
+.deselect {
+  height: 35px;
+  color: #FFFFFF;
+  text-decoration: line-through;
+  background-color: #333333;
+  padding: 2px 2px 2px 2px;
+  display: inline-block;
+  border: none;
+}
+
 select option {
   font-family: monospace;
 }

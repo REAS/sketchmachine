@@ -25,7 +25,7 @@ let pause = false;
 let startDrawing = false;
 let didDrawAnything = false;
 
-let mobile = false; // Global variable, if on phone or not
+//let mobile = false; // Global variable, if on phone or not
 
 let mx, my, pmx, pmy, ppmx, ppmy = 0;
 let rx, ry, prx, pry, pprx, ppry = 0;
@@ -52,11 +52,11 @@ let easing = 0.0;
 let dpi = window.devicePixelRatio;
 
 // TIMELINE
-let overFrame = new Array(numFrames).fill(false);
-let overMarker = new Array(numFrames).fill(false);
+//let overFrame = new Array(numFrames).fill(false);
+//let overMarker = new Array(numFrames).fill(false);
 let onFrame = new Array(numFrames).fill(false);
-let firstClick = false;
-let addMode = true; // Add or remove active frames
+//let firstClick = false;
+//let addMode = true; // Add or remove active frames
 
 let playbackDirection = 1;
 
@@ -113,6 +113,12 @@ const animationSketch = new p5(function (sketch) {
     if (surfaceDim < frameDim) {
       sketch.noSmooth()
     }
+
+    /*
+    for (let i = firstFrame; i < lastFrame; i++) {
+      onFrame[i] = true;
+    }
+    */
 
     canvas.id('animation');
 
@@ -439,12 +445,15 @@ window.addEventListener('keydown', (e) => {
     e.preventDefault();
   }
 
+
+  /*
   if (e.key === 'u' || e.key === 'U') {
     onFrame.fill(false);
   }
   if (e.key === 'a' || e.key === 'A') {
     onFrame.fill(true);
   }
+  */
 
 })
 

@@ -3,13 +3,14 @@ let selectFirstFrame = false;
 
 function selectRange (sketch) {
   for (let i = firstFrame; i < lastFrame; i++) {
-
+    onFrame[i] = true;
   }
-
 }
 
 function deselect (sketch) {
-
+  for (let i = 0; i < numFrames; i++) {
+    onFrame[i] = false;
+  }
 }
 
 
@@ -18,25 +19,17 @@ function displayTimeline (sketch) {
   sketch.drawingContext.clearRect(0, 0, sketch.width, sketch.height);
 
   let tw = frameDim / numFrames;
-  let ty = 12; // Gap from the top of the canvas
+  let ty = 12;  // Gap from the top of the canvas
   let tlh = 30;  // Height of the time line
   let th = 40;  // Height of the selection arrows
-  //let th2 = th * 2;
 
   let tx = sketch.map(currentFrame, 0, numFrames, 0, sketch.width);
-
-  // CURRENT FRAME MARKER ARROW
-  //let tfmy = ty + th * 3 - th / 4;
 
   if (!startDrawing) {
     for (let x = firstFrame; x < lastFrame; x++) {
       let xx = sketch.map(x, 0, numFrames, 0, sketch.width);
       if ((sketch.mouseX > xx && sketch.mouseX < xx + tw && sketch.mouseY > ty && sketch.mouseY < ty + tlh)) {
-        sketch.noStroke();
-        sketch.fill(255, 0, 0);
-        //rect(xx, tfmy , tw+1, th);
-        //sketch.triangle(xx, tfmy, xx + tw + 1, tfmy, xx + tw / 2, tfmy - th / 2);
-        if (sketch.mouseIsPressed && sketch.mouseY >= ty + th && sketch.mouseY <= sketch.height) {
+        if (sketch.mouseIsPressed && sketch.mouseY >= ty && sketch.mouseY <= ty + tlh) {
           if (!pause) {
             clickPlay()
           }
@@ -103,6 +96,16 @@ function displayTimeline (sketch) {
   }
   */
 
+  // DRAW FRAMES THAT ARE "ON", THAT ARE CURRENTLY BEING DRAWING INTO
+  for (let i = firstFrame; i < lastFrame; i++) {
+    if (onFrame[i]) {
+      let tempx = sketch.map(i, 0, numFrames, 0, sketch.width);
+      sketch.noStroke();
+      sketch.fill(126, 126, 126);
+      sketch.rect(tempx, ty, tw, tlh+1);
+    }
+  }
+
   // CURRENT FRAME MARKER (MIDDLE)
   sketch.noStroke();
   sketch.fill(0, 0, 255);
@@ -161,6 +164,7 @@ function displayTimeline (sketch) {
 
   // TICK MARKS, THE GRID OF FRAMES
   for (let x = 0; x <= numFrames; x++) {
+
     let xx = sketch.map(x, 0, numFrames, 0, sketch.width);
     if (x < firstFrame || x > lastFrame) {
       sketch.stroke(102);
