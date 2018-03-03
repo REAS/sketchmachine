@@ -5,11 +5,17 @@ function selectRange (sketch) {
   for (let i = firstFrame; i < lastFrame; i++) {
     onFrame[i] = true;
   }
+  if (pause) {
+    displayTimeline(timelineSketch);
+  }
 }
 
 function deselect (sketch) {
   for (let i = 0; i < numFrames; i++) {
     onFrame[i] = false;
+  }
+  if (pause) {
+    displayTimeline(timelineSketch);
   }
 }
 
