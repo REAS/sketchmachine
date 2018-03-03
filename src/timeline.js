@@ -168,14 +168,22 @@ function displayTimeline (sketch) {
   for (let x = 0; x <= numFrames; x++) {
 
     let xx = sketch.map(x, 0, numFrames, 0, sketch.width);
+    if (x === numFrames) {
+      xx = xx-1;
+    }
     if (x < firstFrame || x > lastFrame) {
-      sketch.stroke(153);
+      sketch.stroke(102);
+      sketch.line(xx, ty+tlh/2-2, xx, ty+tlh/2+2);
     } else {
       sketch.stroke(0);
+      sketch.line(xx, ty, xx, ty + tlh);
     }
     //sketch.line(xx, ty + th, xx, ty + th2);
-    sketch.line(xx, ty, xx, ty + tlh);
+    //sketch.line(xx, ty, xx, ty + tlh);
+    //if (x == numFrames) {
+    //  sketch.line(frameDim-1, ty, frameDim-1, ty + tlh);
+    //}
   }
   //sketch.line(frameDim-1, ty + th, frameDim-1, ty + th2);
-  sketch.line(frameDim-1, ty, frameDim-1, ty + tlh);
+
 }

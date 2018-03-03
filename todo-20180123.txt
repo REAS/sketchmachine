@@ -1,13 +1,25 @@
-CEB
-- Should 'Engorge' be set relative to a mark's thickness?
-- Timeline
-  . Use the single frame selector and add "select/deselect"
-  x Drag frame selection left and right
-  . Export toggle changes timeline icons
-x Lock frame selection when using range UI element
-x Move "Clear"/"Erase" to button area
-x Gray out tick lines for frames that aren't active
+TODO
+- Sketch Machine icon for Giphy site
+- Giphy export not working?
+  - Worked on FireFox OS X 10.10.3, but had to enable pop-ups 
+  - Didn't go to Giphy site on Chrome OS X 10.13.3
+    - Update: It worked, but the pop-up blocker so subtle,
+      I didn't see it
+  - Link to "Find all the Sketch Machines GIFs on Giphy."
+- Explore additional Tools
+  - Grid
+  - Square
+  - Compass
+- Tune color selection
+  - Smaller on laptop, close icon
+  - Random selection
+  - Color cycle option
+- Stop/pause button is off center on some browsers/OSs
+  - Firefox MacOS 10.13.3, too small and at the bottom
+- Make current timeline selection more obvious
 
 Bugs / Regressions
 
-- Clicking and holding mouse without moving it no longer draws just once.
+- Clicking and holding mouse without moving it no longer draws just once
+- "Point" only draws a single time
+
