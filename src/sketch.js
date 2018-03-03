@@ -19,6 +19,8 @@ let timelineNewX = 0;
 let numToLeft = 0;
 let numToRight = 0;
 
+let jitterOn = false;
+
 let frameDim = 512;
 let surfaceDim = Math.min(1024, 512 * window.devicePixelRatio);
 let resInt = parseInt(window.location.search.replace('?res=', ''));
@@ -204,15 +206,17 @@ const animationSketch = new p5(function (sketch) {
     let tempEasing = parseInt(easingSlider.value);
     if (tempEasing > 0) {
       easing = sketch.map(tempEasing, 0, 100, 0.1, 0.01);
-      smoothing = true;
+      //smoothing = true;
     } else {
-      smoothing = false;
+      //smoothing = false;
     }
 
-    if (rxy !== 0) {
+    //if (rxy !== 0) {
+    if (jitterOn) {
       rx = sketch.random(-rxy, rxy);
       ry = sketch.random(-rxy, rxy);
     }
+    //}
 
     if (startDrawing) {
       if (markers[0]) {

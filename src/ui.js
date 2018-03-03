@@ -2,6 +2,14 @@ function speedSizeToggle() {
   speedSize = !speedSize;
 }
 
+function jitterToggle() {
+  jitterOn = !jitterOn;
+}
+
+function sluggishToggle() {
+  smoothing = !smoothing;
+}
+
 function onionToggle() {
   onionSkin = !onionSkin;
   displayFrame(animationSketch);

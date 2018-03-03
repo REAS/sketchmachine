@@ -25,7 +25,7 @@ function displayTimeline (sketch) {
   sketch.drawingContext.clearRect(0, 0, sketch.width, sketch.height);
 
   let tw = frameDim / numFrames;
-  let ty = 12;  // Gap from the top of the canvas
+  let ty = 16;  // Gap from the top of the canvas
   let tlh = 30;  // Height of the time line
   let th = 40;  // Height of the selection arrows
 
