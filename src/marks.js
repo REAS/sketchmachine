@@ -1,4 +1,5 @@
 // POINTS
+
 let pastPoints = [];
 for (let i = 0; i < markers.length; i += 1) {
   pastPoints.push({
@@ -12,6 +13,31 @@ for (let i = 0; i < markers.length; i += 1) {
   })
 }
 
+function mark1(sketch, i, color, thickness) {
+  if (smoothing) {
+    mx += (targetX - mx) * easing;
+    my += (targetY - my) * easing;
+  }
+
+  if (pmx !== mx || pmy !== my) {
+    markerFrames[i].strokeCap(sketch.ROUND);
+    markerFrames[i].noFill();
+    markerFrames[i].stroke(color);
+    if (speedSize) {
+      let varThick = sketch.map(thickness, 1, 100, 0.25, 3.0);
+      let diameter = sketch.dist(pmx, pmy, mx, my) * varThick;
+      markerFrames[i].strokeWeight(diameter);
+    } else {
+      markerFrames[i].strokeWeight(thickness + 5);
+    }
+
+    let x1 = mx + rx;
+    let y1 = my + ry;
+    markerFrames[i].point(x1, y1);
+  }
+}
+
+/*
 function mark1(sketch, i, color, thickness) {
   if (smoothing) {
     mx += (targetX - mx) * easing;
@@ -58,10 +84,12 @@ function mark1(sketch, i, color, thickness) {
     x: x,
     y: y,
   }
-
 }
+*/
+
 
 // LINES
+
 let pastLines = [];
 for (let i = 0; i < markers.length; i += 1) {
   pastLines.push({
@@ -140,6 +168,7 @@ function mark2(sketch, i, color, thickness) {
 }
 
 // QUADS
+
 function mark3(sketch, i, color, thickness) {
   if (smoothing) {
     mx += (targetX - mx) * easing;
@@ -165,6 +194,9 @@ function mark3(sketch, i, color, thickness) {
     markerFrames[i].line(x1, y1, x2, y2);
   }
 }
+
+
+// Utility functions for curves
 
 function curvePoints(x0, y0, x1, y1, x2, y2) {
   // Update pastPast, past, and current points.
