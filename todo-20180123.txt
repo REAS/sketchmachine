@@ -1,5 +1,10 @@
 TODO
 
+- Timeline enhancement
+  . Move current marker when range moves beyond it
+  . When "Select Range" is pressed, deselect prior selections
+  . Move the selected frames when the range moves
+    - This will remove the "hidden" selected frames issue
 - Sketch Machine icon for Giphy site
   . Also a banner?
 - Tune color selection
@@ -14,7 +19,10 @@ TODO
 
 Bugs / Regressions / Issues
 
-- Point is drawing a single point, not a list like Plane and Line
+- Remove strikethrough from "Deselect" button
+- Clicking on a frame in the timeline doesn't jump to that frame
+  . Right now, dragging works, but not clicking 
+x Point is drawing a single point, not a list like Plane and Line
 - Giphy export
   . Worked on FireFox OS X 10.10.3, but had to enable pop-ups 
   . Didn't go to Giphy site on Chrome OS X 10.13.3
