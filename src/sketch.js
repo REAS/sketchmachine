@@ -15,6 +15,10 @@ let timelineRangeSelected = false;
 let timelineRangeLock = false;
 let arrowLock = false;
 
+let timelineNewX = 0;
+let numToLeft = 0;
+let numToRight = 0;
+
 let frameDim = 512;
 let surfaceDim = Math.min(1024, 512 * window.devicePixelRatio);
 let resInt = parseInt(window.location.search.replace('?res=', ''));
@@ -337,7 +341,7 @@ const animationSketch = new p5(function (sketch) {
 const timelineSketch = new p5(function (sketch) {
   sketch.setup = function () {
     sketch.pixelDensity(window.devicePixelRatio);
-    timelineCanvas = sketch.createCanvas(frameDim, 90);
+    timelineCanvas = sketch.createCanvas(frameDim, 95);
     timelineCanvas.id('timeline');
     sketchContainer.append(timelineCanvas.elt);
     sketch.noSmooth();
