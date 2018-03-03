@@ -1,8 +1,8 @@
 TODO
 
 - Timeline enhancement
-  . Move current marker when range moves beyond it
-  . When "Select Range" is pressed, deselect prior selections
+  x Move current marker when range moves beyond it
+  x When "Select Range" is pressed, deselect prior selections
   . Move the selected frames when the range moves
     - This will remove the "hidden" selected frames issue
 - Sketch Machine icon for Giphy site
@@ -16,6 +16,7 @@ TODO
   . Grid
   . Square
   . Compass
+
 
 Bugs / Regressions / Issues
 

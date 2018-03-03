@@ -2,6 +2,9 @@ let selectLastFrame = false;
 let selectFirstFrame = false;
 
 function selectRange (sketch) {
+  // First, deselect all
+  deselect();
+  // Second, select the new range
   for (let i = firstFrame; i < lastFrame; i++) {
     onFrame[i] = true;
   }
@@ -155,6 +158,14 @@ function displayTimeline (sketch) {
     firstFrame = sketch.constrain(firstFrame, 0, numFrames-2);
     lastFrame = sketch.constrain(lastFrame, 2, numFrames);
 
+    if (currentFrame < firstFrame) {
+      currentFrame = firstFrame;
+    }
+
+    if (currentFrame > lastFrame-1) {
+      currentFrame = lastFrame-1;
+    }
+
     //sketch.print(currentX, firstFrame, lastFrame, numToLeft, numToRight);
 
     // Comment this bit out when it's working
@@ -165,6 +176,7 @@ function displayTimeline (sketch) {
   }
 
   // TICK MARKS, THE GRID OF FRAMES
+  let tickMiddle = ty+tlh/2;
   for (let x = 0; x <= numFrames; x++) {
 
     let xx = sketch.map(x, 0, numFrames, 0, sketch.width);
@@ -173,17 +185,11 @@ function displayTimeline (sketch) {
     }
     if (x < firstFrame || x > lastFrame) {
       sketch.stroke(102);
-      sketch.line(xx, ty+tlh/2-2, xx, ty+tlh/2+2);
+      sketch.line(xx, tickMiddle-2, xx, tickMiddle+2);
     } else {
       sketch.stroke(0);
       sketch.line(xx, ty, xx, ty + tlh);
     }
-    //sketch.line(xx, ty + th, xx, ty + th2);
-    //sketch.line(xx, ty, xx, ty + tlh);
-    //if (x == numFrames) {
-    //  sketch.line(frameDim-1, ty, frameDim-1, ty + tlh);
-    //}
   }
-  //sketch.line(frameDim-1, ty + th, frameDim-1, ty + th2);
 
 }
