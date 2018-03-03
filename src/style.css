@@ -578,6 +578,15 @@ select option {
   h1 {
     padding-left: 10px;
   }
+
+  #colors button {
+    width: 6.25%;
+    padding: 6.25% 0 0 0;
+    border: 0;
+    /*outline: 0;*/
+    cursor: pointer;
+    margin: 0;
+  }
 }
 
 .dev * {

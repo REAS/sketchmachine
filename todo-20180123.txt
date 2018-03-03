@@ -1,25 +1,32 @@
 TODO
+
 - Sketch Machine icon for Giphy site
-- Giphy export not working?
-  - Worked on FireFox OS X 10.10.3, but had to enable pop-ups 
-  - Didn't go to Giphy site on Chrome OS X 10.13.3
+  . Also a banner?
+- Tune color selection
+  . Smaller with wide screen
+  . Close icon
+  . Random selection
+  . Color cycle option
+- Explore additional Tools
+  . Grid
+  . Square
+  . Compass
+
+Bugs / Regressions / Issues
+
+- Point is drawing a single point, not a list like Plane and Line
+- Giphy export
+  . Worked on FireFox OS X 10.10.3, but had to enable pop-ups 
+  . Didn't go to Giphy site on Chrome OS X 10.13.3
     - Update: It worked, but the pop-up blocker so subtle,
       I didn't see it
-  - Link to "Find all the Sketch Machines GIFs on Giphy."
-- Explore additional Tools
-  - Grid
-  - Square
-  - Compass
-- Tune color selection
-  - Smaller on laptop, close icon
-  - Random selection
-  - Color cycle option
+  . Link to "Find all the Sketch Machines GIFs on Giphy."
 - Stop/pause button is off center on some browsers/OSs
-  - Firefox MacOS 10.13.3, too small and at the bottom
-- Make current timeline selection more obvious
-
-Bugs / Regressions
-
+  . Firefox MacOS 10.13.3, too small and at the bottom
+- Export speeds are still off, I tweaked but not quite right
+  . What is the math?
+- Default to 512 resolution
+  . I switched it, but I think retina devices go back to 1024
+  . Too slow on my phone @ 1024
 - Clicking and holding mouse without moving it no longer draws just once
-- "Point" only draws a single time
 
