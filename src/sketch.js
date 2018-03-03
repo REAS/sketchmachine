@@ -12,7 +12,8 @@ let lastFrame = 24; //30;
 let currentFrame = firstFrame;
 
 let timelineRangeSelected = false;
-let timelineLock = false;
+let timelineRangeLock = false;
+let arrowLock = false;
 
 let frameDim = 512;
 let surfaceDim = Math.min(1024, 512 * window.devicePixelRatio);
@@ -307,8 +308,10 @@ const animationSketch = new p5(function (sketch) {
 
   function pointerReleased() {
     startDrawing = false;
+    arrowLock = false;
     selectFirstFrame = false;
     selectLastFrame = false;
+    timelineRangeLock = false;
     writeMarkersIntoFrames();
   }
 

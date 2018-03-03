@@ -35,7 +35,7 @@ function displayTimeline (sketch) {
     for (let x = firstFrame; x < lastFrame; x++) {
       let xx = sketch.map(x, 0, numFrames, 0, sketch.width);
       if ((sketch.mouseX > xx && sketch.mouseX < xx + tw && sketch.mouseY > ty && sketch.mouseY < ty + tlh)) {
-        if (sketch.mouseIsPressed && sketch.mouseY >= ty && sketch.mouseY <= ty + tlh) {
+        if (sketch.mouseIsPressed && sketch.mouseY >= ty && sketch.mouseY <= ty + tlh && !selectFirstFrame && !selectLastFrame) {
           if (!pause) {
             clickPlay()
           }
@@ -45,62 +45,6 @@ function displayTimeline (sketch) {
       }
     }
   }
-
-  //sketch.fill(0, 0, 255);
-  //sketch.noStroke();
-  //sketch.triangle(tx, tfmy, tx + tw + 1, tfmy, tx + tw / 2, tfmy - tw);
-
-  /*
-  // HIGHLIGHT FRAMES TO DRAW INTO
-  stroke(0);
-  let i = 0;
-  for (let x = 0; x < numFrames; x++) {
-    let xx = map(x, 0, numFrames, 0, width);
-
-    if (!startDrawing) {
-
-      overFrame[i] = false;
-      if ((mouseX > xx && mouseX < xx + tw && mouseY > ty + th && mouseY < ty + th * 2) && !selectFirstFrame && !selectLastFrame) {
-        overFrame[i] = true;
-        if (mouseIsPressed) {
-          if (firstClick) {
-            //console.log("start the line...");
-            //frameSelectLock = true;
-            if (onFrame[i] == false) {
-              addMode = true;
-            } else {
-              addMode = false;
-            }
-            firstClick = false;
-          }
-          if (addMode) {
-            onFrame[i] = true;
-          } else {
-            onFrame[i] = false;
-          }
-        } else {
-          firstClick = true;
-        }
-
-      }
-    }
-
-    noStroke();
-    if (overFrame[i]) {
-      fill(255, 0, 0);
-      rect(xx, ty + th, tw, th);
-    } else if (onFrame[i]) {
-      if (i >= firstFrame && i < lastFrame) {
-        fill(0, 0, 255)
-      } else {
-        fill(102);
-      }
-      rect(xx, ty + th, tw, th);
-    }
-
-    i++;
-  }
-  */
 
   // DRAW FRAMES THAT ARE "ON", THAT ARE CURRENTLY BEING DRAWING INTO
   for (let i = firstFrame; i < lastFrame; i++) {
@@ -123,11 +67,9 @@ function displayTimeline (sketch) {
   let ffx = firstFrame * tw;
   let lfx = (lastFrame - 1) * tw;
 
-
-
   // BETWEEN THE IN AND OUT MARKER
-  if (sketch.mouseX > ffx + tw && sketch.mouseX < lfx && sketch.mouseY > tty && sketch.mouseY < tty + th && !selectFirstFrame) {
-    if (!startDrawing) {
+  if (sketch.mouseX > ffx + tw && sketch.mouseX < lfx && sketch.mouseY > tty && sketch.mouseY < tty + th && !selectFirstFrame && !selectLastFrame) {
+    if (!startDrawing && !arrowLock) {
       sketch.fill(126, 126, 126);
       sketch.noStroke();
       sketch.rect(ffx, tty, lfx-ffx+tw, th);
@@ -145,12 +87,15 @@ function displayTimeline (sketch) {
   // IN MARKER
   sketch.fill(51); // Default color overwritten with blue if mouse is over
   sketch.noStroke();
-  if (sketch.mouseX > ffx && sketch.mouseX < ffx + tw && sketch.mouseY > tty && sketch.mouseY < tty + th && !selectLastFrame) {
+  if (sketch.mouseX > ffx && sketch.mouseX < ffx + tw && sketch.mouseY > tty && sketch.mouseY < tty + th) {
     if (!startDrawing) {
-      if (sketch.mouseIsPressed && !selectLastFrame) {
+      if (sketch.mouseIsPressed && !selectLastFrame && !arrowLock) {
         selectFirstFrame = true;  // Goes "false" in mouseReleased
+        //
       }
-      sketch.fill(0, 0, 255);
+      if (!selectLastFrame && !arrowLock) {
+        sketch.fill(0, 0, 255);
+      }
     }
   }
   if (selectFirstFrame) {
@@ -165,11 +110,13 @@ function displayTimeline (sketch) {
 
   // OUT MARKER
   sketch.fill(51);
-  if (sketch.mouseX > lfx && sketch.mouseX < lfx + tw && sketch.mouseY > tty && sketch.mouseY < tty + th && !selectFirstFrame) {
+  if (sketch.mouseX > lfx && sketch.mouseX < lfx + tw && sketch.mouseY > tty && sketch.mouseY < tty + th) {
     if (!startDrawing) {
-      sketch.fill(0, 0, 255);
-      if (sketch.mouseIsPressed && !selectFirstFrame) {
+      if (sketch.mouseIsPressed && !selectFirstFrame && !arrowLock) {
         selectLastFrame = true;  // Goes "false" in mouseReleased
+      }
+      if (!selectFirstFrame && !arrowLock){
+        sketch.fill(0, 0, 255);
       }
     }
   }
