@@ -20,7 +20,8 @@ TODO
 
 Bugs / Regressions / Issues
 
-- Remove strikethrough from "Deselect" button
+- If more than one tool is selected, "sluggish" is diminishing, not sluggish
+x Remove strikethrough from "Deselect" button
 - Clicking on a frame in the timeline doesn't jump to that frame
   . Right now, dragging works, but not clicking 
 x Point is drawing a single point, not a list like Plane and Line

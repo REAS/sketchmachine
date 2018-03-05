@@ -1,15 +1,24 @@
 let selectLastFrame = false;
 let selectFirstFrame = false;
+let masterSelect = false;
 
 function selectRange (sketch) {
-  // First, deselect all
-  deselect();
-  // Second, select the new range
-  for (let i = firstFrame; i < lastFrame; i++) {
-    onFrame[i] = true;
-  }
-  if (pause) {
-    displayTimeline(timelineSketch);
+
+  masterSelect = !masterSelect;
+
+  if (!masterSelect) {
+    // First, deselect all
+    deselect();
+  } else {
+    // First, deselect all
+    deselect();
+    // Second, select the new range
+    for (let i = firstFrame; i < lastFrame; i++) {
+      onFrame[i] = true;
+    }
+    if (pause) {
+      displayTimeline(timelineSketch);
+    }
   }
 }
 

@@ -413,16 +413,28 @@ function writeMarkersIntoFrames () {
 }
 
 function eraseFrame() {
-  if (window.confirm("Erase this frame?")) {
+  if (window.confirm("Clear this frame?")) {
     frames[currentFrame].clear();
     displayFrame(animationSketch)
   }
 }
 
 function eraseAllFrames() {
-  if (window.confirm("Are you sure you want to clear all frames?")) {
+  if (window.confirm("Are you sure you want to clear everything?")) {
     for (let i = 0; i < numFrames; i++) {
       frames[i].clear();
+    }
+    displayFrame(animationSketch)
+  }
+}
+
+function eraseSelectedFrames() {
+  if (window.confirm("Are you sure you want to clear the selected frames?")) {
+    frames[currentFrame].clear();
+    for (let i = 0; i < numFrames; i++) {
+      if (onFrame[i]) {
+        frames[i].clear();
+      }
     }
     displayFrame(animationSketch)
   }
@@ -440,6 +452,10 @@ window.addEventListener('keydown', (e) => {
 
   if (e.key === 'c' || e.key === 'C') {
     eraseAllFrames();
+  }
+
+  if (e.key === 's' || e.key === 'S') {
+    eraseSelectedFrames();
   }
 
   if (e.key === 'p' || e.key === 'P') {

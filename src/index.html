@@ -21,9 +21,13 @@
           <input onclick="clickNext()" tabindex="-1" id="next" type="button" value="→" class="back-next">
         </div>
         <div id="select-buttons">
-          <input onclick="selectRange()" tabindex="-1" id="selectrange" type="button" value="Select Range" class="select-range">
-          <input onclick="deselect()" tabindex="-1" id="deselect" type="button" value="Deselect" class="select-range">
-          <input onclick="eraseAllFrames()" tabindex="-1" id="eraseconsole" type="button" value="Clear" class="select-range">
+          <div class="select-range">
+            <form>
+              <input id="selectrange" tabindex="-1" onclick="selectRange()" type="checkbox">
+              <label for="selectrange" id="select-label">Select Range</label>
+            </form>
+          </div>
+          <input onclick="eraseSelectedFrames()" tabindex="-1" id="eraseconsole" type="button" value="Clear Selected" class="clear-range">
         </div>
       </div>
     </div>
@@ -167,6 +171,7 @@
         <br>
         <li><span class="keyboard-shortcut">F</span> Clear Frame</li>
         <li><span class="keyboard-shortcut">C</span> Clear <b>All</b> Frames</li>
+        <li><span class="keyboard-shortcut">S</span> Clear <b>Selected</b> Frames</li>
       </ul>
       <div id="credits">
         Too slow? Try a different resolution: <a class="res" href="/?res=1024">1024</a>, <a class="res" href="/?res=512">512</a>, <a class="res" href="/?res=256">256</a>, <a class="res" href="/?res=128">128</a>, <a class="res" href="/?res=64">64</a>.
