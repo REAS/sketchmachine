@@ -9,6 +9,9 @@ function selectRange (sketch) {
   if (!masterSelect) {
     // First, deselect all
     deselect();
+    if (pause) {
+      displayTimeline(timelineSketch);
+    }
   } else {
     // First, deselect all
     deselect();
@@ -26,8 +29,14 @@ function deselect (sketch) {
   for (let i = 0; i < numFrames; i++) {
     onFrame[i] = false;
   }
-  if (pause) {
-    displayTimeline(timelineSketch);
+}
+
+function manageSelection (sketch) {
+  if (masterSelect) {
+    deselect();
+    for (let i = firstFrame; i < lastFrame; i++) {
+      onFrame[i] = true;
+    }
   }
 }
 
@@ -68,7 +77,7 @@ function displayTimeline (sketch) {
     }
   }
 
-  // CURRENT FRAME MARKER (MIDDLE)
+  // CURRENT FRAME MARKER IN BRIGHT BLUE
   sketch.noStroke();
   sketch.fill(0, 0, 255);
   sketch.rect(tx, ty, tw, tlh+1);
@@ -104,6 +113,7 @@ function displayTimeline (sketch) {
       currentFrame = firstFrame;
     }
     sketch.fill(0, 0, 255);
+    manageSelection();
   }
   sketch.triangle(firstFrame * tw, tty, firstFrame * tw, tty + th, (firstFrame + 1) * tw, tty + th / 2);
 
@@ -126,6 +136,7 @@ function displayTimeline (sketch) {
       currentFrame = lastFrame - 1;
     }
     sketch.fill(0, 0, 255);
+    manageSelection();
   }
   sketch.triangle(lastFrame * tw, tty, lastFrame * tw, tty + th, (lastFrame - 1) * tw, tty + th / 2);
 
@@ -158,11 +169,16 @@ function displayTimeline (sketch) {
 
   // Calculate the "range" change if it's selected and locked
   if (timelineRangeLock) {
+
+    //manageSelection();
+
     let currentX = sketch.ceil(sketch.map(sketch.mouseX, 0, sketch.width, 0, numFrames));
     let newX = sketch.map(currentX, 0, numFrames, 0, sketch.width);
 
     firstFrame = currentX - numToLeft;
     lastFrame = currentX + numToRight;
+
+    manageSelection();
 
     firstFrame = sketch.constrain(firstFrame, 0, numFrames-2);
     lastFrame = sketch.constrain(lastFrame, 2, numFrames);
