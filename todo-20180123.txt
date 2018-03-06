@@ -9,27 +9,15 @@ TODO
   . Random selection
   . Color cycle option
 
-- Explore additional Tools
-  . Grid
-  . Square
-  . Compass
-
 
 Bugs / Regressions / Issues
 
 - "Select All" for the timeline button isn't styled correctly
 
-- Unicode figures in the buttons have different borders on different browsers
-  - Arows too low within the button on some browsers
-  - Stop/pause button is off center on some browsers/OSs
-    . Firefox MacOS 10.13.3, too small and at the bottom
-  - Switch to SVG image buttons?
-
-- Export speeds are still off, I tweaked but not quite right
+- Export speeds are still off, I tweaked but not quite right?
   . What is the precise math?
 
-- Clicking and holding mouse without moving it no longer draws just once
-  . What is this?
+- Clicking and holding mouse without moving it no longer draws just once?
 
 - Giphy export
   . Worked on FireFox OS X 10.10.3, but had to enable pop-ups 
@@ -38,12 +26,23 @@ Bugs / Regressions / Issues
       I didn't see it
   . Link to "Find all the Sketch Machines GIFs on Giphy."
 
+
+Done
+
+x Unicode figures in the buttons have different borders on different browsers
+  x Arows too low within the button on some browsers
+  x Stop/pause button is off center on some browsers/OSs
+    . Firefox MacOS 10.13.3, too small and at the bottom
+  x Switch to SVG image buttons?
+  
 o Clicking on a frame in the timeline doesn't jump to that frame
   . Right now, dragging works, but not clicking 
   . Update: fixed a little, but not 100%
 
-  
-Done
+o Explore additional Tools
+  . Grid
+  . Square
+  . Compass
 
 x Default to 512 resolution
   . I switched it, but I think retina devices go back to 1024

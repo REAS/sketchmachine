@@ -193,7 +193,7 @@ function mark3(sketch, i, color, thickness) {
       let diameter = sketch.dist(pmx, pmy, mx, my) * varThick;
       markerFrames[i].strokeWeight(diameter);
     } else {
-      markerFrames[i].strokeWeight(thickness + 5);
+      markerFrames[i].strokeWeight(thickness + 1);
     }
 
     let x1 = pmx + prx;
