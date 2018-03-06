@@ -3,12 +3,6 @@ TODO
 - Sketch Machine icon for Giphy site
   . Also a banner?
 
-- Tune color selection
-  . Smaller with wide screen
-  . Close icon
-  . Random selection
-  . Color cycle option
-
 
 Bugs / Regressions / Issues
 
@@ -34,7 +28,7 @@ x Unicode figures in the buttons have different borders on different browsers
   x Stop/pause button is off center on some browsers/OSs
     . Firefox MacOS 10.13.3, too small and at the bottom
   x Switch to SVG image buttons?
-  
+
 o Clicking on a frame in the timeline doesn't jump to that frame
   . Right now, dragging works, but not clicking 
   . Update: fixed a little, but not 100%
