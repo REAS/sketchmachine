@@ -188,33 +188,26 @@ hr {
 }
 
 .play {
+  background: url("pause.svg") no-repeat top left;
+  background-size: contain;
   width: 50px;
   height: 50px;
-  color: #FFFFFF;
-  background-color: #0000FF;
   display: inline-block;
   border-radius: 50%;
   border: 1px inset;
   vertical-align: middle;
-  font-size: 1.5em;
   line-height: 50px;
-  /*padding: 0px 0px 0px 0px;*/
-  font-family: "Times New Roman", Times, serif;
-}
-
-.play[value="▶︎"] {
-  /*padding-top: 2px;*/
-  padding-left: 10px;
 }
 
 .back-next {
+  background: url("next.svg") no-repeat top left;
+  background-size: contain;
+  background-color: #333333;
   width: 32px;
   height: 32px;
   color: #FFFFFF;
-  background-color: #333333;
   padding: 3px 2px 2px 2px;
   display: inline-block;
-  /*border-radius: 25%;*/
   border: 1px inset;
   font-size: 1.25em;
   vertical-align: middle;
@@ -265,21 +258,6 @@ hr {
   display: inline-block;
   border: 1px inset;
 }
-
-/*
-.brush, .setting {
-  background-color: #BBB;
-  display: inline-block;
-  margin-bottom: 5px;
-  border: 1px inset;
-  vertical-align: top;
-  height: 32px;
-  line-height: 32px;
-  padding-left: 8px;
-  padding-right: 11px;
-  padding-bottom: 2px;
-}
-*/
 
 .select-range {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -397,7 +375,6 @@ select option {
   line-height: 20px;
   height: 20px;
   background: #999;
-  /*border-radius: 4px;*/
 }
 
 
@@ -406,7 +383,7 @@ select option {
 }
 
 #playback-options {
-    padding-right: 6px;
+  padding-right: 6px;
 }
 
 #playback-options input[type="radio"] {

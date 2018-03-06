@@ -16,19 +16,11 @@
       <canvas width="512" height="512" id="animation-dummy"></canvas>
       <div id="buttons">
         <div id="playback-buttons">
-          <input onclick="clickPlay()" tabindex="-1" id="play" type="button" value="◼︎" class="play">
-          <input onclick="clickBack()" tabindex="-1" id="back" type="button" value="→" class="back-next mirror">
-          <input onclick="clickNext()" tabindex="-1" id="next" type="button" value="→" class="back-next">
+          <input onclick="clickPlay()" tabindex="-1" id="play" type="button" class="play">
+          <input onclick="clickBack()" tabindex="-1" id="back" type="button" class="back-next mirror">
+          <input onclick="clickNext()" tabindex="-1" id="next" type="button" class="back-next">
         </div>
         <div id="select-buttons">
-          <!--
-          <div id="onion-options" class="setting">
-            <form>
-              <input id="onion-check" tabindex="-1" onclick="onionToggle()" type="checkbox">
-              <label for="onion-check" id="onion-label">Onion skin</label>
-            </form>
-          </div>
-          -->
           <div class="select-range">
             <form>
               <input id="select-check" tabindex="-1" onclick="selectRange()" type="checkbox">
@@ -133,6 +125,9 @@
           <div id="playback-options" class="setting">
             <form>
               <span class="setting-label">Playback</span>
+              <!--<input onclick="clickReverse()" id="reverse" tabindex="-1" type="radio" name="playback" value="reverse"><label for="reverse">←</label>
+              <input onclick="clickBackAndForth()" id="back-and-forth" tabindex="-1" type="radio" name="playback" value="back and forth"><label for="back-and-forth">↔︎</label>
+              <input onclick="clickForward()" id="forward" type="radio" tabindex="-1" name="playback" value="forward" checked><label for="forward">→</label>-->
               <input onclick="clickReverse()" id="reverse" tabindex="-1" type="radio" name="playback" value="reverse"><label for="reverse">←</label>
               <input onclick="clickBackAndForth()" id="back-and-forth" tabindex="-1" type="radio" name="playback" value="back and forth"><label for="back-and-forth">↔︎</label>
               <input onclick="clickForward()" id="forward" type="radio" tabindex="-1" name="playback" value="forward" checked><label for="forward">→</label>
@@ -207,7 +202,6 @@
 <script src="sketch.js"></script>
 <script src="timeline.js"></script>
 <script src="marks.js"></script>
-<script src="selector.js"></script>
 <script src="ui.js"></script>
 </body>
 </html>

@@ -57,11 +57,13 @@ function clickPlay() {
   pause = !pause;
   if (pause) {
     displayFrame(animationSketch)
-    document.getElementById("play").value = "▶︎";
+    //document.getElementById("play").value = "▶︎";
+    document.getElementById("play").style.backgroundImage = "url('play.svg')";
     document.getElementById("next").style.visibility = "visible";
     document.getElementById("back").style.visibility = "visible";
   } else {
-    document.getElementById("play").value = "◼︎";
+    //document.getElementById("play").value = "◼︎";
+    document.getElementById("play").style.backgroundImage = "url('pause.svg')";
     document.getElementById("next").style.visibility = "hidden";
     document.getElementById("back").style.visibility = "hidden";
     if (playbackMode === BACKANDFORTH && currentFrame === lastFrame-1) {
