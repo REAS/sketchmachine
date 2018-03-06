@@ -206,7 +206,7 @@ const animationSketch = new p5(function (sketch) {
 
     let tempEasing = parseInt(easingSlider.value);
     if (tempEasing > 0) {
-      easing = sketch.map(tempEasing, 0, 100, 0.1, 0.01);
+      easing = sketch.map(tempEasing, 0, 100, 0.1, 0.02);
       //smoothing = true;
     } else {
       //smoothing = false;
