@@ -2,11 +2,13 @@ TODO
 
 - Sketch Machine icon for Giphy site
   . Also a banner?
+
 - Tune color selection
   . Smaller with wide screen
   . Close icon
   . Random selection
   . Color cycle option
+
 - Explore additional Tools
   . Grid
   . Square
@@ -15,28 +17,41 @@ TODO
 
 Bugs / Regressions / Issues
 
-- "Select" for the timeline button isn't styled correctly
-- If more than one tool is selected, "sluggish" is diminishing, not sluggish
+- "Select All" for the timeline button isn't styled correctly
+
 - Unicode figures in the buttons have different borders on different browsers
-  - Stop, arrows all too low within the button
-- Timeline should be taller, it shrinks on small screen sizes and it's difficult
-  to get with fingers on a phone
-x Remove strikethrough from "Deselect" button
-- Clicking on a frame in the timeline doesn't jump to that frame
-  . Right now, dragging works, but not clicking 
-x Point is drawing a single point, not a list like Plane and Line
+  - Arows too low within the button on some browsers
+  - Stop/pause button is off center on some browsers/OSs
+    . Firefox MacOS 10.13.3, too small and at the bottom
+  - Switch to SVG image buttons?
+
+- Export speeds are still off, I tweaked but not quite right
+  . What is the precise math?
+
+- Clicking and holding mouse without moving it no longer draws just once
+  . What is this?
+
 - Giphy export
   . Worked on FireFox OS X 10.10.3, but had to enable pop-ups 
   . Didn't go to Giphy site on Chrome OS X 10.13.3
     - Update: It worked, but the pop-up blocker so subtle,
       I didn't see it
   . Link to "Find all the Sketch Machines GIFs on Giphy."
-- Stop/pause button is off center on some browsers/OSs
-  . Firefox MacOS 10.13.3, too small and at the bottom
-- Export speeds are still off, I tweaked but not quite right
-  . What is the math?
-- Default to 512 resolution
+
+o Clicking on a frame in the timeline doesn't jump to that frame
+  . Right now, dragging works, but not clicking 
+  . Update: fixed a little, but not 100%
+
+  
+Done
+
+x Default to 512 resolution
   . I switched it, but I think retina devices go back to 1024
   . Too slow on my phone @ 1024
-- Clicking and holding mouse without moving it no longer draws just once
+  . Hacked it a bit, not looking at the pixelDeviceRatio anymore
 
+x Timeline should be taller, it shrinks on small screen sizes and it's difficult
+  to get with fingers on a phone
+
+x If more than one tool is selected, "sluggish" is diminishing, not sluggish
+  . pulled it out of the "mark" functions

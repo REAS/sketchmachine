@@ -21,13 +21,21 @@
           <input onclick="clickNext()" tabindex="-1" id="next" type="button" value="→" class="back-next">
         </div>
         <div id="select-buttons">
-          <div class="select-range">
+          <!--
+          <div id="onion-options" class="setting">
             <form>
-              <input id="selectrange" tabindex="-1" onclick="selectRange()" type="checkbox">
-              <label for="selectrange" id="select-label">Select</label>
+              <input id="onion-check" tabindex="-1" onclick="onionToggle()" type="checkbox">
+              <label for="onion-check" id="onion-label">Onion skin</label>
             </form>
           </div>
-          <input onclick="eraseSelectedFrames()" tabindex="-1" id="eraseconsole" type="button" value="Clear Selected" class="clear-range">
+          -->
+          <div class="select-range">
+            <form>
+              <input id="select-check" tabindex="-1" onclick="selectRange()" type="checkbox">
+              <label for="select-check" id="select-label">Select All</label>
+            </form>
+          </div>
+          <input onclick="eraseSelectedFrames()" tabindex="-1" id="eraseconsole" type="button" value="Clear Frames" class="clear-range">
         </div>
       </div>
     </div>
@@ -170,11 +178,12 @@
         </li>
         <br>
         <li><span class="keyboard-shortcut">F</span> Clear Frame</li>
-        <li><span class="keyboard-shortcut">C</span> Clear <b>All</b> Frames</li>
+        <li><span class="keyboard-shortcut">A</span> Clear <b>All</b> Frames</li>
         <li><span class="keyboard-shortcut">S</span> Clear <b>Selected</b> Frames</li>
       </ul>
       <div id="credits">
-        Too slow? Try a different resolution: <a class="res" href="/?res=1024">1024</a>, <a class="res" href="/?res=512">512</a>, <a class="res" href="/?res=256">256</a>, <a class="res" href="/?res=128">128</a>, <a class="res" href="/?res=64">64</a>.
+        Too slow or want more pixels? Try a different resolution: <br />
+        <a class="res" href="/?res=1024">1024</a>, <a class="res" href="/?res=512">512</a>, <a class="res" href="/?res=256">256</a>, <a class="res" href="/?res=128">128</a>, <a class="res" href="/?res=64">64</a>.
         <br>
         <br>
         <b>Sketch Machine</b> v1 was created by <a href="http://caesuras.net" target="_blank">Casey REAS</a> with help from <a href="https://giphy.com/">GIPHY</a>.

@@ -22,7 +22,8 @@ let numToRight = 0;
 let jitterOn = false;
 
 let frameDim = 512;
-let surfaceDim = Math.min(1024, 512 * window.devicePixelRatio);
+//let surfaceDim = Math.min(1024, 512 * window.devicePixelRatio);
+let surfaceDim = Math.min(1024, 512);
 let resInt = parseInt(window.location.search.replace('?res=', ''));
 if (resInt) { surfaceDim = Math.min(512, resInt); }
 
@@ -219,6 +220,10 @@ const animationSketch = new p5(function (sketch) {
     //}
 
     if (startDrawing) {
+      if (smoothing) {
+        mx += (targetX - mx) * easing;
+        my += (targetY - my) * easing;
+      }
       if (markers[0]) {
         whichTool = parseInt(marker1Tools.value);
         markFunctions[whichTool - 1](sketch, 0, marker1Color, calculateThickness(marker1Slider.value));
@@ -345,7 +350,7 @@ const animationSketch = new p5(function (sketch) {
 const timelineSketch = new p5(function (sketch) {
   sketch.setup = function () {
     sketch.pixelDensity(window.devicePixelRatio);
-    timelineCanvas = sketch.createCanvas(frameDim, 95);
+    timelineCanvas = sketch.createCanvas(frameDim, 110);
     timelineCanvas.id('timeline');
     sketchContainer.append(timelineCanvas.elt);
     sketch.noSmooth();
@@ -365,6 +370,12 @@ const timelineSketch = new p5(function (sketch) {
   }
 
   sketch.mouseDragged = function (e) {
+    if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.height) {
+      displayFrame(animationSketch)
+    }
+  }
+
+  sketch.mousePressed = function (e) {
     if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.height) {
       displayFrame(animationSketch)
     }
@@ -450,7 +461,7 @@ window.addEventListener('keydown', (e) => {
     eraseFrame();
   }
 
-  if (e.key === 'c' || e.key === 'C') {
+  if (e.key === 'a' || e.key === 'A') {
     eraseAllFrames();
   }
 

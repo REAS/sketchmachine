@@ -14,10 +14,15 @@ for (let i = 0; i < markers.length; i += 1) {
 }
 
 function mark1(sketch, i, color, thickness) {
+
+  thickness /= 4;
+
+  /*
   if (smoothing) {
     mx += (targetX - mx) * easing;
     my += (targetY - my) * easing;
   }
+  */
 
   if (pmx !== mx || pmy !== my) {
     markerFrames[i].strokeCap(sketch.ROUND);
@@ -28,7 +33,7 @@ function mark1(sketch, i, color, thickness) {
       let diameter = sketch.dist(pmx, pmy, mx, my) * varThick;
       markerFrames[i].strokeWeight(diameter);
     } else {
-      markerFrames[i].strokeWeight(thickness + 5);
+      markerFrames[i].strokeWeight(thickness + 1);
     }
 
     let x1 = mx + rx;
@@ -106,10 +111,12 @@ for (let i = 0; i < markers.length; i += 1) {
 }
 
 function mark2(sketch, i, color, thickness) {
+  /*
   if (smoothing) {
     mx += (targetX - mx) * easing;
     my += (targetY - my) * easing;
   }
+  */
   markerFrames[i].strokeCap(sketch.ROUND);
   markerFrames[i].strokeJoin(sketch.ROUND);
   markerFrames[i].stroke(color);
@@ -170,10 +177,12 @@ function mark2(sketch, i, color, thickness) {
 // QUADS
 
 function mark3(sketch, i, color, thickness) {
+  /*
   if (smoothing) {
     mx += (targetX - mx) * easing;
     my += (targetY - my) * easing;
   }
+  */
 
   if (pmx !== mx || pmy !== my) {
     markerFrames[i].strokeCap(sketch.SQUARE);

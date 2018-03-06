@@ -47,7 +47,7 @@ function displayTimeline (sketch) {
 
   let tw = frameDim / numFrames;
   let ty = 16;  // Gap from the top of the canvas
-  let tlh = 30;  // Height of the time line
+  let tlh = 40;  // Height of the time line -- Increased for better touch on mobile
   let th = 40;  // Height of the selection arrows
 
   let tx = sketch.map(currentFrame, 0, numFrames, 0, sketch.width);

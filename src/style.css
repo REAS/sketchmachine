@@ -138,7 +138,7 @@ hr {
 #sketch-container {
   position: relative;
   max-width: 520px;
-  max-height: 662px;
+  max-height: 680px; /*662*/
   display: flex;
   flex-direction: column;
 }
@@ -153,6 +153,7 @@ hr {
 
 #playback-buttons {
   margin-left: 4px;
+  height: 50px;
 }
 
 #playback-buttons input {
@@ -265,13 +266,35 @@ hr {
   border: 1px inset;
 }
 
+/*
+.brush, .setting {
+  background-color: #BBB;
+  display: inline-block;
+  margin-bottom: 5px;
+  border: 1px inset;
+  vertical-align: top;
+  height: 32px;
+  line-height: 32px;
+  padding-left: 8px;
+  padding-right: 11px;
+  padding-bottom: 2px;
+}
+*/
+
 .select-range {
-  height: 35px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 0.7em;
   background-color: #333333;
   color: #FFFFFF;
-  padding: 2px 2px 2px 2px;
   display: inline-block;
+  margin-bottom: 5px;
   border: 1px inset;
+  vertical-align: middle;
+  height: 32px;
+  /*line-height: 30px;*/
+  padding-left: 6px;
+  padding-right: 11px;
+  padding-bottom: 2px;
 }
 
 select option {
@@ -323,8 +346,6 @@ select option {
   padding-bottom: 2px;
 }
 
-
-
 .brush, .setting {
   background-color: #BBB;
   display: inline-block;
@@ -339,11 +360,15 @@ select option {
   padding-bottom: 2px;
 }
 
+.select-range, .select-range label, .select-range input  {
+  vertical-align: middle;
+}
+
 .brush input, .brush select, .setting input, .setting .setting-label, .setting label  {
   vertical-align: middle;
 }
 
-#engorge-label, #onion-label, #background-label {
+#engorge-label, #onion-label, #background-label, #select-label {
   cursor: pointer;
 }
 
