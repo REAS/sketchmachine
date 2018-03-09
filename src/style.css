@@ -77,7 +77,7 @@ input[type="button"], button {
 }
 
 #ui {
-  padding: 11px 10px 10px 10px;
+  padding: 21px 10px 10px 10px;
   box-sizing: border-box;
   margin: auto;
   display: flex;
@@ -339,6 +339,7 @@ select option {
 }
 
 #tools {
+  /*margin-top: 0.75em;*/
   margin-bottom: 0.75em;
 }
 
