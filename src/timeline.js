@@ -56,7 +56,7 @@ function displayTimeline (sketch) {
     for (let x = firstFrame; x < lastFrame; x++) {
       let xx = sketch.map(x, 0, numFrames, 0, sketch.width);
       if ((sketch.mouseX > xx && sketch.mouseX < xx + tw && sketch.mouseY > ty && sketch.mouseY < ty + tlh)) {
-        if (sketch.mouseIsPressed && sketch.mouseY >= ty && sketch.mouseY <= ty + tlh && !selectFirstFrame && !selectLastFrame &&!timelineRangeLock) {
+        if (sketch.mouseIsPressed && sketch.mouseY >= ty && sketch.mouseY <= ty + tlh && !selectFirstFrame && !selectLastFrame && !timelineRangeLock) {
           if (!pause) {
             clickPlay()
           }
@@ -72,14 +72,19 @@ function displayTimeline (sketch) {
     if (onFrame[i]) {
       let tempx = sketch.map(i, 0, numFrames, 0, sketch.width);
       sketch.noStroke();
-      sketch.fill(126, 126, 126);
-      sketch.rect(tempx, ty, tw, tlh+1);
+      //sketch.fill(126, 126, 126);
+      sketch.fill(0, 0, 255);
+      sketch.rect(tempx, ty, tw, tlh + 1);
     }
   }
 
   // CURRENT FRAME MARKER IN BRIGHT BLUE
   sketch.noStroke();
-  sketch.fill(0, 0, 255);
+  //if (!masterSelect) {
+    sketch.fill(0, 0, 255);
+  //} else {
+  //  sketch.fill(255);
+  //}
   sketch.rect(tx, ty, tw, tlh+1);
 
   // RANGE OF FRAMES, FIRST TO LAST
