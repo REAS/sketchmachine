@@ -1,0 +1,59 @@
+To Do
+
+- Sketch Machine icon for GIPHY site (Send you login info via Skype)
+  . Also a banner. Replace src/og-image.png
+  . Also a favicon. Replace src/favicon.png
+
+Bugs / Regressions / Issues
+
+...
+
+Finished
+
+X Preload 'play.svg' so there is no flicker on first click.
+
+X Export speeds are still off, I tweaked but not quite right?
+  . What is the precise math?
+   + I have no idea - it's supposed to be milliseconds.
+     + :( - I think there are inaccuracies on both sides!
+     + GIF encoding/playback and browser timing/rendering.
+     !+ Update: Looks like GIFs work in centiseconds
+         + I followed the data: https://github.com/jnordberg/gif.js/blob/master/src/GIFEncoder.js#L93-L95
+         + http://www.onicos.com/staff/iz/formats/gif.html#gceb 2 bytes for 1/100ths of a second here.
+     + So the 'mathematically correct' fix is to change all fpsOptions to multiples of 10. I bet we will still see some variation though. :(
+
+X Giphy export
+  x Worked on FireFox OS X 10.10.3, but had to enable pop-ups
+  x Didn't go to Giphy site on Chrome OS X 10.13.3
+    x Update: It worked, but the pop-up blocker so subtle, I didn't see it
+    ^ This is acceptable I think... the alternative would be to show a link, or jump the page...
+  x Link to "Find all the Sketch Machines GIFs on Giphy."
+
+x Clicking and holding mouse without moving it no longer draws just once?
+x "Select All" for the timeline button isn't styled correctly
+
+x Unicode figures in the buttons have different borders on different browsers
+  x Arows too low within the button on some browsers
+  x Stop/pause button is off center on some browsers/OSs
+    . Firefox MacOS 10.13.3, too small and at the bottom
+  x Switch to SVG image buttons?
+
+x Clicking on a frame in the timeline doesn't jump to that frame
+  x Right now, dragging works, but not clicking
+  x Update: fixed a little, but not 100%
+
+o Explore additional Tools
+  . Grid
+  . Square
+  . Compass
+
+x Default to 512 resolution
+  . I switched it, but I think retina devices go back to 1024
+  . Too slow on my phone @ 1024
+  . Hacked it a bit, not looking at the pixelDeviceRatio anymore
+
+x Timeline should be taller, it shrinks on small screen sizes and it's difficult
+  to get with fingers on a phone
+
+x If more than one tool is selected, "sluggish" is diminishing, not sluggish
+  . pulled it out of the "mark" functions

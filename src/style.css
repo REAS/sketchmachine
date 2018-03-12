@@ -9,6 +9,11 @@ body {
   -webkit-text-size-adjust: none;
 }
 
+body::after {
+  position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
+  content:url(play.svg);
+}
+
 body.noscroll {
   height: 100%;
   overflow: hidden;
@@ -19,7 +24,8 @@ body.noscroll {
  width: calc(100% - 8px) !important;
  height: auto !important;
  cursor: crosshair;
- background: url(checkers.png);
+ background: url(checkers.svg);
+ background-size: 16px;
  border: 4px inset;
 }
 
@@ -257,9 +263,10 @@ hr {
   background-color: #333333;
   color: #FFFFFF;
   height: 32px;
-  vertical-align: middle;
   border: 1px inset;
-  padding: 2px 10px 2px 4px;
+  box-sizing: border-box;
+  padding: 0 8px 0 4px;
+  margin: auto;
 }
 
 .clear-frames {
@@ -321,7 +328,7 @@ select option {
   vertical-align: middle;
   height: 32px; /*40*/
   line-height: 32px; /*40*/
-  padding-left: 8px;
+  padding-left: 6px;
   padding-right: 11px;
   padding-bottom: 2px;
 }
@@ -332,6 +339,10 @@ select option {
 
 #engorge-label, #onion-label, #background-label, #select-label {
   cursor: pointer;
+}
+
+#select-label {
+  padding-left: 4px;
 }
 
 #background-label {
@@ -352,13 +363,14 @@ select option {
 }
 
 #playback-options label {
-  padding: 1px 4px 2px 4px;
+  padding: 3px;
   color: #666;
   display: inline-block;
   cursor: pointer;
   font-size: 1.25em;
-  line-height: 20px;
+  line-height: 18px;
   height: 20px;
+  width: 20px;
   background: #999;
 }
 
@@ -457,7 +469,8 @@ select option {
   visibility: hidden;
   cursor: context-menu;
   image-rendering: pixelated;
-  background: url(checkers.png);
+  background: url(checkers.svg);
+  background-size: 16px;
 }
 
 #export-controls {

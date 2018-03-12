@@ -13,16 +13,15 @@ for (let i = 0; i < markers.length; i += 1) {
   })
 }
 
+/*
 function mark1(sketch, i, color, thickness) {
 
   thickness /= 4;
 
-  /*
-  if (smoothing) {
-    mx += (targetX - mx) * easing;
-    my += (targetY - my) * easing;
-  }
-  */
+  // if (smoothing) {
+  //   mx += (targetX - mx) * easing;
+  //   my += (targetY - my) * easing;
+  // }
 
   if (pmx !== mx || pmy !== my) {
     markerFrames[i].strokeCap(sketch.ROUND);
@@ -41,13 +40,18 @@ function mark1(sketch, i, color, thickness) {
     markerFrames[i].point(x1, y1);
   }
 }
+*/
 
-/*
 function mark1(sketch, i, color, thickness) {
+
+  thickness /= 4;
+
+  /*
   if (smoothing) {
     mx += (targetX - mx) * easing;
     my += (targetY - my) * easing;
   }
+  */
 
   markerFrames[i].strokeCap(sketch.ROUND);
   markerFrames[i].stroke(color);
@@ -71,7 +75,7 @@ function mark1(sketch, i, color, thickness) {
     lastPoint.x !== x ||
     lastPoint.y !== y;
 
-  markerFrames[i].drawingContext.globalCompositeOperation = 'copy';
+  // markerFrames[i].drawingContext.globalCompositeOperation = 'copy';
 
   if (pointChanged) {
     markerFrames[i].point(x, y);
@@ -81,7 +85,7 @@ function mark1(sketch, i, color, thickness) {
     markerFrames[i].point(x, y);
   }
 
-  markerFrames[i].drawingContext.globalCompositeOperation = 'source-over';
+  // markerFrames[i].drawingContext.globalCompositeOperation = 'source-over';
 
   pastPoints[i].lastPoint = {
     color: color,
@@ -90,7 +94,6 @@ function mark1(sketch, i, color, thickness) {
     y: y,
   }
 }
-*/
 
 
 // LINES
@@ -111,12 +114,14 @@ for (let i = 0; i < markers.length; i += 1) {
 }
 
 function mark2(sketch, i, color, thickness) {
+
   /*
   if (smoothing) {
     mx += (targetX - mx) * easing;
     my += (targetY - my) * easing;
   }
   */
+
   markerFrames[i].strokeCap(sketch.ROUND);
   markerFrames[i].strokeJoin(sketch.ROUND);
   markerFrames[i].stroke(color);
@@ -146,17 +151,21 @@ function mark2(sketch, i, color, thickness) {
     lastLine.x2 !== x2 ||
     lastLine.y2 !== y2;
 
+  let points
+
   if (lineChanged) {
     points = curvePoints(x0, y0, x1, y1, x2, y2);
-    pastLines[i].lastLineFrames = [currentFrame]
+    pastLines[i].lastLineFrames = [currentFrame];
   } else if (lastLineFrames.includes(currentFrame) === false) {
     lastLineFrames.push(currentFrame);
     points = curvePoints(x0, y0, x1, y1, x2, y2);
   }
 
-  if (points && points.length > 0) {
+  if (points) {
     if (points.length === 2 && points[0][0] === points[1][0] && points[0][1] === points[1][1]) {
-      markerFrames[i].point(... points[0])
+      markerFrames[i].point(...points[0])
+    } else if (points.length === 0) {
+      markerFrames[i].point(x2, y2);
     } else {
       markerFrames[i].beginShape();
       points.forEach((p) => { markerFrames[i].vertex(...p); });

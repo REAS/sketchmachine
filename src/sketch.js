@@ -15,18 +15,19 @@ let timelineRangeSelected = false;
 let timelineRangeLock = false;
 let arrowLock = false;
 
-let timelineNewX = 0;
 let numToLeft = 0;
 let numToRight = 0;
 
 let jitterOn = false;
 
 let frameDim = 512;
-//let surfaceDim = Math.min(1024, 512 * window.devicePixelRatio);
-let surfaceDim = Math.min(1024, 512);
+let surfaceDim = frameDim;
+if (window.screen.availWidth >= 1024) {
+  surfaceDim = Math.min(1024, 512 * window.devicePixelRatio);
+}
 let resInt = parseInt(window.location.search.replace('?res=', ''));
-if (resInt) { surfaceDim = Math.min(512, resInt); }
-
+if (resInt) { surfaceDim = Math.min(1024, resInt); }
+let surfaceBorder = 4;
 let frameSurfaceRatio = frameDim / surfaceDim;
 
 let lastTime = 0;
@@ -36,11 +37,22 @@ let pause = false;
 let startDrawing = false;
 let didDrawAnything = false;
 
-//let mobile = false; // Global variable, if on phone or not
+let mx = 0;
+let my = 0;
+let pmx = 0
+let pmy = 0;
+let ppmx = 0;
+let ppmy = 0;
 
-let mx, my, pmx, pmy, ppmx, ppmy = 0;
-let rx, ry, prx, pry, pprx, ppry = 0;
-let targetX, targetY = 0;
+let rx = 0;
+let ry = 0;
+let prx = 0
+let pry = 0;
+let pprx = 0;
+let ppry = 0;
+
+let targetX = 0;
+let targetY = 0;
 
 let currentColor = "#FFFFFF";
 let currentColorSelection = 1;
@@ -60,8 +72,6 @@ let smoothing = false;
 let easingSlider = document.querySelector("#easing-slider");
 let easing = 0.0;
 
-let dpi = window.devicePixelRatio;
-
 // TIMELINE
 //let overFrame = new Array(numFrames).fill(false);
 //let overMarker = new Array(numFrames).fill(false);
@@ -76,7 +86,7 @@ const FORWARD = 1;
 const BACKANDFORTH = 2;
 
 let playbackMode = FORWARD;
-const fpsOptions = [17, 22, 33, 42, 80, 125, 250, 500, 1000];
+const fpsOptions = [10, 20, 30, 40, 80, 120, 250, 500, 1000];
 
 // MARKERS
 const marker1Select = document.querySelector("#b1-select");
@@ -121,9 +131,7 @@ const animationSketch = new p5(function (sketch) {
     sketch.pixelDensity(window.devicePixelRatio);
     canvas = sketch.createCanvas(frameDim, frameDim);
 
-    if (surfaceDim < frameDim) {
-      sketch.noSmooth()
-    }
+    if (surfaceDim <= frameDim) { sketch.noSmooth() }
 
     /*
     for (let i = firstFrame; i < lastFrame; i++) {
@@ -177,11 +185,11 @@ const animationSketch = new p5(function (sketch) {
     if (startDrawing) {
 
       if (smoothing) {
-        targetX = Math.floor((sketch.mouseX - 4) / frameSurfaceRatio)
-        targetY = Math.floor((sketch.mouseY - 4) / frameSurfaceRatio)
+        targetX = Math.floor((sketch.mouseX - surfaceBorder) / frameSurfaceRatio)
+        targetY = Math.floor((sketch.mouseY - surfaceBorder) / frameSurfaceRatio)
       } else {
-        mx = Math.floor((sketch.mouseX - 4) / frameSurfaceRatio)
-        my = Math.floor((sketch.mouseY - 4) / frameSurfaceRatio)
+        mx = Math.floor((sketch.mouseX - surfaceBorder) / frameSurfaceRatio)
+        my = Math.floor((sketch.mouseY - surfaceBorder) / frameSurfaceRatio)
       }
     }
 
@@ -252,9 +260,6 @@ const animationSketch = new p5(function (sketch) {
     }
 
     // Now, finally, draw the animation to the screen
-    if (!pause || startDrawing) {
-      displayFrame(sketch)
-    }
 
     if (startDrawing) {
       ppmx = pmx;
@@ -267,9 +272,14 @@ const animationSketch = new p5(function (sketch) {
       pry = ry;
     }
 
+    if (!pause || startDrawing) {
+      writeMarkersIntoFrames();
+      displayFrame(sketch)
+    }
+
     if (!pause) {
+
       if (sketch.millis() > lastTime + timeStep) {
-        writeMarkersIntoFrames();
 
         if (playbackMode === FORWARD) {
           currentFrame++;  // Go to the next frame
@@ -305,11 +315,10 @@ const animationSketch = new p5(function (sketch) {
     // If click in animation area
     if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.height) {
       startDrawing = true;
-      lastLineFrames = [];
-      lastPointFrames = [];
-      lastQuadFrames = [];
-      pmx = Math.floor((sketch.mouseX - 4) / frameSurfaceRatio);
-      pmy = Math.floor((sketch.mouseY - 4) / frameSurfaceRatio);
+      pastLines.forEach((line) => { line.lastLineFrames = [] });
+      pastPoints.forEach((point) => { point.lastPointFrames = [] });
+      pmx = Math.floor((sketch.mouseX - surfaceBorder) / frameSurfaceRatio);
+      pmy = Math.floor((sketch.mouseY - surfaceBorder) / frameSurfaceRatio);
       ppmx = pmx;
       ppmy = pmy;
       if (smoothing) {
@@ -363,7 +372,7 @@ const timelineSketch = new p5(function (sketch) {
   }
 
   sketch.mouseMoved = function (e) {
-    if (e.target !== timelineCanvas.elt) { return }
+    if (timelineCanvas && e.target !== timelineCanvas.elt) { return }
     if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.height) {
       displayTimeline(sketch)
     }
@@ -486,7 +495,6 @@ window.addEventListener('keydown', (e) => {
     e.preventDefault();
   }
 
-
   /*
   if (e.key === 'u' || e.key === 'U') {
     onFrame.fill(false);
@@ -495,7 +503,6 @@ window.addEventListener('keydown', (e) => {
     onFrame.fill(true);
   }
   */
-
 })
 
 function calculateThickness(t) {
@@ -517,8 +524,7 @@ function renderFrameGIF (gif, i) {
     exportFrame.drawingContext.clearRect(0, 0, surfaceDim, surfaceDim);
   }
   exportFrame.drawingContext.drawImage(frames[i].canvas, 0, 0, surfaceDim, surfaceDim);
-  //gif.addFrame(exportFrame.canvas, {delay: timeStep * 2, copy: true});
-  gif.addFrame(exportFrame.canvas, {delay: timeStep * 1.25, copy: true});
+  gif.addFrame(exportFrame.canvas, {delay: timeStep, copy: true});
 }
 
 let checkInterval;

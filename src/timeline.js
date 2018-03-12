@@ -61,6 +61,7 @@ function displayTimeline (sketch) {
             clickPlay()
           }
           currentFrame = x;
+          displayFrame(animationSketch);
           arrowLock = true;
         }
       }
