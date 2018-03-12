@@ -86,7 +86,7 @@ const FORWARD = 1;
 const BACKANDFORTH = 2;
 
 let playbackMode = FORWARD;
-const fpsOptions = [10, 20, 30, 40, 80, 120, 250, 500, 1000];
+const fpsOptions = [20, 30, 40, 60, 80, 120, 250, 500, 1000];
 
 // MARKERS
 const marker1Select = document.querySelector("#b1-select");
@@ -261,6 +261,10 @@ const animationSketch = new p5(function (sketch) {
 
     // Now, finally, draw the animation to the screen
 
+    if (!pause || startDrawing) {
+      displayFrame(sketch)
+    }
+
     if (startDrawing) {
       ppmx = pmx;
       ppmy = pmy;
@@ -272,14 +276,9 @@ const animationSketch = new p5(function (sketch) {
       pry = ry;
     }
 
-    if (!pause || startDrawing) {
-      writeMarkersIntoFrames();
-      displayFrame(sketch)
-    }
-
     if (!pause) {
-
       if (sketch.millis() > lastTime + timeStep) {
+        writeMarkersIntoFrames();
 
         if (playbackMode === FORWARD) {
           currentFrame++;  // Go to the next frame
