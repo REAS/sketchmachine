@@ -16,6 +16,7 @@ X Export speeds are still off, I tweaked but not quite right?
          + http://www.onicos.com/staff/iz/formats/gif.html#gceb 2 bytes for 1/100ths of a second here.
      + So the 'mathematically correct' fix is to change all fpsOptions to multiples of 10. I bet we will still see some variation though. :(
      ??? So I did this... it seems worse? Maybe I missed something.
+     - Edit: Seems great except at highest speeds.
 
 Finished
 
