@@ -95,16 +95,18 @@
         <div id="tool-modifiers">
           <h2>Modifiers</h2>
           <div class="setting">
+            <input id="jitter-check" tabindex="-1" onclick="jitterToggle()" type="checkbox">
+            <span class="setting-label">Jitter</span>
+            <input id="randomXY" tabindex="-1" type="range" min="10" max="100" value="40">
+          </div>
+          <br />
+          <div class="setting">
             <form>
               <input id="engorge-check" tabindex="-1" onclick="speedSizeToggle()" type="checkbox">
               <label for="engorge-check" id="engorge-label">Engorge</label>
             </form>
           </div>
-          <div class="setting">
-            <input id="jitter-check" tabindex="-1" onclick="jitterToggle()" type="checkbox">
-            <span class="setting-label">Jitter</span>
-            <input id="randomXY" tabindex="-1" type="range" min="10" max="100" value="40">
-          </div>
+          <br />
           <div class="setting">
             <input id="sluggish-check" tabindex="-1" onclick="sluggishToggle()" type="checkbox">
             <span class="setting-label">Sluggish</span>
@@ -118,16 +120,19 @@
             <label for="background-check" id="background-label" class="setting-label">Background</label>
             <input onclick="openColorSelector(0)" tabindex="-1" id="background-color-button" type="button" value="" class="colorButton">
           </div>
+          <br />
           <div id="speed-slider" class="setting">
             <span class="setting-label">Speed</span>
             <input id="speed" style="direction: rtl" tabindex="-1" type="range" min="1" max="9" value="4">
           </div>
+          <br />
           <div id="onion-options" class="setting">
             <form>
               <input id="onion-check" tabindex="-1" onclick="onionToggle()" type="checkbox">
               <label for="onion-check" id="onion-label">Onion skin</label>
             </form>
           </div>
+          <br />
           <div id="playback-options" class="setting">
             <form>
               <span class="setting-label">Playback</span>

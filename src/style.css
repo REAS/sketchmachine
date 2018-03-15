@@ -326,7 +326,7 @@ select option {
   margin-bottom: 5px;
   border: 1px inset;
   vertical-align: middle;
-  height: 32px; /*40*/
+  height: 30px; /*40*/
   line-height: 32px; /*40*/
   padding-left: 6px;
   padding-right: 11px;
