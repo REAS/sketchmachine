@@ -145,7 +145,7 @@ const animationSketch = new p5(function (sketch) {
     sketchContainer.prepend(canvas.elt);
     canvas.background(204);
 
-    marker1Color = "#FFFFFF";
+    marker1Color = web216[sketch.int(sketch.random(web216.length))]; //"#FFFFFF";
     marker2Color = web216[sketch.int(sketch.random(web216.length))];
     marker3Color = web216[sketch.int(sketch.random(web216.length))];
     marker4Color = web216[sketch.int(sketch.random(web216.length))];
@@ -157,7 +157,7 @@ const animationSketch = new p5(function (sketch) {
     marker4ColorButton.style.backgroundColor = marker4Color;
     marker5ColorButton.style.backgroundColor = marker5Color;
 
-    backgroundColor = "#000000"; //web216[int(random(web216.length))];
+    backgroundColor = web216[sketch.int(sketch.random(web216.length))];  //"#000000"; //
     backgroundColorButton.style.backgroundColor = backgroundColor;
 
     sketch.pixelDensity(1);
