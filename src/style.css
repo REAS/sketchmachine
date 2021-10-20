@@ -168,14 +168,36 @@ hr {
 }
 
 .colorButton {
-  width: 24px;
-  height: 24px;
-  color: white;
-  padding: 2px 2px 2px 2px;
-  display: inline-block;
   border-radius: 50%;
-  border: 1px solid #FFFFFF;
+  height: 24px;
+  width: 24px;
+  border: none;
+  outline: 1px solid #FFFFFF;
+  padding: 0px;
+  margin-bottom: 1px;
+  display: inline-block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   cursor: pointer;
+  border-radius: 50&;
+  -o-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -moz-outline-radius: 50%;
+}
+
+.colorButton::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+}
+.colorButton::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+.colorButton::-moz-color-swatch {
+  border: none;
+  border-radius: 50%;
 }
 
 .play {
@@ -330,7 +352,7 @@ select option {
   line-height: 32px; /*40*/
   padding-left: 6px;
   padding-right: 11px;
-  padding-bottom: 2px;
+  padding-bottom: 5px;
 }
 
 .brush input, .brush select, .setting input, .setting .setting-label, .setting label  {

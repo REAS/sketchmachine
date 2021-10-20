@@ -20,39 +20,6 @@ function backgroundToggle() {
   displayFrame(animationSketch);
 }
 
-function openColorSelector (n) {
-  document.body.classList.add('noscroll');
-  colorSelector.classList.add('active');
-  currentColorSelection = n;
-}
-
-function closeColorSelector (e) {
-  currentColor = e.target.dataset.color
-
-  if (currentColorSelection === 0) {
-    backgroundColor = currentColor;
-    displayFrame(animationSketch);
-    backgroundColorButton.style.backgroundColor = currentColor;
-  } else if (currentColorSelection === 1) {
-    marker1Color = currentColor;
-    marker1ColorButton.style.backgroundColor = marker1Color;
-  } else if (currentColorSelection === 2) {
-    marker2Color = currentColor;
-    marker2ColorButton.style.backgroundColor = marker2Color;
-  } else if (currentColorSelection === 3) {
-    marker3Color = currentColor;
-    marker3ColorButton.style.backgroundColor = marker3Color;
-  } else if (currentColorSelection === 4) {
-    marker4Color = currentColor;
-    marker4ColorButton.style.backgroundColor = marker4Color;
-  } else if (currentColorSelection === 5) {
-    marker5Color = currentColor;
-    marker5ColorButton.style.backgroundColor = marker5Color;
-  }
-  colorSelector.classList.remove('active');
-  document.body.classList.remove('noscroll');
-}
-
 function clickPlay() {
   pause = !pause;
   if (pause) {
@@ -334,18 +301,6 @@ const web216 = [
   '#FFFF99',
   '#FFFFCC'
 ];
-
-// Populate color picker with buttons.
-
-const colors = document.querySelector('#colors');
-
-web216.forEach((c) => {
-  let btn = document.createElement('button');
-  btn.onclick = closeColorSelector;
-  btn.dataset.color = c;
-  btn.style.backgroundColor = c;
-  colors.append(btn)
-});
 
 // Resolution links
 

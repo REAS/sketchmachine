@@ -43,7 +43,7 @@
               <option value="3">Plane</option>
             </select>
             <input id="b1-slider" tabindex="-1" type="range" min="1" max="100" value="10">
-            <input onclick="openColorSelector(1)" tabindex="-1" id="b1-color" type="button" value="" class="colorButton">
+            <input tabindex="-1" id="b1-color" type="color" value="" class="colorButton" onchange="marker1Color = this.value;">
           </div>
           <div id="brush-2" class="brush">
             <input id="b2-select" tabindex="-1" type="checkbox" checked>
@@ -53,7 +53,7 @@
               <option value="3">Plane</option>
             </select>
             <input id="b2-slider" tabindex="-1" type="range" min="1" max="100" value="20">
-            <input onclick="openColorSelector(2)" tabindex="-1" id="b2-color" type="button" value="" class="colorButton">
+            <input tabindex="-1" id="b2-color" type="color" value="" class="colorButton" onchange="marker2Color = this.value;">
           </div>
           <div id="brush-3" class="brush">
             <input id="b3-select" tabindex="-1" type="checkbox" checked>
@@ -63,7 +63,7 @@
               <option value="3">Plane</option>
             </select>
             <input id="b3-slider" tabindex="-1" type="range" min="1" max="100" value="30">
-            <input onclick="openColorSelector(3)" tabindex="-1" id="b3-color" type="button" value="" class="colorButton">
+            <input tabindex="-1" id="b3-color" type="color" value="" class="colorButton" onchange="marker3Color = this.value;">
           </div>
           <div id="brush-4" class="brush">
             <input id="b4-select" tabindex="-1" type="checkbox" checked>
@@ -73,7 +73,7 @@
               <option value="3">Plane</option>
             </select>
             <input id="b4-slider" tabindex="-1" type="range" min="1" max="100" value="40">
-            <input onclick="openColorSelector(4)" tabindex="-1" id="b4-color" type="button" value="" class="colorButton">
+            <input tabindex="-1" id="b4-color" type="color" value="" class="colorButton" onchange="marker4Color = this.value;">
           </div>
           <div id="brush-5" class="brush">
             <input id="b5-select" tabindex="-1" type="checkbox" checked>
@@ -83,7 +83,7 @@
               <option value="3">Plane</option>
             </select>
             <input id="b5-slider" tabindex="-1" type="range" min="1" max="100" value="50">
-            <input onclick="openColorSelector(5)" tabindex="-1" id="b5-color" type="button" value="" class="colorButton">
+            <input tabindex="-1" id="b5-color" type="color" value="" class="colorButton" onchange="marker5Color = this.value;">
           </div>
         </div>
         <div id="tool-modifiers">
@@ -112,7 +112,7 @@
           <div id="background-buttons" class="setting">
             <input id="background-check" tabindex="-1" onclick="backgroundToggle()" checked type="checkbox">
             <label for="background-check" id="background-label" class="setting-label">Background</label>
-            <input onclick="openColorSelector(0)" tabindex="-1" id="background-color-button" type="button" value="" class="colorButton">
+			<input tabindex="-1" id="background-color-button" type="color" value="" class="colorButton" onchange="backgroundColor = this.value;">
           </div>
           <br />
           <div id="speed-slider" class="setting">
@@ -194,10 +194,6 @@
       </div>
     </div>
   </footer>
-  <div id="color-selector">
-    <div id="colors">
-    </div>
-  </div>
 </div>
 <script src="vendor/p5.min.js"></script>
 <script src="vendor/gif.js"></script>
