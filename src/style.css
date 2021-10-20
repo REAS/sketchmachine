@@ -174,7 +174,6 @@ hr {
   border: none;
   outline: 1px solid #FFFFFF;
   padding: 0px;
-  margin-bottom: 1px;
   display: inline-block;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -191,10 +190,12 @@ hr {
   border: none;
   border-radius: 50%;
 }
+
 .colorButton::-webkit-color-swatch {
   border: none;
   border-radius: 50%;
 }
+
 .colorButton::-moz-color-swatch {
   border: none;
   border-radius: 50%;
@@ -352,7 +353,7 @@ select option {
   line-height: 32px; /*40*/
   padding-left: 6px;
   padding-right: 11px;
-  padding-bottom: 5px;
+  padding-bottom: 4px;
 }
 
 .brush input, .brush select, .setting input, .setting .setting-label, .setting label  {
