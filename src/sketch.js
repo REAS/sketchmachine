@@ -62,7 +62,6 @@ const sketchContainer = document.querySelector('#sketch-container');
 const animationDummy = document.querySelector('#animation-dummy');
 const speedSlider = document.querySelector('#speed');
 
-const colorSelector = document.querySelector('#color-selector');
 const backgroundColorSelector = document.querySelector('#background-color-selector');
 const backgroundColorButton = document.querySelector('#background-color-button');
 
@@ -151,14 +150,14 @@ const animationSketch = new p5(function (sketch) {
     marker4Color = web216[sketch.int(sketch.random(web216.length))];
     marker5Color = web216[sketch.int(sketch.random(web216.length))];
 
-    marker1ColorButton.style.backgroundColor = marker1Color;
-    marker2ColorButton.style.backgroundColor = marker2Color;
-    marker3ColorButton.style.backgroundColor = marker3Color;
-    marker4ColorButton.style.backgroundColor = marker4Color;
-    marker5ColorButton.style.backgroundColor = marker5Color;
+    marker1ColorButton.value = marker1Color;
+    marker2ColorButton.value = marker2Color;
+    marker3ColorButton.value = marker3Color;
+    marker4ColorButton.value = marker4Color;
+    marker5ColorButton.value = marker5Color;
 
     backgroundColor = web216[sketch.int(sketch.random(web216.length))];  //"#000000"; //
-    backgroundColorButton.style.backgroundColor = backgroundColor;
+    backgroundColorButton.value = backgroundColor;
 
     sketch.pixelDensity(1);
 
